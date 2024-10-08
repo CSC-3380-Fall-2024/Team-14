@@ -7,7 +7,7 @@ public partial class Player : Area2D {
 	public int speed {get; set;} = 760;
 
 	// gravity is player-specific not world-defined
-	public static int gravity = 1500;
+	public static int gravity = 3000;
 
 	// we set jump amount based on desired height, not "force"
 	public static int jumpHeight = 540;
@@ -30,7 +30,7 @@ public partial class Player : Area2D {
 
 	// we want to set parameters for gravitation and a jump height, but we implement a jump as a change in velocity
 	// jumpForce calculation figure automatically figures out the correct impulse up front
-	public int jumpForce = 2 * (int) Math.Sqrt(gravity * jumpHeight);
+	public int jumpForce = (int) Math.Sqrt(2 * gravity * jumpHeight);
 
 	// called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta) {
