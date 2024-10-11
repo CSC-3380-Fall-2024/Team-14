@@ -9,8 +9,6 @@ public partial class Player : Area2D {
 
 	// gravity is player-specific not world-defined
 	public static int gravity = 4000;
-  
-	public static int gravity = 3000;
 
 	// we set jump amount based on desired height, not "force"
 	public static int jumpHeight = 540;
