@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Numerics;
 
 public partial class Player : Area2D {
 	// how fast the player moves in pixels/second
@@ -13,7 +14,7 @@ public partial class Player : Area2D {
 	public static int jumpHeight = 540;
 
 	// size of the game window
-	public Vector2 ScreenSize;
+	public Godot.Vector2 ScreenSize;
 
 	// called when the node enters the scene tree for the first time.
 	public override void _Ready() {
@@ -68,9 +69,14 @@ public partial class Player : Area2D {
 			}
 		}
 
+		//kills player if k is pressed **TESTING PROCESS ONLY**
+		if (Input.IsActionPressed("k")){
+			Kill_Reset();
+		}
+
 		// we need to actually apply the calculated velocity, and we also need to keep the player bounded within the screen
-		Position += new Vector2(velocity.X, velocity.Y) * (float) delta;
-		Position = new Vector2(
+		Position += new Godot.Vector2(velocity.X, velocity.Y) * (float) delta;
+		Position = new Godot.Vector2(
 			x: Mathf.Clamp(Position.X, 0, ScreenSize.X),
 			y: Mathf.Clamp(Position.Y, 0, ScreenSize.Y)
 		);
@@ -87,7 +93,20 @@ public partial class Player : Area2D {
 		Show();
 	}
 
-	public void Start(Vector2 position)
+	// Kills player and places them back at start
+	public void Kill_Reset()
+	{
+		// make dead and move back to starting position
+		Hide();
+		Position = new Godot.Vector2(0,0);
+		velocity = new MovementVec();
+		isAirborne = true;
+
+		//revives in new position
+		Show();
+		GetNode<CollisionShape2D>("CollisionShape2D").Disabled = false;
+	}
+	public void Start(Godot.Vector2 position)
 	{
 		Position = position;
 		Show();
