@@ -3,8 +3,8 @@ using System;
 
 public partial class Player : CharacterBody2D
 {
-	public const float Speed = 300.0f;
-	public const float JumpVelocity = -400.0f;
+	public const float Speed = 760.0f;
+	public const float JumpVelocity = -540.0f;
 
 	public Vector2 ScreenSize;
 
@@ -33,7 +33,7 @@ public partial class Player : CharacterBody2D
 			velocity.X = Speed;
 		}
 		if (Input.IsActionPressed("move_left")) {
-			velocity.X -= speed;
+			velocity.X -= Speed;
 		}
 
 		Velocity = velocity;
