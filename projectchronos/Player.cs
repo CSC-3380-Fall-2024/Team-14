@@ -12,7 +12,7 @@ public partial class Player : CharacterBody2D {
 	public static int gravity = 3000;
 
 	// we set jump amount based on desired height, not "force"
-	public static int jumpHeight = 540;
+	public static int jumpHeight = 250; // keep this value
 
 	// size of the game window
 	public Godot.Vector2 ScreenSize;
@@ -24,9 +24,6 @@ public partial class Player : CharacterBody2D {
 		Hide();
 	}
 
-	// flag for the player being mid-jump or mid-fall is useful for handling player movement inputs
-	public bool isAirborne = true;
-
 	// we want to set parameters for gravitation and a jump height, but we implement a jump as a change in velocity
 	// jumpForce calculation figure automatically figures out the correct impulse up front
 	public int jumpForce = (int) Math.Sqrt(2 * gravity * jumpHeight);
@@ -34,12 +31,12 @@ public partial class Player : CharacterBody2D {
 	// called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _PhysicsProcess(double delta)
 	{
-		Vector2 velocity = new Vector2();
+		Vector2 velocity = Velocity;
 		// there's no reason to worry about gravity if we're not in the air
-		if (isAirborne) {
+		if (!IsOnFloor()) {
 
 			// add a positive value here because higher position is lower on the screen
-			velocity += GetGravity();
+			velocity += (GetGravity() * (float)delta);
 		}
 
 		// by default the player is not inputting horizontal movement
@@ -54,10 +51,9 @@ public partial class Player : CharacterBody2D {
 		}
 
 		if (Input.IsActionPressed("jump")) {
-			if (!isAirborne) {
+			if (IsOnFloor()) {
 				// subtract because the top of the screen is minimum coordinate
 				velocity.Y -= jumpForce;
-				isAirborne = true;
 			}
 		}
 
@@ -84,7 +80,6 @@ public partial class Player : CharacterBody2D {
 		Hide();
 		Position = new Godot.Vector2(0,0);
 		Velocity = new Vector2();
-		isAirborne = true;
 
 		//revives in new position
 		Show();
