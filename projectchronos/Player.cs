@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Numerics;
+using System.Runtime.InteropServices;
 
 public partial class Player : Area2D {
 	// how fast the player moves in pixels/second
@@ -16,13 +17,13 @@ public partial class Player : Area2D {
 	// size of the game window
 	public Godot.Vector2 ScreenSize;
 
+
 	// called when the node enters the scene tree for the first time.
 	public override void _Ready() {
 		ScreenSize = GetViewportRect().Size;
 
-		Hide();
+	
 	}
-
 	// flag for the player being mid-jump or mid-fall is useful for handling player movement inputs
 	public bool isAirborne = true;
 		
@@ -94,7 +95,8 @@ public partial class Player : Area2D {
 	}
 
 	// Kills player and places them back at start
-	public void Kill_Reset()
+	//DISCLAIMER removing test code actually breaks the function please do not edit this section unless you are SURE 
+	public void Kill_Reset() //DO NOT REMOVE TEST CODE IT BREAKS THINGS :(
 	{
 		// make dead and move back to starting position
 		Hide();
@@ -102,10 +104,33 @@ public partial class Player : Area2D {
 		velocity = new MovementVec();
 		isAirborne = true;
 
-		//revives in new position
-		Show();
-		GetNode<CollisionShape2D>("CollisionShape2D").Disabled = false;
+		//find the parent node 
+		//DO NOT REMOVE TEST CODE  OR EDIT SECTION IT BREAKS FOR SOME REASON
+		var currnetNode = GetParent();
+		while (currnetNode != null){
+			//GD.Print("current" + currnetNode.Name); *Test Code*
+			currnetNode = currnetNode.GetParent();
+		}
+		
+		//try to find main
+		//DO NOT REMOVE TEST CODE OR EDIT IT BREAKS CODE
+		Node currentParent = GetParent();
+		while(currentParent!=null){
+			//GD.Print("checking node" + currentParent.Name); *Test Code*
+			if (currentParent is Main mainNode){
+				//GD.Print("main found calling showexit"); *TestCode*
+				mainNode.ShowExit();
+				return;
+			}
+			currentParent = currentParent.GetParent();
+		}
+		
+		//GD.Print("main find failed"); *TestCode*
+		
+	
 	}
+
+	
 	public void Start(Godot.Vector2 position)
 	{
 		Position = position;
