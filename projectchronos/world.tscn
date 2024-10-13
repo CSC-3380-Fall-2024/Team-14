@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://c6lt1tt11cqg7"]
+
+[ext_resource type="Script" path="res://GameWorld.cs" id="1_c5ykx"]
+[ext_resource type="Texture2D" uid="uid://bf5tqxbpmxpmu" path="res://background.png" id="1_nkqkr"]
+[ext_resource type="PackedScene" uid="uid://4kf7paebw3px" path="res://player.tscn" id="2_6xg6t"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j1uk3"]
+size = Vector2(1920, 1080)
+
+[node name="World" type="Node2D"]
+script = ExtResource("1_c5ykx")
+
+[node name="Area2D" type="Area2D" parent="."]
+gravity = 3000.0
+
+[node name="Sprite2D" type="Sprite2D" parent="Area2D"]
+position = Vector2(960, 540)
+texture = ExtResource("1_nkqkr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(960, 540)
+shape = SubResource("RectangleShape2D_j1uk3")
+
+[node name="Player" parent="." instance=ExtResource("2_6xg6t")]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PackedVector2Array(0, 528, 1240, 536, 1240, 328, 584, 328, 1240, 224, 1344, 224, 1336, 600, 0, 600)
