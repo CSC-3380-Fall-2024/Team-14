@@ -95,8 +95,7 @@ public partial class Player : Area2D {
 	}
 
 	// Kills player and places them back at start
-	//DISCLAIMER removing test code actually breaks the function please do not edit this section unless you are SURE 
-	public void Kill_Reset() //DO NOT REMOVE TEST CODE IT BREAKS THINGS :(
+	public void Kill_Reset() 
 	{
 		// make dead and move back to starting position
 		Hide();
@@ -105,28 +104,21 @@ public partial class Player : Area2D {
 		isAirborne = true;
 
 		//find the parent node 
-		//DO NOT REMOVE TEST CODE  OR EDIT SECTION IT BREAKS FOR SOME REASON
 		var currnetNode = GetParent();
 		while (currnetNode != null){
-			//GD.Print("current" + currnetNode.Name); *Test Code*
 			currnetNode = currnetNode.GetParent();
 		}
 		
 		//try to find main
-		//DO NOT REMOVE TEST CODE OR EDIT IT BREAKS CODE
+		//runs the show exit code
 		Node currentParent = GetParent();
 		while(currentParent!=null){
-			//GD.Print("checking node" + currentParent.Name); *Test Code*
 			if (currentParent is Main mainNode){
-				//GD.Print("main found calling showexit"); *TestCode*
 				mainNode.ShowExit();
 				return;
 			}
 			currentParent = currentParent.GetParent();
 		}
-		
-		//GD.Print("main find failed"); *TestCode*
-		
 	
 	}
 
