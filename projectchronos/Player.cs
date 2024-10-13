@@ -17,6 +17,11 @@ public partial class Player : Area2D {
 	// size of the game window
 	public Godot.Vector2 ScreenSize;
 
+	//life limit & bool determinining if we are currentl reseting scene from a kill and a bool showing if we have already done this once per time key is pressed
+	private int lives = 3;
+	private bool reset = false; //checks for being mid reset
+	private bool processed = false; //checks for key press action
+
 
 	// called when the node enters the scene tree for the first time.
 	public override void _Ready() {
@@ -72,7 +77,14 @@ public partial class Player : Area2D {
 
 		//kills player if k is pressed **TESTING PROCESS ONLY**
 		if (Input.IsActionPressed("k")){
-			Kill_Reset();
+			if (!reset && !processed){
+				Kill_Reset();
+				processed = true; //sets it so we know k is pressed
+			}
+		}
+
+		else{
+			processed = false; //reset key press to false
 		}
 
 		// we need to actually apply the calculated velocity, and we also need to keep the player bounded within the screen
@@ -97,18 +109,37 @@ public partial class Player : Area2D {
 	// Kills player and places them back at start
 	public void Kill_Reset() 
 	{
-		// make dead and move back to starting position
-		Hide();
-		Position = new Godot.Vector2(0,0);
-		velocity = new MovementVec();
-		isAirborne = true;
+		if (reset) return; // ensures we are not currently resetting
+		
+		//decreases lives by one
+		if (lives > 0){
+			lives = lives - 1;
+		}
 
+		//shows kill screen (gameover)
+		if(lives <= 0) {
+			ShowExitScreen(); //call exit screen
+		}
+
+		else{
+			// make dead and move back to starting position
+			Hide();
+			Position = new Godot.Vector2(0,0);
+			velocity = new MovementVec();
+			isAirborne = true;
+			Start(Position); //place back to start
+		}
+
+	}
+
+	public void ShowExitScreen() 
+	{
 		//find the parent node 
-		var currnetNode = GetParent();
+		Node currnetNode = GetParent();
 		while (currnetNode != null){
 			currnetNode = currnetNode.GetParent();
 		}
-		
+	
 		//try to find main
 		//runs the show exit code
 		Node currentParent = GetParent();
@@ -119,7 +150,6 @@ public partial class Player : Area2D {
 			}
 			currentParent = currentParent.GetParent();
 		}
-	
 	}
 
 	
