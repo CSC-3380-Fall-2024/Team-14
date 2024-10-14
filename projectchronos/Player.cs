@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Numerics;
+using System.Runtime.CompilerServices;
 using Vector2 = Godot.Vector2;
 
 public partial class Player : CharacterBody2D {
@@ -11,33 +12,48 @@ public partial class Player : CharacterBody2D {
 	// gravity is player-specific not world-defined
 	public static int gravity = 4000;
 
-	// we set jump amount based on desired height, not "force"
+	// gravity * 2 is a temporary magic number, can set this value arbitrarily
+	public static int fallSpeed = gravity * 2;
+
+	// jump values are set based on desired height
 	public static int jumpHeight = 250; // keep this value
 
 	// size of the game window
 	public Godot.Vector2 ScreenSize;
 
+	//life limit & bool determinining if we are currentl reseting scene from a kill and a bool showing if we have already done this once per time key is pressed
+	private int lives_left;
+	private bool reset = false; //checks for being mid reset
+	private bool processed = false; //checks for key press action
+
 
 	// called when the node enters the scene tree for the first time.
 	public override void _Ready() {
 		ScreenSize = GetViewportRect().Size;
-
-	
 	}
 
-	// we want to set parameters for gravitation and a jump height, but we implement a jump as a change in velocity
-	// jumpForce calculation figure automatically figures out the correct impulse up front
+	// we set jump based on desired height, but implement as a velocity delta
+	// jumpForce calculation pre-computes velocity delta with gravity
 	public int jumpForce = (int) Math.Sqrt(2 * gravity * jumpHeight);
 
 	// called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _PhysicsProcess(double delta)
 	{
 		Vector2 velocity = Velocity;
-		// there's no reason to worry about gravity if we're not in the air
-		if (!IsOnFloor()) {
 
-			// add a positive value here because higher position is lower on the screen
-			velocity += (GetGravity() * (float)delta);
+		// what happens while airborne
+		if (!IsOnFloor()) {
+			
+			// keep track of time spent airborne
+			if (GetNode<Timer>("FallTimer").IsStopped()) {
+				GetNode<Timer>("FallTimer").Start();
+			}
+
+			// implement gravity
+			velocity += GetGravity() * (float)delta; // positive value because greater Y is lower on the screen
+			velocity.Y = Math.Min(velocity.Y, fallSpeed); // clamp vertical fall speed
+		} else {
+			GetNode<Timer>("FallTimer").Stop();
 		}
 
 		// by default the player is not inputting horizontal movement
@@ -54,20 +70,25 @@ public partial class Player : CharacterBody2D {
 
 		if (Input.IsActionPressed("jump")) {
 			if (IsOnFloor()) {
-				// subtract because the top of the screen is minimum coordinate
-				velocity.Y -= jumpForce;
+				velocity.Y -= jumpForce; // subtract because screen top is minimum Y coordinate
 			}
 		}
 
+		// you can hit down key to "cancel" partway through a jump
 		if (Input.IsActionPressed("down")) {
-
-			// you can hit down key to "cancel" partway through a jump
 			velocity.Y = Math.Max(velocity.Y, 0);
 		}
 
 		//kills player if k is pressed **TESTING PROCESS ONLY**
 		if (Input.IsActionPressed("k")){
-			Kill_Reset();
+			if (!reset && !processed){
+				Kill_Reset();
+				processed = true; //sets it so we know k is pressed
+			}
+		}
+
+		else{
+			processed = false; //reset key press to false
 		}
 
 		Velocity = velocity;
@@ -76,45 +97,64 @@ public partial class Player : CharacterBody2D {
 	}
 
 	// Kills player and places them back at start
-	//DISCLAIMER removing test code actually breaks the function please do not edit this section unless you are SURE 
-	public void Kill_Reset() //DO NOT REMOVE TEST CODE IT BREAKS THINGS :(
+	public void Kill_Reset() 
 	{
-		// make dead and move back to starting position
-		Hide();
-		Position = new Godot.Vector2(0,0);
-		Velocity = new Vector2();
+		if (lives_left > 0){
+			lives_left = lives_left -1;
+		}
 
-		//find the parent node 
-		//DO NOT REMOVE TEST CODE  OR EDIT SECTION IT BREAKS FOR SOME REASON
-		var currnetNode = GetParent();
-		while (currnetNode != null){
-			//GD.Print("current" + currnetNode.Name); *Test Code*
-			currnetNode = currnetNode.GetParent();
+		if(lives_left<=0){
+			ShowExitScreen();
+		}
+
+		// make dead and move back to starting position
+		else{
+			Hide();
+			Position = new Godot.Vector2(0,0);
+			Velocity = Vector2.Zero;
+			processed = false; //rest key tracking
+			reset = true; //reset start
+			Show();
+			MoveAndSlide();
+			reset=false; //reset complete
 		}
 		
+	}
+
+	public void ShowExitScreen() 
+	{
+		//find the parent node 
+		Node currnetNode = GetParent();
+		while (currnetNode != null){
+			currnetNode = currnetNode.GetParent();
+		}
+	
 		//try to find main
-		//DO NOT REMOVE TEST CODE OR EDIT IT BREAKS CODE
+		//runs the show exit code
 		Node currentParent = GetParent();
 		while(currentParent!=null){
-			//GD.Print("checking node" + currentParent.Name); *Test Code*
 			if (currentParent is Main mainNode){
-				//GD.Print("main found calling showexit"); *TestCode*
 				mainNode.ShowExit();
 				return;
 			}
 			currentParent = currentParent.GetParent();
 		}
-		
-		//GD.Print("main find failed"); *TestCode*
-		
-	
 	}
 
 	
 	public void Start(Godot.Vector2 position)
 	{
+		//find main and grab lives from it
+		Main mainNode = (Main)GetParent().GetParent();
+		lives_left = mainNode.GetMax();
+
 		Position = position;
 		Show();
 		GetNode<CollisionShape2D>("CollisionShape2D").Disabled = false;
+	}
+
+	// player dies after falling for too long
+	private void OnFallTimerTimeout() {
+		Kill_Reset();
 	}
 }
