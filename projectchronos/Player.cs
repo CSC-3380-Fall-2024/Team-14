@@ -65,6 +65,7 @@ public partial class Player : CharacterBody2D {
 
 		if (Input.IsActionPressed("move_left")) {
 			velocity.X -= speed;
+			
 		}
 
 		if (Input.IsActionPressed("jump")) {
