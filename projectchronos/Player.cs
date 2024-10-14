@@ -17,12 +17,15 @@ public partial class Player : CharacterBody2D {
 	// size of the game window
 	public Godot.Vector2 ScreenSize;
 
+	//life limit & bool determinining if we are currentl reseting scene from a kill and a bool showing if we have already done this once per time key is pressed
+	private int lives_left;
+	private bool reset = false; //checks for being mid reset
+	private bool processed = false; //checks for key press action
+
 
 	// called when the node enters the scene tree for the first time.
 	public override void _Ready() {
 		ScreenSize = GetViewportRect().Size;
-
-	
 	}
 
 	// we want to set parameters for gravitation and a jump height, but we implement a jump as a change in velocity
@@ -66,7 +69,14 @@ public partial class Player : CharacterBody2D {
 
 		//kills player if k is pressed **TESTING PROCESS ONLY**
 		if (Input.IsActionPressed("k")){
-			Kill_Reset();
+			if (!reset && !processed){
+				Kill_Reset();
+				processed = true; //sets it so we know k is pressed
+			}
+		}
+
+		else{
+			processed = false; //reset key press to false
 		}
 
 		Velocity = velocity;
@@ -75,43 +85,57 @@ public partial class Player : CharacterBody2D {
 	}
 
 	// Kills player and places them back at start
-	//DISCLAIMER removing test code actually breaks the function please do not edit this section unless you are SURE 
-	public void Kill_Reset() //DO NOT REMOVE TEST CODE IT BREAKS THINGS :(
+	public void Kill_Reset() 
 	{
-		// make dead and move back to starting position
-		Hide();
-		Position = new Godot.Vector2(0,0);
-		Velocity = new Vector2();
+		if (lives_left > 0){
+			lives_left = lives_left -1;
+		}
 
-		//find the parent node 
-		//DO NOT REMOVE TEST CODE  OR EDIT SECTION IT BREAKS FOR SOME REASON
-		var currnetNode = GetParent();
-		while (currnetNode != null){
-			//GD.Print("current" + currnetNode.Name); *Test Code*
-			currnetNode = currnetNode.GetParent();
+		if(lives_left<=0){
+			ShowExitScreen();
+		}
+
+		// make dead and move back to starting position
+		else{
+			Hide();
+			Position = new Godot.Vector2(0,0);
+			Velocity = Vector2.Zero;
+			processed = false; //rest key tracking
+			reset = true; //reset start
+			Show();
+			MoveAndSlide();
+			reset=false; //reset complete
 		}
 		
+	}
+
+	public void ShowExitScreen() 
+	{
+		//find the parent node 
+		Node currnetNode = GetParent();
+		while (currnetNode != null){
+			currnetNode = currnetNode.GetParent();
+		}
+	
 		//try to find main
-		//DO NOT REMOVE TEST CODE OR EDIT IT BREAKS CODE
+		//runs the show exit code
 		Node currentParent = GetParent();
 		while(currentParent!=null){
-			//GD.Print("checking node" + currentParent.Name); *Test Code*
 			if (currentParent is Main mainNode){
-				//GD.Print("main found calling showexit"); *TestCode*
 				mainNode.ShowExit();
 				return;
 			}
 			currentParent = currentParent.GetParent();
 		}
-		
-		//GD.Print("main find failed"); *TestCode*
-		
-	
 	}
 
 	
 	public void Start(Godot.Vector2 position)
 	{
+		//find main and grab lives from it
+		Main mainNode = (Main)GetParent().GetParent();
+		lives_left = mainNode.GetMax();
+
 		Position = position;
 		Show();
 		GetNode<CollisionShape2D>("CollisionShape2D").Disabled = false;

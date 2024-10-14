@@ -4,9 +4,12 @@ using System;
 public partial class World : Node2D
 {
 
+	
+
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		
 		Show();
 
 	}
@@ -16,6 +19,9 @@ public partial class World : Node2D
 	{
 		Show();
 	}
+
+	//grabs value for Max_Lives
+	
 
 	public void Start(Vector2 position)
 	{
