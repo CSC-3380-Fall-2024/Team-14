@@ -18,7 +18,7 @@ public partial class Player : CharacterBody2D {
 	public Godot.Vector2 ScreenSize;
 
 	//life limit & bool determinining if we are currentl reseting scene from a kill and a bool showing if we have already done this once per time key is pressed
-	private int lives = 3;
+	private int lives_left;
 	private bool reset = false; //checks for being mid reset
 	private bool processed = false; //checks for key press action
 
@@ -26,8 +26,6 @@ public partial class Player : CharacterBody2D {
 	// called when the node enters the scene tree for the first time.
 	public override void _Ready() {
 		ScreenSize = GetViewportRect().Size;
-
-	
 	}
 
 	// we want to set parameters for gravitation and a jump height, but we implement a jump as a change in velocity
@@ -89,11 +87,11 @@ public partial class Player : CharacterBody2D {
 	// Kills player and places them back at start
 	public void Kill_Reset() 
 	{
-		if (lives > 0){
-			lives = lives -1;
+		if (lives_left > 0){
+			lives_left = lives_left -1;
 		}
 
-		if(lives<=0){
+		if(lives_left<=0){
 			ShowExitScreen();
 		}
 
@@ -134,6 +132,10 @@ public partial class Player : CharacterBody2D {
 	
 	public void Start(Godot.Vector2 position)
 	{
+		//find main and grab lives from it
+		Main mainNode = (Main)GetParent().GetParent();
+		lives_left = mainNode.GetMax();
+
 		Position = position;
 		Show();
 		GetNode<CollisionShape2D>("CollisionShape2D").Disabled = false;
