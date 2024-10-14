@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Numerics;
+using System.Runtime.CompilerServices;
 using Vector2 = Godot.Vector2;
 
 public partial class Player : CharacterBody2D {
@@ -11,7 +12,10 @@ public partial class Player : CharacterBody2D {
 	// gravity is player-specific not world-defined
 	public static int gravity = 4000;
 
-	// we set jump amount based on desired height, not "force"
+	// gravity * 2 is a temporary magic number, can set this value arbitrarily
+	public static int fallSpeed = gravity * 2;
+
+	// jump values are set based on desired height
 	public static int jumpHeight = 250; // keep this value
 
 	// size of the game window
@@ -28,19 +32,28 @@ public partial class Player : CharacterBody2D {
 		ScreenSize = GetViewportRect().Size;
 	}
 
-	// we want to set parameters for gravitation and a jump height, but we implement a jump as a change in velocity
-	// jumpForce calculation figure automatically figures out the correct impulse up front
+	// we set jump based on desired height, but implement as a velocity delta
+	// jumpForce calculation pre-computes velocity delta with gravity
 	public int jumpForce = (int) Math.Sqrt(2 * gravity * jumpHeight);
 
 	// called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _PhysicsProcess(double delta)
 	{
 		Vector2 velocity = Velocity;
-		// there's no reason to worry about gravity if we're not in the air
-		if (!IsOnFloor()) {
 
-			// add a positive value here because higher position is lower on the screen
-			velocity += (GetGravity() * (float)delta);
+		// what happens while airborne
+		if (!IsOnFloor()) {
+			
+			// keep track of time spent airborne
+			if (GetNode<Timer>("FallTimer").IsStopped()) {
+				GetNode<Timer>("FallTimer").Start();
+			}
+
+			// implement gravity
+			velocity += GetGravity() * (float)delta; // positive value because greater Y is lower on the screen
+			velocity.Y = Math.Min(velocity.Y, fallSpeed); // clamp vertical fall speed
+		} else {
+			GetNode<Timer>("FallTimer").Stop();
 		}
 
 		// by default the player is not inputting horizontal movement
@@ -56,14 +69,12 @@ public partial class Player : CharacterBody2D {
 
 		if (Input.IsActionPressed("jump")) {
 			if (IsOnFloor()) {
-				// subtract because the top of the screen is minimum coordinate
-				velocity.Y -= jumpForce;
+				velocity.Y -= jumpForce; // subtract because screen top is minimum Y coordinate
 			}
 		}
 
+		// you can hit down key to "cancel" partway through a jump
 		if (Input.IsActionPressed("down")) {
-
-			// you can hit down key to "cancel" partway through a jump
 			velocity.Y = Math.Max(velocity.Y, 0);
 		}
 
@@ -139,5 +150,10 @@ public partial class Player : CharacterBody2D {
 		Position = position;
 		Show();
 		GetNode<CollisionShape2D>("CollisionShape2D").Disabled = false;
+	}
+
+	// player dies after falling for too long
+	private void OnFallTimerTimeout() {
+		Kill_Reset();
 	}
 }
