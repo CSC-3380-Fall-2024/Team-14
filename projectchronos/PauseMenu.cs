@@ -1,15 +1,37 @@
 using Godot;
 using System;
 
+
 public partial class PauseMenu : Control
 {
-	// Called when the node enters the scene tree for the first time.
-	public override void _Ready()
+
+	 public override void _Ready()
 	{
+		//hide menu upon loading up the world
+		Hide();
+	}
+	
+	public override void _Process(double delta)
+{
+	 if (Input.IsActionJustPressed("ui_cancel") && !GetTree().Paused)
+		{
+			Pause();
+		}
+		else if (Input.IsActionJustPressed("ui_cancel") && GetTree().Paused)
+		{
+			Resume();
+		}
+}
+
+ public void Resume()
+	{
+		GetTree().Paused = false;
+		Hide();
 	}
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
+ public void Pause()
 	{
+		GetTree().Paused = true;
+		Show();
 	}
 }
