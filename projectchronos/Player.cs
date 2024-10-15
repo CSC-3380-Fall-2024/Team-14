@@ -19,6 +19,8 @@ public partial class Player : CharacterBody2D {
 
 	public Godot.Vector2 ScreenSize; // size of the game window
 
+	private bool hasJumpLeft;
+
 	//life limit & bool determining if we are currently resetting scene from a kill and a bool showing if we have already done this once per time key is pressed
 	private int lives_left;
 	private bool reset = false; //checks for being mid reset
@@ -53,18 +55,19 @@ public partial class Player : CharacterBody2D {
 			velocity.Y = Math.Min(velocity.Y, fallSpeed); // clamp vertical fall speed
 		} else {
 			GetNode<Timer>("FallTimer").Stop();
+			hasJumpLeft = true; // reset double-jump ability
 		}
 
 		// read and execute player movement input
 		velocity.X = 0; // player doesn't moving horizontally by default
-		velocity = PlayerControl(velocity);
+		velocity = PlayerControl(velocity, hasJumpLeft || IsOnFloor());
 
 		Velocity = velocity;
 		Show();
 		MoveAndSlide();
 	}
 
-	private Vector2 PlayerControl(Vector2 velocity) {
+	private Vector2 PlayerControl(Vector2 velocity, bool canJump) {
 		if (Input.IsActionPressed("move_right")) {
 			velocity.X += speed;
 		}
@@ -73,9 +76,10 @@ public partial class Player : CharacterBody2D {
 			velocity.X -= speed;
 		}
 
-		if (Input.IsActionPressed("jump")) {
-			if (IsOnFloor()) {
-				velocity.Y -= jumpForce; // subtract because screen top is minimum Y coordinate
+		if (Input.IsActionJustPressed("jump")) {
+			if (canJump) {
+				velocity.Y = - jumpForce; // subtract because screen top is minimum Y coordinate
+				hasJumpLeft = IsOnFloor();
 			}
 		}
 
