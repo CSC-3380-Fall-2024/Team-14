@@ -1,49 +1,73 @@
 using Godot;
 using System;
+using System.Numerics;
+using System.Runtime.CompilerServices;
+using Vector2 = Godot.Vector2;
 
-public partial class Player : Area2D {
-	// how fast the player moves in pixels/second
+public partial class Player : CharacterBody2D {
 	[Export]
-	public int speed {get; set;} = 760;
+	public int speed {get; set;} = 760; // how fast the player moves in pixels/second
 
-	// gravity is player-specific not world-defined
-	public static int gravity = 1500;
+	[Export]
+	public int gravity = 4000; // gravity is player-specific not world-defined
 
-	// we set jump amount based on desired height, not "force"
-	public static int jumpHeight = 540;
+	[Export]
+	public int fallSpeed = 8000;// temporary magic number, can set this value arbitrarily
 
-	// size of the game window
-	public Vector2 ScreenSize;
+	[Export]
+	public int jumpHeight = 250; // jump values are set based on desired height
+
+	public Godot.Vector2 ScreenSize; // size of the game window
+
+	private bool hasJumpLeft;
+
+	//life limit & bool determining if we are currently resetting scene from a kill and a bool showing if we have already done this once per time key is pressed
+	private int lives_left;
+	private bool reset = false; //checks for being mid reset
+	private bool processed = false; //checks for key press action
+
+	public int jumpForce;
 
 	// called when the node enters the scene tree for the first time.
 	public override void _Ready() {
 		ScreenSize = GetViewportRect().Size;
 
-		Hide();
+		// we set jump based on desired height, but implement as a velocity delta
+		// jumpForce calculation pre-computes velocity delta with gravity
+		jumpForce = (int) Math.Sqrt(2 * gravity * jumpHeight);
 	}
 
-	// flag for the player being mid-jump or mid-fall is useful for handling player movement inputs
-	public bool isAirborne = true;
-		
-	// by default, the player is not moving
-	public MovementVec velocity = new MovementVec();
-
-	// we want to set parameters for gravitation and a jump height, but we implement a jump as a change in velocity
-	// jumpForce calculation figure automatically figures out the correct impulse up front
-	public int jumpForce = 2 * (int) Math.Sqrt(gravity * jumpHeight);
-
 	// called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta) {
-		// there's no reason to worry about gravity if we're not in the air
-		if (isAirborne) {
+	public override void _PhysicsProcess(double delta)
+	{
+		Vector2 velocity = Velocity;
 
-			// add a positive value here because higher position is lower on the screen
-			velocity.Y += (int) ((float) gravity * delta);
+		// what happens while airborne
+		if (!IsOnFloor()) {
+			
+			// keep track of time spent airborne
+			if (GetNode<Timer>("FallTimer").IsStopped()) {
+				GetNode<Timer>("FallTimer").Start();
+			}
+
+			// implement gravity
+			velocity += GetGravity() * (float)delta; // positive value because greater Y is lower on the screen
+			velocity.Y = Math.Min(velocity.Y, fallSpeed); // clamp vertical fall speed
+		} else {
+			GetNode<Timer>("FallTimer").Stop();
+			hasJumpLeft = true; // reset double-jump ability
 		}
 
-		// by default the player is not inputting horizontal movement
-		velocity.X = 0;
+		// read and execute player movement input
+		velocity.X = 0; // player doesn't moving horizontally by default
+		velocity = PlayerControl(velocity, hasJumpLeft || IsOnFloor());
 
+		Velocity = velocity;
+		Show();
+		MoveAndSlide();
+	}
+
+	private Vector2 PlayerControl(Vector2 velocity, bool canJump) {
 		if (Input.IsActionPressed("move_right")) {
 			velocity.X += speed;
 		}
@@ -52,50 +76,90 @@ public partial class Player : Area2D {
 			velocity.X -= speed;
 		}
 
-		if (Input.IsActionPressed("jump")) {
-			if (!isAirborne) {
-				// subtract because the top of the screen is minimum coordinate
-				velocity.Y -= jumpForce;
-				isAirborne = true;
+		if (Input.IsActionJustPressed("jump")) {
+			if (canJump) {
+				velocity.Y = - jumpForce; // subtract because screen top is minimum Y coordinate
+				hasJumpLeft = IsOnFloor();
 			}
 		}
 
+		// you can hit down key to "cancel" partway through a jump
 		if (Input.IsActionPressed("down")) {
+			velocity.Y = Math.Max(velocity.Y, 0);
+		}
 
-			// you can hit down key to "cancel" partway through a jump
-			if (isAirborne) {
-				velocity.Y = Math.Max(velocity.Y, 0);
+		//kills player if k is pressed **TESTING PROCESS ONLY**
+		if (Input.IsActionPressed("k")){
+			if (!reset && !processed){
+				Kill_Reset();
+				processed = true; //sets it so we know k is pressed
 			}
+		} else{
+			processed = false; //reset key press to false
 		}
 
-		// we need to actually apply the calculated velocity, and we also need to keep the player bounded within the screen
-		Position += new Vector2(velocity.X, velocity.Y) * (float) delta;
-		Position = new Vector2(
-			x: Mathf.Clamp(Position.X, 0, ScreenSize.X),
-			y: Mathf.Clamp(Position.Y, 0, ScreenSize.Y)
-		);
-
-		if (Position.Y == ScreenSize.Y) {
-			isAirborne = false;
-			velocity.Y = 0;
-		}
-
-		if (Position.Y == 0) {
-			velocity.Y = 0;
-		}
-
-		Show();
+		return velocity;
 	}
 
-	public void Start(Vector2 position)
+	// Kills player and places them back at start
+	public void Kill_Reset() 
 	{
+		if (lives_left > 0){
+			lives_left = lives_left -1;
+		}
+
+		if(lives_left<=0){
+			ShowExitScreen();
+		}
+
+		// make dead and move back to starting position
+		else{
+			Hide();
+			Position = new Godot.Vector2(0,0);
+			Velocity = Vector2.Zero;
+			processed = false; //rest key tracking
+			reset = true; //reset start
+			Show();
+			MoveAndSlide();
+			reset=false; //reset complete
+		}
+		
+	}
+
+	public void ShowExitScreen() 
+	{
+		//find the parent node 
+		Node currnetNode = GetParent();
+		while (currnetNode != null){
+			currnetNode = currnetNode.GetParent();
+		}
+	
+		//try to find main
+		//runs the show exit code
+		Node currentParent = GetParent();
+		while(currentParent!=null){
+			if (currentParent is Main mainNode){
+				mainNode.ShowExit();
+				return;
+			}
+			currentParent = currentParent.GetParent();
+		}
+	}
+
+	
+	public void Start(Godot.Vector2 position)
+	{
+		//find main and grab lives from it
+		Main mainNode = (Main)GetParent().GetParent();
+		lives_left = mainNode.GetMax();
+
 		Position = position;
 		Show();
 		GetNode<CollisionShape2D>("CollisionShape2D").Disabled = false;
 	}
-}
 
-// this is stupid idk why this is like this
-public class MovementVec {
-	public int X, Y = 0;
+	// player dies after falling for too long
+	private void OnFallTimerTimeout() {
+		Kill_Reset();
+	}
 }
