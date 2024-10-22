@@ -179,7 +179,7 @@ public partial class Player : CharacterBody2D {
 	{
 		//find main and grab lives from it
 		Main mainNode = (Main)GetParent().GetParent();
-		lives_left = mainNode.GetMax();
+		lives_left = mainNode.getConfig().MaxLives;
 
 		Position = position;
 		Show();
