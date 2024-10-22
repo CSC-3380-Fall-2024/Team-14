@@ -125,6 +125,13 @@ public partial class Player : CharacterBody2D {
 		} else{
 			processed = false; //reset key press to false
 		}
+		
+		var hud = GetNode<HUD>(new NodePath("../HUD"));
+		hud.SetLives(lives_left);
+		
+		Velocity = velocity;
+		Show();
+		MoveAndSlide();
 
 		return velocity;
 	}
