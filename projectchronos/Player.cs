@@ -40,53 +40,80 @@ public partial class Player : CharacterBody2D {
 	// called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _PhysicsProcess(double delta)
 	{
+		UpDirection = -GetGravity().Normalized();
+		
 		Vector2 velocity = Velocity;
 
-		// what happens while airborne
-		if (!IsOnFloor()) {
-			
-			// keep track of time spent airborne
-			if (GetNode<Timer>("FallTimer").IsStopped()) {
-				GetNode<Timer>("FallTimer").Start();
-			}
-
-			// implement gravity
-			velocity += GetGravity() * (float)delta; // positive value because greater Y is lower on the screen
-			velocity.Y = Math.Min(velocity.Y, fallSpeed); // clamp vertical fall speed
-		} else {
-			GetNode<Timer>("FallTimer").Stop();
-			hasJumpLeft = true; // reset double-jump ability
-		}
+		velocity = HandleJumpsAndGravity(velocity, (float) delta);
+		
 
 		// read and execute player movement input
-		velocity.X = 0; // player doesn't moving horizontally by default
 		velocity = PlayerControl(velocity, hasJumpLeft || IsOnFloor());
 
 		Velocity = velocity;
 		Show();
 		MoveAndSlide();
 	}
+	
+	/// <summary>
+	/// Sets the up direction to gravity, manages the fall timer and jump counter, and applies gravity.
+	/// Distance is reduced if gravity takes it above the max fall speed.
+	/// Gravity is from GetGravity
+	/// </summary>
+	/// <param name="velocity">Velocity to use as a starting point</param>
+	/// <param name="delta">Number of seconds since last call</param>
+	/// <returns>The velocity with gravity added</returns>
+	private Vector2 HandleJumpsAndGravity(Vector2 velocity, float delta) {
+		
+		// what happens while airborne
+		if (!IsOnFloor()) {
+			// keep track of time spent airborne
+			if (GetNode<Timer>("FallTimer").IsStopped()) {
+				GetNode<Timer>("FallTimer").Start();
+			}
+
+			// implement gravity
+			velocity += GetGravity() * delta; // positive value because greater Y is lower on the screen
+			// Clamp maximum fall speed
+			var gravityComp = velocity.Dot(GetGravity().Normalized());
+			if (gravityComp > fallSpeed) {
+				velocity -= GetGravity().Normalized() * (fallSpeed / gravityComp);
+			}
+		} else {
+			GetNode<Timer>("FallTimer").Stop();
+			hasJumpLeft = true; // reset double-jump ability
+		}
+		
+		return velocity;
+	}
 
 	private Vector2 PlayerControl(Vector2 velocity, bool canJump) {
+		var horizontalDir = UpDirection.Rotated((float) Math.PI / 2f);
+		if (Input.IsActionJustReleased("move_left") || Input.IsActionJustReleased("move_right") || IsOnFloor()) {
+			// Remove horizontal movement as the player is not moving
+			velocity -= horizontalDir * velocity.Dot(horizontalDir);
+		}
+		
 		if (Input.IsActionPressed("move_right")) {
-			velocity.X += speed;
+			velocity -= horizontalDir * velocity.Dot(horizontalDir);
+			velocity += horizontalDir * speed;
 		}
 
 		if (Input.IsActionPressed("move_left")) {
-			velocity.X -= speed;
-			
+			velocity -= horizontalDir * velocity.Dot(horizontalDir);
+			velocity -= horizontalDir * speed;
 		}
 
 		if (Input.IsActionJustPressed("jump")) {
 			if (canJump) {
-				velocity.Y = - jumpForce; // subtract because screen top is minimum Y coordinate
+				velocity += jumpForce * UpDirection;
 				hasJumpLeft = IsOnFloor();
 			}
 		}
 
 		// you can hit down key to "cancel" partway through a jump
 		if (Input.IsActionPressed("down")) {
-			velocity.Y = Math.Max(velocity.Y, 0);
+			velocity -= UpDirection * Math.Max(Velocity.Dot(UpDirection), 0);
 		}
 
 		//kills player if k is pressed **TESTING PROCESS ONLY**
@@ -98,6 +125,13 @@ public partial class Player : CharacterBody2D {
 		} else{
 			processed = false; //reset key press to false
 		}
+		
+		var hud = GetNode<HUD>(new NodePath("../HUD"));
+		hud.SetLives(lives_left);
+		
+		Velocity = velocity;
+		Show();
+		MoveAndSlide();
 
 		return velocity;
 	}
@@ -152,7 +186,7 @@ public partial class Player : CharacterBody2D {
 	{
 		//find main and grab lives from it
 		Main mainNode = (Main)GetParent().GetParent();
-		lives_left = mainNode.GetMax();
+		lives_left = mainNode.getConfig().MaxLives;
 
 		Position = position;
 		Show();
