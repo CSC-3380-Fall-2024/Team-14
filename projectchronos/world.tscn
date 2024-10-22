@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://c6lt1tt11cqg7"]
+[gd_scene load_steps=10 format=3 uid="uid://c6lt1tt11cqg7"]
 
 [ext_resource type="Texture2D" uid="uid://bf5tqxbpmxpmu" path="res://background.png" id="1_nkqkr"]
 [ext_resource type="PackedScene" uid="uid://4kf7paebw3px" path="res://player.tscn" id="2_6xg6t"]
+[ext_resource type="PackedScene" uid="uid://tt3kaocr7444" path="res://basic_enemy.tscn" id="3_ld203"]
 [ext_resource type="Script" path="res://Camera2d.cs" id="3_tia5n"]
 [ext_resource type="Script" path="res://HUD.cs" id="4_5dip8"]
 [ext_resource type="Texture2D" uid="uid://byu3sp5ap7x0c" path="res://heart.png" id="4_ri6pp"]
@@ -82,3 +83,5 @@ position = Vector2(845.046, -107.714)
 rotation = -0.162464
 shape = SubResource("RectangleShape2D_k1v3s")
 
+[node name="BasicEnemy" parent="." instance=ExtResource("3_ld203")]
+position = Vector2(23, 195)

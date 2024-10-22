@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://tt3kaocr7444"]
+
+[ext_resource type="Texture2D" uid="uid://u0cd3jbfsmt6" path="res://assets/terrible_monster.png" id="1_bl43d"]
+[ext_resource type="Script" path="res://BasicEnemy.cs" id="1_x4m13"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0crip"]
+size = Vector2(128, 128)
+
+[node name="BasicEnemy" type="CharacterBody2D"]
+script = ExtResource("1_x4m13")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_0crip")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_bl43d")
