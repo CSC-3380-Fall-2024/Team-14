@@ -9,6 +9,12 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j1uk3"]
 size = Vector2(1920, 1080)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0t3bv"]
+size = Vector2(297, 253)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k1v3s"]
+size = Vector2(852.909, 801)
+
 [node name="World" type="Node2D"]
 
 [node name="Area2D" type="Area2D" parent="."]
@@ -56,3 +62,23 @@ vertical = true
 [node name="LifeHeart" type="TextureRect" parent="HUD/Container/LivesContainer"]
 layout_mode = 2
 texture = ExtResource("4_ri6pp")
+
+[node name="Area2D2" type="Area2D" parent="."]
+gravity_space_override = 3
+gravity_point_center = Vector2(1, 0)
+gravity_direction = Vector2(1, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2"]
+position = Vector2(1123.5, 425.5)
+shape = SubResource("RectangleShape2D_0t3bv")
+
+[node name="Area2D3" type="Area2D" parent="."]
+gravity_space_override = 3
+gravity_point_center = Vector2(0.2, 1)
+gravity_direction = Vector2(0.2, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D3"]
+position = Vector2(845.046, -107.714)
+rotation = -0.162464
+shape = SubResource("RectangleShape2D_k1v3s")
+

@@ -1,0 +1,68 @@
+[gd_scene load_steps=5 format=3 uid="uid://bperpaawxgtjj"]
+
+[ext_resource type="Script" path="res://TitleScreen.cs" id="1_x8hp7"]
+[ext_resource type="Texture2D" uid="uid://6o4groqyfmp3" path="res://assets/chronos_title_background.png" id="2_ardke"]
+[ext_resource type="Texture2D" uid="uid://bhy3afpr6t4nc" path="res://assets/chronos_title_text_upscale.png" id="2_cg2b1"]
+[ext_resource type="FontFile" uid="uid://nyojpkaf8mf7" path="res://assets/chronos_font.ttf" id="3_f7bky"]
+
+[node name="TitleScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_x8hp7")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_ardke")
+
+[node name="Menu" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+offset_left = 260.0
+offset_top = 160.0
+offset_right = 1660.0
+offset_bottom = 920.0
+
+[node name="TitleText" type="TextureRect" parent="Menu"]
+layout_mode = 2
+texture = ExtResource("2_cg2b1")
+expand_mode = 5
+stretch_mode = 3
+
+[node name="CenterRow" type="HBoxContainer" parent="Menu"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Buttons" type="VBoxContainer" parent="Menu/CenterRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+
+[node name="StartButton" type="Button" parent="Menu/CenterRow/Buttons"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_f7bky")
+theme_override_font_sizes/font_size = 48
+text = "START"
+flat = true
+alignment = 0
+
+[node name="QuitButton" type="Button" parent="Menu/CenterRow/Buttons"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_f7bky")
+theme_override_font_sizes/font_size = 48
+text = "QUIT"
+flat = true
+alignment = 0
+
+[connection signal="pressed" from="Menu/CenterRow/Buttons/StartButton" to="." method="OnStartButtonPressed"]
+[connection signal="pressed" from="Menu/CenterRow/Buttons/QuitButton" to="." method="OnQuitButtonPressed"]
