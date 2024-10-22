@@ -5,9 +5,6 @@ using ProjectChronos;
 
 public partial class Main : Node {
 
-	[Export]
-	public PackedScene GameWorldScene {get; set;}
-
 	private TextureRect exitScreen;
 
 	private Configuration config = new() { MaxLives = 3 };
