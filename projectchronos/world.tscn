@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://c6lt1tt11cqg7"]
+[gd_scene load_steps=12 format=3 uid="uid://c6lt1tt11cqg7"]
 
 [ext_resource type="Texture2D" uid="uid://bf5tqxbpmxpmu" path="res://background.png" id="1_nkqkr"]
 [ext_resource type="PackedScene" uid="uid://4kf7paebw3px" path="res://player.tscn" id="2_6xg6t"]
@@ -95,8 +95,7 @@ position = Vector2(590, 505)
 shape = SubResource("RectangleShape2D_6tewd")
 debug_color = Color(0.839216, 0.6, 0.701961, 0.843137)
 
-[connection signal="body_entered" from="Area2D4" to="Player" method="_on_area_2d_4_body_entered"]
-
 [node name="BasicEnemy" parent="." instance=ExtResource("3_ld203")]
 position = Vector2(23, 195)
 
+[connection signal="body_entered" from="Area2D4" to="Player" method="_on_area_2d_4_body_entered"]

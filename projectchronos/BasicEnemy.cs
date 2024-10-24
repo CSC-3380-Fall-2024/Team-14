@@ -29,8 +29,12 @@ public partial class BasicEnemy : CharacterBody2D {
 		QueueFree();
 	}
 
-	public void TakeDamage(float damage) {
+	public void TakeDamage(float damage) { // should not ever modify enemy health directly (from outside)
 		stats.currentLife -= damage;
+	}
+
+	public float DistanceToPlayer() {
+		return GetNode<Player>("Player").Position.DistanceTo(Position); // built-in godot methods sure are useful
 	}
 }
 
