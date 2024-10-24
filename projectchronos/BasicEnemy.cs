@@ -1,27 +1,36 @@
 using Godot;
-using System;
-using System.ComponentModel.DataAnnotations;
 
 public partial class BasicEnemy : CharacterBody2D {
 	public const float Speed = 300.0f;
 	public const float JumpVelocity = -400.0f;
 
-	private StatBlock stats = new StatBlock(100, 1, true, true, npcAI.Default, 100);
+	public StatBlock stats = new StatBlock(100, 1, true, true, npcAI.MonteKillO, 30);
+	public AI ai;
+
+    public override void _Ready()
+    {
+		ai = MakeAI(stats.ai);
+        base._Ready();
+    }
 
     public override void _PhysicsProcess(double delta) {
-		TakeDamage(20 * (float) delta); // prototype enemy takes passive damage for testing
-		stats = AiProcess(stats); // run the 'AI'
+		TakeDamage( 1 / DistanceToPlayer() * 2000f * (float) delta); // prototype enemy takes passive proximity damage for testing
+		
+		 // die if we have zero health duh
+		if (stats.currentLife <= 0) {
+			kill();
+		}
+
+		ai.ExecuteAI((float) delta); // have to actually run the AI code
+
 		Show();
 	}
 
-	// AiProcess mutates NPC stats based on behavior defined with the given 'AI'
-	public StatBlock AiProcess(StatBlock stats) {
-		if (stats.ai == npcAI.Default) {
-			if (stats.currentLife <= 0) {
-				kill();
-			}
+	public AI MakeAI(npcAI aiType) {
+		switch(aiType) {
+			case npcAI.MonteKillO : return new MonteKillO(this, 2);
+			default : return new DefaultAI(this);
 		}
-		return stats;
 	}
 
 	// we wrap this in its own method just because? maybe we'll add additional behavior to the kill event
@@ -33,13 +42,17 @@ public partial class BasicEnemy : CharacterBody2D {
 		stats.currentLife -= damage;
 	}
 
-	public float DistanceToPlayer() {
-		return GetNode<Player>("Player").Position.DistanceTo(Position); // built-in godot methods sure are useful
+	public Vector2 PlayerPosition() {
+		return GetNode<Player>("/root/Main/World/Player").Position;
 	}
-}
 
-public enum npcAI {
-	Default // will be adding more for actual behaviors
+	public float DistanceToPlayer() {
+		return PlayerPosition().DistanceTo(Position); // built-in godot methods sure are useful
+	}
+
+	public float GetSpeed() {
+		return Speed;
+	}
 }
 
 
