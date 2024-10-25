@@ -2,6 +2,7 @@ using Godot;
 using System;
 using System.Numerics;
 using System.Runtime.CompilerServices;
+using System.Security.Cryptography.X509Certificates;
 using Vector2 = Godot.Vector2;
 
 public partial class Player : CharacterBody2D {
@@ -28,6 +29,7 @@ public partial class Player : CharacterBody2D {
 
 	public int jumpForce;
 
+
 	// called when the node enters the scene tree for the first time.
 	public override void _Ready() {
 		ScreenSize = GetViewportRect().Size;
@@ -35,6 +37,12 @@ public partial class Player : CharacterBody2D {
 		// we set jump based on desired height, but implement as a velocity delta
 		// jumpForce calculation pre-computes velocity delta with gravity
 		jumpForce = (int) Math.Sqrt(2 * gravity * jumpHeight);
+
+        var H = new HealthBar
+        {
+            Health = 5
+        };
+        H.InitHealth(H.Health);
 	}
 
 	// called every frame. 'delta' is the elapsed time since the previous frame.
@@ -53,6 +61,7 @@ public partial class Player : CharacterBody2D {
 		Velocity = velocity;
 		Show();
 		MoveAndSlide();
+
 	}
 	
 	/// <summary>
@@ -197,4 +206,5 @@ public partial class Player : CharacterBody2D {
 	private void OnFallTimerTimeout() {
 		Kill_Reset();
 	}
+
 }
