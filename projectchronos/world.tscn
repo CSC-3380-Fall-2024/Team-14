@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://tt3kaocr7444" path="res://basic_enemy.tscn" id="3_ld203"]
 [ext_resource type="Script" path="res://Camera2d.cs" id="3_tia5n"]
 [ext_resource type="Script" path="res://HUD.cs" id="4_5dip8"]
-[ext_resource type="Texture2D" uid="uid://byu3sp5ap7x0c" path="res://heart.png" id="4_ri6pp"]
+[ext_resource type="Texture2D" uid="uid://bnscgg2qb6aho" path="res://assets/chronos_life_sprite.png" id="5_5om3g"]
 [ext_resource type="Script" path="res://KillingSquare.cs" id="6_xvjpd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j1uk3"]
@@ -66,7 +66,7 @@ vertical = true
 
 [node name="LifeHeart" type="TextureRect" parent="HUD/Container/LivesContainer"]
 layout_mode = 2
-texture = ExtResource("4_ri6pp")
+texture = ExtResource("5_5om3g")
 
 [node name="Area2D2" type="Area2D" parent="."]
 gravity_space_override = 3
