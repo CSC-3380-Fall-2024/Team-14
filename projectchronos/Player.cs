@@ -18,6 +18,12 @@ public partial class Player : CharacterBody2D {
 	[Export]
 	public int jumpHeight = 250; // jump values are set based on desired height
 
+	[Export]
+	public int PlayerMaxHp = 20;
+
+	[Export]
+	public int PlayerHp;
+
 	public Godot.Vector2 ScreenSize; // size of the game window
 
 	private bool hasJumpLeft;
@@ -37,6 +43,11 @@ public partial class Player : CharacterBody2D {
 		// we set jump based on desired height, but implement as a velocity delta
 		// jumpForce calculation pre-computes velocity delta with gravity
 		jumpForce = (int) Math.Sqrt(2 * gravity * jumpHeight);
+
+		var healthBar = GetNode<HealthBar>("./HUD/HealthBar");
+		PlayerHp = PlayerMaxHp;
+		healthBar.Value = PlayerHp;
+		healthBar.MaxValue = PlayerHp;
 
 	}
 
@@ -129,6 +140,28 @@ public partial class Player : CharacterBody2D {
 		} else{
 			processed = false; //reset key press to false
 		}
+
+		//testing health bar depletion
+		if(Input.IsActionJustPressed("HealthMinus"))
+		{
+			var healthBar = GetNode<HealthBar>("HealthBar");
+			PlayerHp = (int)Mathf.Clamp(healthBar.Value, 0, healthBar.MaxValue);
+			PlayerHp -= 2;
+			healthBar.Value = PlayerHp;
+			if(PlayerHp <= 0 && lives_left >= 1)
+			{
+				Kill_Reset();
+				healthBar.Value = healthBar.MaxValue;
+			}
+		}
+		//testing healing
+		if (Input.IsActionJustPressed("HealthPlus"))
+		{
+			var healthBar = GetNode<HealthBar>("HealthBar");
+			PlayerHp = (int)Mathf.Clamp(healthBar.Value, 0, healthBar.MaxValue);
+			PlayerHp += 2;
+			healthBar.Value = PlayerHp;
+		}
 		
 		var hud = GetNode<HUD>(new NodePath("../HUD"));
 		hud.SetLives(lives_left);
@@ -201,5 +234,6 @@ public partial class Player : CharacterBody2D {
 	private void OnFallTimerTimeout() {
 		Kill_Reset();
 	}
+
 
 }

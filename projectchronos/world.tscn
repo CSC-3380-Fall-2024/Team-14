@@ -1,11 +1,13 @@
-[gd_scene load_steps=10 format=3 uid="uid://c6lt1tt11cqg7"]
+[gd_scene load_steps=13 format=3 uid="uid://c6lt1tt11cqg7"]
 
 [ext_resource type="Texture2D" uid="uid://bf5tqxbpmxpmu" path="res://background.png" id="1_nkqkr"]
 [ext_resource type="PackedScene" uid="uid://4kf7paebw3px" path="res://player.tscn" id="2_6xg6t"]
+[ext_resource type="PackedScene" path="res://basic_enemy.tscn" id="3_ld203"]
 [ext_resource type="Script" path="res://Camera2d.cs" id="3_tia5n"]
 [ext_resource type="Script" path="res://HUD.cs" id="4_5dip8"]
-[ext_resource type="Texture2D" uid="uid://byu3sp5ap7x0c" path="res://heart.png" id="4_ri6pp"]
-[ext_resource type="PackedScene" uid="uid://bmngqtruxc8ee" path="res://HealthBar.tscn" id="6_c33eu"]
+[ext_resource type="Texture2D" uid="uid://bnscgg2qb6aho" path="res://assets/chronos_life_sprite.png" id="5_5om3g"]
+[ext_resource type="PackedScene" uid="uid://cnmh3rw3roajk" path="res://HealthBar.tscn" id="6_c33eu"]
+[ext_resource type="Script" path="res://KillingSquare.cs" id="6_xvjpd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j1uk3"]
 size = Vector2(1920, 1080)
@@ -16,7 +18,61 @@ size = Vector2(297, 253)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k1v3s"]
 size = Vector2(852.909, 801)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6tewd"]
+size = Vector2(326.5, 68)
+
 [node name="World" type="Node2D"]
+
+[node name="Area2D" type="Area2D" parent="."]
+gravity = 3000.0
+
+[node name="Sprite2D" type="Sprite2D" parent="Area2D"]
+position = Vector2(960, 540)
+texture = ExtResource("1_nkqkr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(960, 540)
+shape = SubResource("RectangleShape2D_j1uk3")
+
+[node name="Player" parent="." instance=ExtResource("2_6xg6t")]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PackedVector2Array(0, 528, 1240, 536, 1240, 328, 584, 328, 1240, 224, 1344, 224, 1336, 600, 0, 600)
+
+[node name="Area2D2" type="Area2D" parent="."]
+gravity_space_override = 3
+gravity_point_center = Vector2(1, 0)
+gravity_direction = Vector2(1, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2"]
+position = Vector2(1122, 432)
+shape = SubResource("RectangleShape2D_0t3bv")
+
+[node name="Area2D3" type="Area2D" parent="."]
+gravity_space_override = 3
+gravity_point_center = Vector2(0.2, 1)
+gravity_direction = Vector2(0.2, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D3"]
+position = Vector2(845.046, -107.714)
+rotation = -0.162464
+shape = SubResource("RectangleShape2D_k1v3s")
+
+[node name="Area2D4" type="Area2D" parent="."]
+script = ExtResource("6_xvjpd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D4"]
+position = Vector2(590, 505)
+shape = SubResource("RectangleShape2D_6tewd")
+debug_color = Color(0.839216, 0.6, 0.701961, 0.843137)
+
+[node name="BasicEnemy" parent="." instance=ExtResource("3_ld203")]
+position = Vector2(23, 195)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+script = ExtResource("3_tia5n")
 
 [node name="HUD" type="CanvasLayer" parent="."]
 script = ExtResource("4_5dip8")
@@ -42,48 +98,11 @@ vertical = true
 
 [node name="LifeHeart" type="TextureRect" parent="HUD/Container/LivesContainer"]
 layout_mode = 2
-texture = ExtResource("4_ri6pp")
+texture = ExtResource("5_5om3g")
 
-[node name="HealthBar" parent="HUD" instance=ExtResource("6_c33eu")]
-offset_right = -1560.0
+[node name="HealthBar" parent="HUD/Container" instance=ExtResource("6_c33eu")]
+layout_mode = 1
+offset_right = 240.0
+offset_bottom = 30.0
 
-[node name="Area2D" type="Area2D" parent="."]
-gravity = 3000.0
-
-[node name="Sprite2D" type="Sprite2D" parent="Area2D"]
-position = Vector2(960, 540)
-texture = ExtResource("1_nkqkr")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(960, 540)
-shape = SubResource("RectangleShape2D_j1uk3")
-
-[node name="Player" parent="." instance=ExtResource("2_6xg6t")]
-visible = false
-
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
-polygon = PackedVector2Array(0, 528, 1240, 536, 1240, 328, 584, 328, 1240, 224, 1344, 224, 1336, 600, 0, 600)
-
-[node name="Camera2D" type="Camera2D" parent="."]
-script = ExtResource("3_tia5n")
-
-[node name="Area2D2" type="Area2D" parent="."]
-gravity_space_override = 3
-gravity_point_center = Vector2(1, 0)
-gravity_direction = Vector2(1, 0)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2"]
-position = Vector2(1123.5, 425.5)
-shape = SubResource("RectangleShape2D_0t3bv")
-
-[node name="Area2D3" type="Area2D" parent="."]
-gravity_space_override = 3
-gravity_point_center = Vector2(0.2, 1)
-gravity_direction = Vector2(0.2, 1)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D3"]
-position = Vector2(845.046, -107.714)
-rotation = -0.162464
-shape = SubResource("RectangleShape2D_k1v3s")
+[connection signal="body_entered" from="Area2D4" to="Player" method="_on_area_2d_4_body_entered"]
