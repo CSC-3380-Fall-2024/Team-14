@@ -41,36 +41,6 @@ shape = SubResource("RectangleShape2D_j1uk3")
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
 polygon = PackedVector2Array(0, 528, 1240, 536, 1240, 328, 584, 328, 1240, 224, 1344, 224, 1336, 600, 0, 600)
 
-[node name="Area2D2" type="Area2D" parent="."]
-gravity_space_override = 3
-gravity_point_center = Vector2(1, 0)
-gravity_direction = Vector2(1, 0)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2"]
-position = Vector2(1122, 432)
-shape = SubResource("RectangleShape2D_0t3bv")
-
-[node name="Area2D3" type="Area2D" parent="."]
-gravity_space_override = 3
-gravity_point_center = Vector2(0.2, 1)
-gravity_direction = Vector2(0.2, 1)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D3"]
-position = Vector2(845.046, -107.714)
-rotation = -0.162464
-shape = SubResource("RectangleShape2D_k1v3s")
-
-[node name="Area2D4" type="Area2D" parent="."]
-script = ExtResource("6_xvjpd")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D4"]
-position = Vector2(590, 505)
-shape = SubResource("RectangleShape2D_6tewd")
-debug_color = Color(0.839216, 0.6, 0.701961, 0.843137)
-
-[node name="BasicEnemy" parent="." instance=ExtResource("3_ld203")]
-position = Vector2(23, 195)
-
 [node name="Camera2D" type="Camera2D" parent="."]
 script = ExtResource("3_tia5n")
 
@@ -104,5 +74,35 @@ texture = ExtResource("5_5om3g")
 layout_mode = 1
 offset_right = 240.0
 offset_bottom = 30.0
+
+[node name="Area2D2" type="Area2D" parent="."]
+gravity_space_override = 3
+gravity_point_center = Vector2(1, 0)
+gravity_direction = Vector2(1, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2"]
+position = Vector2(1122, 432)
+shape = SubResource("RectangleShape2D_0t3bv")
+
+[node name="Area2D3" type="Area2D" parent="."]
+gravity_space_override = 3
+gravity_point_center = Vector2(0.2, 1)
+gravity_direction = Vector2(0.2, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D3"]
+position = Vector2(845.046, -107.714)
+rotation = -0.162464
+shape = SubResource("RectangleShape2D_k1v3s")
+
+[node name="Area2D4" type="Area2D" parent="."]
+script = ExtResource("6_xvjpd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D4"]
+position = Vector2(590, 505)
+shape = SubResource("RectangleShape2D_6tewd")
+debug_color = Color(0.839216, 0.6, 0.701961, 0.843137)
+
+[node name="BasicEnemy" parent="." instance=ExtResource("3_ld203")]
+position = Vector2(23, 195)
 
 [connection signal="body_entered" from="Area2D4" to="Player" method="_on_area_2d_4_body_entered"]
