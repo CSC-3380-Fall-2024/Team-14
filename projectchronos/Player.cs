@@ -38,11 +38,6 @@ public partial class Player : CharacterBody2D {
 		// jumpForce calculation pre-computes velocity delta with gravity
 		jumpForce = (int) Math.Sqrt(2 * gravity * jumpHeight);
 
-        var H = new HealthBar
-        {
-            Health = 5
-        };
-        H.InitHealth(H.Health);
 	}
 
 	// called every frame. 'delta' is the elapsed time since the previous frame.
