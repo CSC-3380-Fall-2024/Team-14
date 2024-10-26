@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://Camera2d.cs" id="3_tia5n"]
 [ext_resource type="Script" path="res://HUD.cs" id="4_5dip8"]
 [ext_resource type="Texture2D" uid="uid://bnscgg2qb6aho" path="res://assets/chronos_life_sprite.png" id="5_5om3g"]
+
 [ext_resource type="Script" path="res://KillingSquare.cs" id="6_xvjpd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j1uk3"]
