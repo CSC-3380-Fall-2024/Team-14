@@ -178,6 +178,7 @@ public partial class Player : CharacterBody2D {
 	{
 		if (lives_left > 0){
 			lives_left = lives_left -1;
+			GetTree().ChangeSceneToFile("res://modifiers.tscn");
 		}
 
 		if(lives_left<=0){
