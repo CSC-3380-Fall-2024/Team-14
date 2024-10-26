@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://HUD.cs" id="4_5dip8"]
 [ext_resource type="Texture2D" uid="uid://bnscgg2qb6aho" path="res://assets/chronos_life_sprite.png" id="5_5om3g"]
 [ext_resource type="PackedScene" uid="uid://cnmh3rw3roajk" path="res://HealthBar.tscn" id="6_c33eu"]
+
 [ext_resource type="Script" path="res://KillingSquare.cs" id="6_xvjpd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j1uk3"]
@@ -74,6 +75,7 @@ texture = ExtResource("5_5om3g")
 layout_mode = 1
 offset_right = 240.0
 offset_bottom = 30.0
+
 
 [node name="Area2D2" type="Area2D" parent="."]
 gravity_space_override = 3
