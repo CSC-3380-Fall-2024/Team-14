@@ -148,7 +148,7 @@ public partial class Player : CharacterBody2D {
 			PlayerHp = (int)Mathf.Clamp(healthBar.Value, 0, healthBar.MaxValue);
 			PlayerHp -= 2;
 			healthBar.Value = PlayerHp;
-			if(PlayerHp <= 0 && lives_left >= 1)
+			if(PlayerHp <= 0 && lives_left >= 0)
 			{
 				Kill_Reset();
 				healthBar.Value = healthBar.MaxValue;
