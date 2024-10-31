@@ -55,6 +55,15 @@ text = "START"
 flat = true
 alignment = 0
 
+[node name="SettingsButton" type="Button" parent="Menu/CenterRow/Buttons"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_f7bky")
+theme_override_font_sizes/font_size = 48
+text = "SETTINGS"
+flat = true
+alignment = 0
+
 [node name="QuitButton" type="Button" parent="Menu/CenterRow/Buttons"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -65,4 +74,5 @@ flat = true
 alignment = 0
 
 [connection signal="pressed" from="Menu/CenterRow/Buttons/StartButton" to="." method="OnStartButtonPressed"]
+[connection signal="pressed" from="Menu/CenterRow/Buttons/SettingsButton" to="." method="OnSettingsButtonPressed"]
 [connection signal="pressed" from="Menu/CenterRow/Buttons/QuitButton" to="." method="OnQuitButtonPressed"]
