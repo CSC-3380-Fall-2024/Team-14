@@ -17,18 +17,13 @@ public partial class HUD : CanvasLayer
 	public void SetLives(int lives) {
 		var livesContainer = GetNode<FlowContainer>("./Container/LivesContainer");
 		if (livesContainer.GetChildCount() > lives) {
-			GD.Print("Removing");
 			for (int i = livesContainer.GetChildCount(); i > lives; i--) {
 				livesContainer.RemoveChild(livesContainer.GetChildren()[i - 1]);
 			}
 		} else if (livesContainer.GetChildCount() < lives) {
 			for (int i = livesContainer.GetChildCount(); i < lives; i++) {
-				GD.Print("Duplicating in loop");
 				livesContainer.AddChild(livesContainer.GetChildren()[0].Duplicate());
 			}
-		}
-		else {
-			GD.Print("Doing nothing");
 		}
 	}
 }
