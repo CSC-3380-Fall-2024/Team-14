@@ -21,8 +21,23 @@ public partial class Player : CharacterBody2D {
 	[Export]
 	public int PlayerMaxHp = 20;
 
+	private int _playerHp;
+	
 	[Export]
-	public int PlayerHp;
+	public int PlayerHp {
+		get => _playerHp;
+		set {
+			var healthBar = GetNode<HealthBar>("HealthBar");
+			_playerHp = Mathf.Clamp(value, 0, PlayerMaxHp);
+			healthBar.MaxValue = PlayerMaxHp;
+			healthBar.Value = _playerHp;
+			if(_playerHp <= 0 && lives_left >= 0)
+			{
+				Kill_Reset();
+				_playerHp = PlayerMaxHp;
+			}
+		}
+	}
 
 	public Godot.Vector2 ScreenSize; // size of the game window
 
@@ -35,7 +50,6 @@ public partial class Player : CharacterBody2D {
 
 	public int jumpForce;
 
-
 	// called when the node enters the scene tree for the first time.
 	public override void _Ready() {
 		ScreenSize = GetViewportRect().Size;
@@ -44,7 +58,6 @@ public partial class Player : CharacterBody2D {
 		// jumpForce calculation pre-computes velocity delta with gravity
 		jumpForce = (int) Math.Sqrt(2 * gravity * jumpHeight);
 
-		var healthBar = GetNode<HealthBar>("./HUD/HealthBar");
 		PlayerHp = PlayerMaxHp;
 		healthBar.Value = PlayerHp;
 		healthBar.MaxValue = PlayerHp;
@@ -62,6 +75,8 @@ public partial class Player : CharacterBody2D {
 
 		// read and execute player movement input
 		velocity = PlayerControl(velocity, hasJumpLeft || IsOnFloor());
+		
+		ProcessFire(delta);
 
 		ProgressBarHandler(); // method manages this player feature from "outside"
 
@@ -143,25 +158,13 @@ public partial class Player : CharacterBody2D {
 		}
 
 		//testing health bar depletion
-		if(Input.IsActionJustPressed("HealthMinus"))
-		{
-			var healthBar = GetNode<HealthBar>("HealthBar");
-			PlayerHp = (int)Mathf.Clamp(healthBar.Value, 0, healthBar.MaxValue);
+		if(Input.IsActionJustPressed("HealthMinus")) {
 			PlayerHp -= 2;
-			healthBar.Value = PlayerHp;
-			if(PlayerHp <= 0 && lives_left >= 0)
-			{
-				Kill_Reset();
-				healthBar.Value = healthBar.MaxValue;
-			}
 		}
 		//testing healing
 		if (Input.IsActionJustPressed("HealthPlus"))
 		{
-			var healthBar = GetNode<HealthBar>("HealthBar");
-			PlayerHp = (int)Mathf.Clamp(healthBar.Value, 0, healthBar.MaxValue);
 			PlayerHp += 2;
-			healthBar.Value = PlayerHp;
 		}
 		
 		var hud = GetNode<HUD>(new NodePath("../HUD"));
@@ -242,7 +245,6 @@ public partial class Player : CharacterBody2D {
 			currentParent = currentParent.GetParent();
 		}
 	}
-
 	
 	public void Start(Godot.Vector2 position)
 	{
@@ -260,5 +262,32 @@ public partial class Player : CharacterBody2D {
 		Kill_Reset();
 	}
 
+	private double _sinceLastFireTick = 0;
+	private double _fireSecondsRemaining = 0;
+	/**
+	 * Sets the player to be on fire for this many more seconds.
+	 * Note that this is not cumulative. 
+	 */
+	public void SetFireDuration(double seconds) {
+		_fireSecondsRemaining = seconds;
+	}
+
+	/**
+	 * Decrements the number of seconds that the player is on fire by delta and deals fire damage if
+	 * a second has passed.
+	 */
+	private void ProcessFire(double delta) {
+		if (_fireSecondsRemaining > 0) {
+			Main mainNode = (Main)GetParent().GetParent();
+			if (_sinceLastFireTick > 1) {
+				PlayerHp -= mainNode.getConfig().FireDamagePerSecond;
+				_sinceLastFireTick -= 1;
+			}
+
+			_sinceLastFireTick += delta;
+			_fireSecondsRemaining -= delta;
+			if (_fireSecondsRemaining < 0) _fireSecondsRemaining = 0;
+		}
+	}
 
 }
