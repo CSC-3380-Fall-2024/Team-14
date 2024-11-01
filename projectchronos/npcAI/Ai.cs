@@ -8,5 +8,6 @@ public abstract class AI {
 
 public enum npcAI {
 	DefaultAI, // will be adding more for actual behaviors
-	MonteKillO
+	MonteKillO,
+	SisyphusAI
 }
