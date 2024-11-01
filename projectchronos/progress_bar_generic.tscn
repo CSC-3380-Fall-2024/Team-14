@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://bccchwmakcjbs"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ips8o"]
+
+[node name="ProgressBarGeneric" type="ProgressBar"]
+offset_right = 4.0
+offset_bottom = 27.0
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+layout_mode = 0
+offset_right = 480.0
+offset_bottom = 40.0
+theme_override_styles/background = SubResource("StyleBoxFlat_ips8o")

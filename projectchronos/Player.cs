@@ -59,6 +59,8 @@ public partial class Player : CharacterBody2D {
 		jumpForce = (int) Math.Sqrt(2 * gravity * jumpHeight);
 
 		PlayerHp = PlayerMaxHp;
+		healthBar.Value = PlayerHp;
+		healthBar.MaxValue = PlayerHp;
 	}
 
 	// called every frame. 'delta' is the elapsed time since the previous frame.
@@ -75,6 +77,8 @@ public partial class Player : CharacterBody2D {
 		velocity = PlayerControl(velocity, hasJumpLeft || IsOnFloor());
 		
 		ProcessFire(delta);
+
+		ProgressBarHandler(); // method manages this player feature from "outside"
 
 		Velocity = velocity;
 		Show();
@@ -171,6 +175,29 @@ public partial class Player : CharacterBody2D {
 		MoveAndSlide();
 
 		return velocity;
+	}
+
+	// this method exists to isolate all the stuff our extra progress bar might have to do in _Ready()
+	// first we have to decide whether to actually show it
+	public void ProgressBarHandler() {
+		var progressBarGeneric = GetNode<ProgressBarGeneric>("ProgressBarGeneric");
+		if (progressBarGeneric.IsVisible()) {
+			progressBarGeneric.Show();
+		} else {
+			progressBarGeneric.Hide();
+		}
+	}
+
+	// method 1 for the all-purpose player status bar, getting the state
+	public int GetBarProgress() {
+		var progressBarGeneric = GetNode<ProgressBarGeneric>("./HUD/ProgressBarGeneric");
+		return (int) progressBarGeneric.Value;
+	}
+
+	// method 2 for the all-purpose player status bar, setting the state
+	public void SetBarProgress(int value) {
+		var progressBarGeneric = GetNode<ProgressBarGeneric>("./HUD/ProgressBarGeneric");
+		progressBarGeneric.Value = value;
 	}
 
 	// Kills player and places them back at start
