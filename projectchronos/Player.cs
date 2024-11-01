@@ -59,6 +59,7 @@ public partial class Player : CharacterBody2D {
 		jumpForce = (int) Math.Sqrt(2 * gravity * jumpHeight);
 
 		PlayerHp = PlayerMaxHp;
+		var healthBar = GetNode<HealthBar>("HealthBar");
 		healthBar.Value = PlayerHp;
 		healthBar.MaxValue = PlayerHp;
 	}
