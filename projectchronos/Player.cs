@@ -59,6 +59,7 @@ public partial class Player : CharacterBody2D {
 		jumpForce = (int) Math.Sqrt(2 * gravity * jumpHeight);
 
 		PlayerHp = PlayerMaxHp;
+		var healthBar = GetNode<HealthBar>("HealthBar");
 		healthBar.Value = PlayerHp;
 		healthBar.MaxValue = PlayerHp;
 	}
@@ -186,6 +187,8 @@ public partial class Player : CharacterBody2D {
 		} else {
 			progressBarGeneric.Hide();
 		}
+
+		progressBarGeneric.SetVisible(hasJumpLeft && !IsOnFloor()); // linking visibility to double jump I guess
 	}
 
 	// method 1 for the all-purpose player status bar, getting the state
