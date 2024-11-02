@@ -34,4 +34,14 @@ public partial class PauseMenu : Control
 		GetTree().Paused = true;
 		Show();
 	}
+
+ private void OnSettingsPressed()
+ {
+	GetTree().ChangeSceneToFile("settings_screen.tscn");
+ }
+
+ private void OnExitPressed()
+ {
+	GetTree().ChangeSceneToFile("title_screen.tscn");
+ }
 }

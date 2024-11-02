@@ -10,6 +10,7 @@ public partial class SettingsScreen : Control
 		//Initialize to default values 
 		selectedDifficulty = 0; //"EASY"
 		selectedAspectRatio = 0; //"16:9"
+		ProcessMode = ProcessModeEnum.Always;
 	}
 
 	//Signal handler method for difficulty selection, connected in Godot

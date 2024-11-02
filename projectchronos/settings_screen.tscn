@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://dm5bjkvn6xxn7"]
+[gd_scene load_steps=3 format=3 uid="uid://cnv123eicw11x"]
 
 [ext_resource type="FontFile" uid="uid://nyojpkaf8mf7" path="res://assets/chronos_font.ttf" id="1_qrrre"]
 [ext_resource type="Script" path="res://SettingsScreen.cs" id="1_stt42"]
