@@ -4,10 +4,10 @@ using System;
 public partial class Daemon : BasicEnemy
 {
 	public float MeleeRange = 80f; //melee attack range
-    
-    public float MagicRange = 300f; //magic attack range
+	
+	public float MagicRange = 300f; //magic attack range
 	public float EnemyMaxHp = 10f; //enemy health
-    
+	
 
 	public override void _Ready()
 	{
@@ -22,18 +22,18 @@ public partial class Daemon : BasicEnemy
 		
 			if (DistanceToPlayer() <= MeleeRange) //checks to see if enemy is within attack range
 			{
-				GD.Print("in range");
+				GD.Print("in melee range");
 				Attack();
 			}
 			else if(DistanceToPlayer() <= MagicRange)
 			{
 				GD.Print("in magic range");
-				Attack();
+				MagicAttack();
 			}
-            else
-            {
-                Chase();
-            }
+			else
+			{
+				Chase();
+			}
 		
 
 		if (stats.currentLife <= 0){
@@ -60,9 +60,9 @@ public partial class Daemon : BasicEnemy
 		
 	}
 
-    private void MagicAttack()
-    {
-        GD.Print("Fire");
-    }
+	private void MagicAttack()
+	{
+		GD.Print("Fire");
+	}
 
 }
