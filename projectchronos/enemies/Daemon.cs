@@ -3,9 +3,9 @@ using System;
 
 public partial class Daemon : BasicEnemy
 {
-	public float MeleeRange = 80f; //melee attack range
+	public float MeleeRange = 150f; //melee attack range
 	
-	public float MagicRange = 300f; //magic attack range
+	public float MagicRange = 600f; //magic attack range
 	public float EnemyMaxHp = 10f; //enemy health
 	
 
@@ -38,7 +38,7 @@ public partial class Daemon : BasicEnemy
 
 		if (stats.currentLife <= 0){
 			GD.Print("Killing");
-			kill();
+			kill(); //removes enemy when health hits zero
 		}
 
 		Show();
@@ -46,9 +46,9 @@ public partial class Daemon : BasicEnemy
 
 	private void Chase()
 	{
-		var direction = (PlayerPosition()-Position).Normalized(); //moves towards player
-		Velocity = direction * Speed; //sets velocity
-		MoveAndSlide();// adds previously estabvlished physics stuff
+		var direction = (PlayerPosition()-Position).Normalized(); 
+		Velocity = direction * Speed; 
+		MoveAndSlide();
 		GD.Print("chasing");
 	}	
 
@@ -56,13 +56,14 @@ public partial class Daemon : BasicEnemy
 	private void Attack()
 	{
 		GD.Print("Attacking");
-		// take damage goes here
+		//placeholder for damage
 		
 	}
 
 	private void MagicAttack()
 	{
 		GD.Print("Fire");
+        //another placeholder
 	}
 
 }
