@@ -37,7 +37,8 @@ public partial class PauseMenu : Control
 
  private void OnSettingsPressed()
  {
-	GetTree().ChangeSceneToFile("settings_screen.tscn");
+	SettingsScreen settings = GetNode<SettingsScreen>("SettingsScreen");
+	settings.Visible = true;
  }
 
  private void OnExitPressed()

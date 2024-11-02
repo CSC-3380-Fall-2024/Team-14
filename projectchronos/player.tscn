@@ -24,6 +24,7 @@ texture = ExtResource("1_c8gss")
 wait_time = 3.0
 
 [node name="HealthBar" parent="." instance=ExtResource("3_umkuu")]
+z_index = 0
 offset_left = -100.0
 offset_top = -100.0
 offset_right = 100.0

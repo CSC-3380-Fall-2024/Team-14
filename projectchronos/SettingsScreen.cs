@@ -10,7 +10,7 @@ public partial class SettingsScreen : Control
 		//Initialize to default values 
 		selectedDifficulty = 0; //"EASY"
 		selectedAspectRatio = 0; //"16:9"
-		ProcessMode = ProcessModeEnum.Always;
+		Visible = false;
 	}
 
 	//Signal handler method for difficulty selection, connected in Godot
@@ -27,7 +27,7 @@ public partial class SettingsScreen : Control
 
 	//Signal handler method for continue button
 	private void OnContinueButtonPressed() {
-		GetTree().ChangeSceneToFile("res://main.tscn"); //Go to main scene
+		Visible = false;
 	}
 
 	//Signal handler method for quit to title button
