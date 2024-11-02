@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Player.cs" id="1_3o1y4"]
 [ext_resource type="Texture2D" uid="uid://bbentnu2sv5qx" path="res://player.png" id="1_c8gss"]
 [ext_resource type="PackedScene" uid="uid://cnmh3rw3roajk" path="res://HealthBar.tscn" id="3_umkuu"]
-[ext_resource type="PackedScene" path="res://progress_bar_generic.tscn" id="4_fctfr"]
+[ext_resource type="PackedScene" uid="uid://bccchwmakcjbs" path="res://progress_bar_generic.tscn" id="4_fctfr"]
 [ext_resource type="Script" path="res://ProgressBarGeneric.cs" id="5_p5oxw"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jyh6k"]

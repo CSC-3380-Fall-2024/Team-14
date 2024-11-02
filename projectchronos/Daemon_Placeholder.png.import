@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dd4p0c2df180o"
-path="res://.godot/imported/melee_enemy.png-35ec599f12065ffebfbbbca32a06394d.ctex"
+uid="uid://doju1rtwjdbjw"
+path="res://.godot/imported/Daemon_Placeholder.png-46233fca2eb8af073c4144712b9f1e3a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://melee_enemy.png"
-dest_files=["res://.godot/imported/melee_enemy.png-35ec599f12065ffebfbbbca32a06394d.ctex"]
+source_file="res://Daemon_Placeholder.png"
+dest_files=["res://.godot/imported/Daemon_Placeholder.png-46233fca2eb8af073c4144712b9f1e3a.ctex"]
 
 [params]
 
