@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://dm5bjkvn6xxn7"]
+[gd_scene load_steps=3 format=3 uid="uid://cnv123eicw11x"]
 
 [ext_resource type="FontFile" uid="uid://nyojpkaf8mf7" path="res://assets/chronos_font.ttf" id="1_qrrre"]
 [ext_resource type="Script" path="res://SettingsScreen.cs" id="1_stt42"]
@@ -11,6 +11,15 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_stt42")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.525101, 0.525101, 0.525101, 1)
 
 [node name="SettingsOptions" type="TabContainer" parent="."]
 layout_mode = 1
