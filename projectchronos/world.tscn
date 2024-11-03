@@ -42,11 +42,13 @@ position = Vector2(641, 541)
 shape = SubResource("RectangleShape2D_j1uk3")
 
 [node name="Player" parent="." instance=ExtResource("2_6xg6t")]
+position = Vector2(-154, 502)
 position = Vector2(-659, 424)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PackedVector2Array(-322, 541, 1240, 536, 1240, 328, 584, 328, 1240, 224, 1344, 224, 1336, 600, -322, 601)
 polygon = PackedVector2Array(-1364, 540, 1240, 536, 1240, 328, 584, 328, 1240, 224, 1344, 224, 1336, 600, -1364, 594)
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -75,7 +77,6 @@ vertical = true
 
 [node name="LifeHeart" type="TextureRect" parent="HUD/Container/LivesContainer"]
 layout_mode = 2
-texture = ExtResource("4_ri6pp")
 
 [node name="Area2D2" type="Area2D" parent="."]
 gravity_space_override = 3
@@ -83,6 +84,7 @@ gravity_point_center = Vector2(1, 0)
 gravity_direction = Vector2(1, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2"]
+position = Vector2(1122, 432)
 position = Vector2(1580, 807)
 shape = SubResource("RectangleShape2D_0t3bv")
 
@@ -100,6 +102,7 @@ shape = SubResource("RectangleShape2D_k1v3s")
 script = ExtResource("6_xvjpd")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D4"]
+position = Vector2(590, 505)
 position = Vector2(659, 737)
 shape = SubResource("RectangleShape2D_6tewd")
 debug_color = Color(0.839216, 0.6, 0.701961, 0.843137)
