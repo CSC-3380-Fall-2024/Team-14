@@ -1,12 +1,13 @@
-[gd_scene load_steps=14 format=3 uid="uid://c6lt1tt11cqg7"]
+[gd_scene load_steps=13 format=3 uid="uid://c6lt1tt11cqg7"]
 
 [ext_resource type="Texture2D" uid="uid://bf5tqxbpmxpmu" path="res://background.png" id="1_nkqkr"]
 [ext_resource type="PackedScene" uid="uid://4kf7paebw3px" path="res://player.tscn" id="2_6xg6t"]
-[ext_resource type="PackedScene" uid="uid://tt3kaocr7444" path="res://basic_enemy.tscn" id="3_ld203"]
+[ext_resource type="PackedScene" uid="uid://tt3kaocr7444" path="res://enemies/basic_enemy.tscn" id="3_ld203"]
 [ext_resource type="Script" path="res://Camera2d.cs" id="3_tia5n"]
 [ext_resource type="Script" path="res://HUD.cs" id="4_5dip8"]
 [ext_resource type="Texture2D" uid="uid://bnscgg2qb6aho" path="res://assets/chronos_life_sprite.png" id="5_5om3g"]
 [ext_resource type="Script" path="res://KillingSquare.cs" id="6_xvjpd"]
+[ext_resource type="PackedScene" uid="uid://d3xwews2ictv1" path="res://enemies/daemon.tscn" id="8_1mm2v"]
 [ext_resource type="Script" path="res://RangedEnemy.cs" id="8_6lus1"]
 
 [ext_resource type="Script" path="res://projectile.cs" id="8_grek6"]
@@ -110,6 +111,10 @@ debug_color = Color(0.839216, 0.6, 0.701961, 0.843137)
 [node name="BasicEnemy" parent="." instance=ExtResource("3_ld203")]
 position = Vector2(1927, -6)
 
+[node name="Daemon" parent="." instance=ExtResource("8_1mm2v")]
+position = Vector2(843, 102)
+
+[connection signal="body_entered" from="Area2D4" to="Player" method="_on_area_2d_4_body_entered"]
 [node name="RangedEnemy" type="CharacterBody2D" parent="."]
 script = ExtResource("8_6lus1")
 
