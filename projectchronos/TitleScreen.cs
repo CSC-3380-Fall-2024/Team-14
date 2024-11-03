@@ -4,7 +4,9 @@ using System;
 public partial class TitleScreen : Control
 {
 	// Called when the node enters the scene tree for the first time.
-	public override void _Ready() {
+	public override void _Ready() 
+	{
+		ProcessMode = ProcessModeEnum.Always; //makes it so that title screen works when paused;
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -24,6 +26,8 @@ public partial class TitleScreen : Control
 
 	//Defining the signal handler method for the settings button to be connected via the Godot editor
 	private void OnSettingsButtonPressed() {
-		GetTree().ChangeSceneToFile("res://settings_screen.tscn");
+		SettingsScreen settings = GetNode<SettingsScreen>("SettingsScreen");
+		settings.Visible = true;
+		
 	}
 }

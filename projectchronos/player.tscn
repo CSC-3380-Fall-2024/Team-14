@@ -10,6 +10,7 @@
 radius = 48.0104
 
 [node name="Player" type="CharacterBody2D"]
+position = Vector2(339, 515)
 script = ExtResource("1_3o1y4")
 metadata/_edit_group_ = true
 
@@ -21,9 +22,10 @@ scale = Vector2(0.2, 0.2)
 texture = ExtResource("1_c8gss")
 
 [node name="FallTimer" type="Timer" parent="."]
-wait_time = 3.0
+wait_time = 10.0
 
 [node name="HealthBar" parent="." instance=ExtResource("3_umkuu")]
+z_index = 0
 offset_left = -100.0
 offset_top = -100.0
 offset_right = 100.0
