@@ -9,6 +9,8 @@
 [ext_resource type="Script" path="res://KillingSquare.cs" id="6_xvjpd"]
 [ext_resource type="Script" path="res://RangedEnemy.cs" id="8_6lus1"]
 
+[ext_resource type="Script" path="res://projectile.cs" id="8_grek6"]
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j1uk3"]
 size = Vector2(1920, 1080)
 
@@ -23,6 +25,8 @@ size = Vector2(326.5, 68)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_svsvv"]
 size = Vector2(130.5, 110)
+[sub_resource type="CircleShape2D" id="CircleShape2D_u22fn"]
+radius = 32.0
 
 [node name="World" type="Node2D"]
 
@@ -34,7 +38,7 @@ position = Vector2(960, 540)
 texture = ExtResource("1_nkqkr")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(960, 540)
+position = Vector2(641, 541)
 shape = SubResource("RectangleShape2D_j1uk3")
 
 [node name="Player" parent="." instance=ExtResource("2_6xg6t")]
@@ -71,7 +75,7 @@ vertical = true
 
 [node name="LifeHeart" type="TextureRect" parent="HUD/Container/LivesContainer"]
 layout_mode = 2
-texture = ExtResource("5_5om3g")
+texture = ExtResource("4_ri6pp")
 
 [node name="Area2D2" type="Area2D" parent="."]
 gravity_space_override = 3
@@ -111,4 +115,18 @@ position = Vector2(12, -117)
 shape = SubResource("RectangleShape2D_svsvv")
 debug_color = Color(0.382172, 0.00179816, 0.791898, 0.984314)
 
-[connection signal="body_entered" from="Area2D4" to="Player" method="_on_area_2d_4_body_entered"]
+position = Vector2(-936, -1550)
+
+[node name="projectile" type="Area2D" parent="."]
+script = ExtResource("8_grek6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="projectile"]
+position = Vector2(-31, 340)
+shape = SubResource("CircleShape2D_u22fn")
+debug_color = Color(0.903599, 0.298174, 0.192131, 0.42)
+
+[node name="MoverTimer" type="Timer" parent="projectile"]
+
+[node name="Despawner" type="Timer" parent="projectile"]
+
+[connection signal="body_entered" from="projectile" to="projectile" method="OnBodyEntered"]
