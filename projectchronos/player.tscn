@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://4kf7paebw3px"]
+[gd_scene load_steps=8 format=3 uid="uid://4kf7paebw3px"]
 
 [ext_resource type="Script" path="res://Player.cs" id="1_3o1y4"]
 [ext_resource type="Texture2D" uid="uid://bbentnu2sv5qx" path="res://player.png" id="1_c8gss"]
 [ext_resource type="PackedScene" uid="uid://cnmh3rw3roajk" path="res://HealthBar.tscn" id="3_umkuu"]
 [ext_resource type="PackedScene" uid="uid://bccchwmakcjbs" path="res://progress_bar_generic.tscn" id="4_fctfr"]
 [ext_resource type="Script" path="res://ProgressBarGeneric.cs" id="5_p5oxw"]
+[ext_resource type="Texture2D" uid="uid://dn2stq7qakgit" path="res://assets/fire-particle.png" id="6_hie02"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jyh6k"]
 radius = 48.0104
@@ -39,5 +40,18 @@ offset_top = -158.0
 offset_right = -226.0
 offset_bottom = -131.0
 script = ExtResource("5_p5oxw")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+amount = 24
+lifetime = 2.0
+explosiveness = 0.24
+randomness = 0.5
+texture = ExtResource("6_hie02")
+emission_shape = 1
+emission_sphere_radius = 87.48
+direction = Vector2(0, -1)
+gravity = Vector2(0, -80)
+initial_velocity_min = 47.3
+initial_velocity_max = 121.62
 
 [connection signal="timeout" from="FallTimer" to="." method="OnFallTimerTimeout"]
