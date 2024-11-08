@@ -1,12 +1,15 @@
-[gd_scene load_steps=12 format=3 uid="uid://c6lt1tt11cqg7"]
+[gd_scene load_steps=17 format=3 uid="uid://c6lt1tt11cqg7"]
 
 [ext_resource type="Texture2D" uid="uid://bf5tqxbpmxpmu" path="res://background.png" id="1_nkqkr"]
 [ext_resource type="PackedScene" uid="uid://4kf7paebw3px" path="res://player.tscn" id="2_6xg6t"]
-[ext_resource type="PackedScene" uid="uid://tt3kaocr7444" path="res://basic_enemy.tscn" id="3_ld203"]
+[ext_resource type="PackedScene" uid="uid://tt3kaocr7444" path="res://enemies/basic_enemy.tscn" id="3_ld203"]
 [ext_resource type="Script" path="res://Camera2d.cs" id="3_tia5n"]
 [ext_resource type="Script" path="res://HUD.cs" id="4_5dip8"]
-[ext_resource type="Texture2D" uid="uid://byu3sp5ap7x0c" path="res://heart.png" id="4_ri6pp"]
 [ext_resource type="Script" path="res://KillingSquare.cs" id="6_xvjpd"]
+[ext_resource type="PackedScene" uid="uid://d3xwews2ictv1" path="res://enemies/daemon.tscn" id="8_1mm2v"]
+[ext_resource type="Script" path="res://RangedEnemy.cs" id="8_6lus1"]
+[ext_resource type="Script" path="res://projectile.cs" id="8_grek6"]
+[ext_resource type="PackedScene" uid="uid://dka0b76vns5el" path="res://enemy_spawner.tscn" id="10_n6v34"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j1uk3"]
 size = Vector2(1920, 1080)
@@ -20,6 +23,12 @@ size = Vector2(852.909, 801)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6tewd"]
 size = Vector2(326.5, 68)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_svsvv"]
+size = Vector2(130.5, 110)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_u22fn"]
+radius = 32.0
+
 [node name="World" type="Node2D"]
 
 [node name="Area2D" type="Area2D" parent="."]
@@ -30,15 +39,16 @@ position = Vector2(960, 540)
 texture = ExtResource("1_nkqkr")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(960, 540)
+position = Vector2(641, 541)
 shape = SubResource("RectangleShape2D_j1uk3")
 
 [node name="Player" parent="." instance=ExtResource("2_6xg6t")]
+position = Vector2(-659, 424)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
-polygon = PackedVector2Array(0, 528, 1240, 536, 1240, 328, 584, 328, 1240, 224, 1344, 224, 1336, 600, 0, 600)
+polygon = PackedVector2Array(-1364, 540, 1240, 536, 1240, 328, 584, 328, 1240, 224, 1344, 224, 1336, 600, -1364, 594)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 script = ExtResource("3_tia5n")
@@ -66,7 +76,6 @@ vertical = true
 
 [node name="LifeHeart" type="TextureRect" parent="HUD/Container/LivesContainer"]
 layout_mode = 2
-texture = ExtResource("4_ri6pp")
 
 [node name="Area2D2" type="Area2D" parent="."]
 gravity_space_override = 3
@@ -74,7 +83,7 @@ gravity_point_center = Vector2(1, 0)
 gravity_direction = Vector2(1, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2"]
-position = Vector2(1122, 432)
+position = Vector2(1580, 807)
 shape = SubResource("RectangleShape2D_0t3bv")
 
 [node name="Area2D3" type="Area2D" parent="."]
@@ -91,11 +100,38 @@ shape = SubResource("RectangleShape2D_k1v3s")
 script = ExtResource("6_xvjpd")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D4"]
-position = Vector2(590, 505)
+position = Vector2(659, 737)
 shape = SubResource("RectangleShape2D_6tewd")
 debug_color = Color(0.839216, 0.6, 0.701961, 0.843137)
 
 [node name="BasicEnemy" parent="." instance=ExtResource("3_ld203")]
-position = Vector2(23, 195)
+position = Vector2(1927, -6)
+
+[node name="Daemon" parent="." instance=ExtResource("8_1mm2v")]
+position = Vector2(843, 102)
+
+[node name="RangedEnemy" type="CharacterBody2D" parent="."]
+script = ExtResource("8_6lus1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RangedEnemy"]
+position = Vector2(-936, -1550)
+shape = SubResource("RectangleShape2D_svsvv")
+debug_color = Color(0.382172, 0.00179816, 0.791898, 0.984314)
+
+[node name="projectile" type="Area2D" parent="."]
+script = ExtResource("8_grek6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="projectile"]
+position = Vector2(-31, 340)
+shape = SubResource("CircleShape2D_u22fn")
+debug_color = Color(0.903599, 0.298174, 0.192131, 0.42)
+
+[node name="MoverTimer" type="Timer" parent="projectile"]
+
+[node name="Despawner" type="Timer" parent="projectile"]
+
+[node name="EnemySpawner" parent="." instance=ExtResource("10_n6v34")]
+position = Vector2(-400, 100)
 
 [connection signal="body_entered" from="Area2D4" to="Player" method="_on_area_2d_4_body_entered"]
+[connection signal="body_entered" from="projectile" to="projectile" method="OnBodyEntered"]

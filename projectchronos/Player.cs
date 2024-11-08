@@ -2,6 +2,7 @@ using Godot;
 using System;
 using System.Numerics;
 using System.Runtime.CompilerServices;
+using System.Security.Cryptography.X509Certificates;
 using Vector2 = Godot.Vector2;
 
 public partial class Player : CharacterBody2D {
@@ -16,6 +17,27 @@ public partial class Player : CharacterBody2D {
 
 	[Export]
 	public int jumpHeight = 250; // jump values are set based on desired height
+
+	[Export]
+	public int PlayerMaxHp = 20;
+
+	private int _playerHp;
+	
+	[Export]
+	public int PlayerHp {
+		get => _playerHp;
+		set {
+			var healthBar = GetNode<HealthBar>("HealthBar");
+			_playerHp = Mathf.Clamp(value, 0, PlayerMaxHp);
+			healthBar.MaxValue = PlayerMaxHp;
+			healthBar.Value = _playerHp;
+			if(_playerHp <= 0 && lives_left >= 0)
+			{
+				Kill_Reset();
+				_playerHp = PlayerMaxHp;
+			}
+		}
+	}
 
 	public Godot.Vector2 ScreenSize; // size of the game window
 
@@ -35,6 +57,11 @@ public partial class Player : CharacterBody2D {
 		// we set jump based on desired height, but implement as a velocity delta
 		// jumpForce calculation pre-computes velocity delta with gravity
 		jumpForce = (int) Math.Sqrt(2 * gravity * jumpHeight);
+
+		PlayerHp = PlayerMaxHp;
+		var healthBar = GetNode<HealthBar>("HealthBar");
+		healthBar.Value = PlayerHp;
+		healthBar.MaxValue = PlayerHp;
 	}
 
 	// called every frame. 'delta' is the elapsed time since the previous frame.
@@ -49,10 +76,15 @@ public partial class Player : CharacterBody2D {
 
 		// read and execute player movement input
 		velocity = PlayerControl(velocity, hasJumpLeft || IsOnFloor());
+		
+		ProcessFire(delta);
+
+		ProgressBarHandler(); // method manages this player feature from "outside"
 
 		Velocity = velocity;
 		Show();
 		MoveAndSlide();
+
 	}
 	
 	/// <summary>
@@ -125,6 +157,16 @@ public partial class Player : CharacterBody2D {
 		} else{
 			processed = false; //reset key press to false
 		}
+
+		//testing health bar depletion
+		if(Input.IsActionJustPressed("HealthMinus")) {
+			PlayerHp -= 2;
+		}
+		//testing healing
+		if (Input.IsActionJustPressed("HealthPlus"))
+		{
+			PlayerHp += 2;
+		}
 		
 		var hud = GetNode<HUD>(new NodePath("../HUD"));
 		hud.SetLives(lives_left);
@@ -136,11 +178,37 @@ public partial class Player : CharacterBody2D {
 		return velocity;
 	}
 
+	// this method exists to isolate all the stuff our extra progress bar might have to do in _Ready()
+	// first we have to decide whether to actually show it
+	public void ProgressBarHandler() {
+		var progressBarGeneric = GetNode<ProgressBarGeneric>("ProgressBarGeneric");
+		if (progressBarGeneric.IsVisible()) {
+			progressBarGeneric.Show();
+		} else {
+			progressBarGeneric.Hide();
+		}
+
+		progressBarGeneric.SetVisible(hasJumpLeft && !IsOnFloor()); // linking visibility to double jump I guess
+	}
+
+	// method 1 for the all-purpose player status bar, getting the state
+	public int GetBarProgress() {
+		var progressBarGeneric = GetNode<ProgressBarGeneric>("./HUD/ProgressBarGeneric");
+		return (int) progressBarGeneric.Value;
+	}
+
+	// method 2 for the all-purpose player status bar, setting the state
+	public void SetBarProgress(int value) {
+		var progressBarGeneric = GetNode<ProgressBarGeneric>("./HUD/ProgressBarGeneric");
+		progressBarGeneric.Value = value;
+	}
+
 	// Kills player and places them back at start
 	public void Kill_Reset() 
 	{
 		if (lives_left > 0){
 			lives_left = lives_left -1;
+			GetTree().ChangeSceneToFile("res://modifiers.tscn");
 		}
 
 		if(lives_left<=0){
@@ -180,7 +248,6 @@ public partial class Player : CharacterBody2D {
 			currentParent = currentParent.GetParent();
 		}
 	}
-
 	
 	public void Start(Godot.Vector2 position)
 	{
@@ -197,4 +264,33 @@ public partial class Player : CharacterBody2D {
 	private void OnFallTimerTimeout() {
 		Kill_Reset();
 	}
+
+	private double _sinceLastFireTick = 0;
+	private double _fireSecondsRemaining = 0;
+	/**
+	 * Sets the player to be on fire for this many more seconds.
+	 * Note that this is not cumulative. 
+	 */
+	public void SetFireDuration(double seconds) {
+		_fireSecondsRemaining = seconds;
+	}
+
+	/**
+	 * Decrements the number of seconds that the player is on fire by delta and deals fire damage if
+	 * a second has passed.
+	 */
+	private void ProcessFire(double delta) {
+		if (_fireSecondsRemaining > 0) {
+			Main mainNode = (Main)GetParent().GetParent();
+			if (_sinceLastFireTick > 1) {
+				PlayerHp -= mainNode.getConfig().FireDamagePerSecond;
+				_sinceLastFireTick -= 1;
+			}
+
+			_sinceLastFireTick += delta;
+			_fireSecondsRemaining -= delta;
+			if (_fireSecondsRemaining < 0) _fireSecondsRemaining = 0;
+		}
+	}
+
 }

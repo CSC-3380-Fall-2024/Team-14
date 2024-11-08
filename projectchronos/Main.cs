@@ -7,7 +7,7 @@ public partial class Main : Node {
 
 	private TextureRect exitScreen;
 
-	private Configuration config = new() { MaxLives = 3 };
+	private Configuration config = new() { MaxLives = 3, FireDamagePerSecond = 2 };
 	
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready() {
@@ -46,4 +46,5 @@ public partial class Main : Node {
 	{
 		exitScreen.Visible = true;
 	}
+
 }

@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://bperpaawxgtjj"]
+[gd_scene load_steps=6 format=3 uid="uid://bperpaawxgtjj"]
 
 [ext_resource type="Script" path="res://TitleScreen.cs" id="1_x8hp7"]
 [ext_resource type="Texture2D" uid="uid://6o4groqyfmp3" path="res://assets/chronos_title_background.png" id="2_ardke"]
 [ext_resource type="Texture2D" uid="uid://bhy3afpr6t4nc" path="res://assets/chronos_title_text_upscale.png" id="2_cg2b1"]
 [ext_resource type="FontFile" uid="uid://nyojpkaf8mf7" path="res://assets/chronos_font.ttf" id="3_f7bky"]
+[ext_resource type="PackedScene" uid="uid://cnv123eicw11x" path="res://settings_screen.tscn" id="5_2h74o"]
 
 [node name="TitleScreen" type="Control"]
 layout_mode = 3
@@ -55,6 +56,15 @@ text = "START"
 flat = true
 alignment = 0
 
+[node name="SettingsButton" type="Button" parent="Menu/CenterRow/Buttons"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_f7bky")
+theme_override_font_sizes/font_size = 48
+text = "SETTINGS"
+flat = true
+alignment = 0
+
 [node name="QuitButton" type="Button" parent="Menu/CenterRow/Buttons"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -64,5 +74,9 @@ text = "QUIT"
 flat = true
 alignment = 0
 
+[node name="SettingsScreen" parent="." instance=ExtResource("5_2h74o")]
+layout_mode = 1
+
 [connection signal="pressed" from="Menu/CenterRow/Buttons/StartButton" to="." method="OnStartButtonPressed"]
+[connection signal="pressed" from="Menu/CenterRow/Buttons/SettingsButton" to="." method="OnSettingsButtonPressed"]
 [connection signal="pressed" from="Menu/CenterRow/Buttons/QuitButton" to="." method="OnQuitButtonPressed"]

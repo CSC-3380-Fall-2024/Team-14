@@ -7,13 +7,13 @@ public partial class BasicEnemy : CharacterBody2D {
 	public StatBlock stats = new StatBlock(100, 1, true, true, npcAI.MonteKillO, 30);
 	public AI ai;
 
-    public override void _Ready()
-    {
+	public override void _Ready()
+	{
 		ai = MakeAI(stats.ai);
-        base._Ready();
-    }
+		base._Ready();
+	}
 
-    public override void _PhysicsProcess(double delta) {
+	public override void _PhysicsProcess(double delta) {
 		TakeDamage( 1 / DistanceToPlayer() * 2000f * (float) delta); // prototype enemy takes passive proximity damage for testing
 		
 		 // die if we have zero health duh
@@ -58,21 +58,21 @@ public partial class BasicEnemy : CharacterBody2D {
 
 // this is kind of horrible lol this could grow out of control rapidly
 public class StatBlock {
-    public StatBlock(float maxLife, float damage, bool hasGravity, bool hasCollisions, npcAI ai, float currentLife) {
-        this.maxLife = maxLife;
+	public StatBlock(float maxLife, float damage, bool hasGravity, bool hasCollisions, npcAI ai, float currentLife) {
+		this.maxLife = maxLife;
 		this.damage = damage;
-        this.hasGravity = hasGravity;
+		this.hasGravity = hasGravity;
 		this.hasCollisions = hasCollisions;
 		this.ai = ai;
 		this.currentLife = currentLife;
-    }
+	}
 
-    public float maxLife;
-    public float damage;
+	public float maxLife;
+	public float damage;
 	public bool hasGravity;
 	public bool hasCollisions;
 	public npcAI ai;
 	public float currentLife;
 
-    public override string ToString() => $"({maxLife}, {damage}, {hasGravity}, {hasCollisions}, {ai}, {currentLife})";
+	public override string ToString() => $"({maxLife}, {damage}, {hasGravity}, {hasCollisions}, {ai}, {currentLife})";
 }

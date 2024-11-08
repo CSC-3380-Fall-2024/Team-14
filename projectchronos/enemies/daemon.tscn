@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://d3xwews2ictv1"]
+
+[ext_resource type="Script" path="res://enemies/Daemon.cs" id="1_23rb8"]
+[ext_resource type="Texture2D" uid="uid://doju1rtwjdbjw" path="res://Daemon_Placeholder.png" id="1_bwvvs"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bkucv"]
+size = Vector2(141, 162)
+
+[node name="Daemon" type="CharacterBody2D"]
+script = ExtResource("1_23rb8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(23.5, -19)
+shape = SubResource("RectangleShape2D_bkucv")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(23.5, -18.25)
+scale = Vector2(0.30787, 0.272007)
+texture = ExtResource("1_bwvvs")

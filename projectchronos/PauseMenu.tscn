@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://l08dxvnatluh"]
+[gd_scene load_steps=3 format=3 uid="uid://dbdlin5d8710t"]
 
 [ext_resource type="Script" path="res://PauseMenu.cs" id="1_kd31o"]
+[ext_resource type="PackedScene" uid="uid://cnv123eicw11x" path="res://settings_screen.tscn" id="2_55243"]
 
 [node name="PauseMenu" type="Control"]
 process_mode = 3
@@ -37,12 +38,16 @@ offset_bottom = 33.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Resume" type="Button" parent="VBoxContainer"]
+[node name="Settings" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-text = "Resume"
+text = "Settings"
 
 [node name="Exit" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 text = "Exit"
 
-[connection signal="pressed" from="VBoxContainer/Resume" to="." method="OnResumePressed"]
+[node name="SettingsScreen" parent="." instance=ExtResource("2_55243")]
+layout_mode = 1
+
+[connection signal="pressed" from="VBoxContainer/Settings" to="." method="OnSettingsPressed"]
+[connection signal="pressed" from="VBoxContainer/Exit" to="." method="OnExitPressed"]
