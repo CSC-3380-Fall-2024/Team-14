@@ -9,6 +9,12 @@ public partial class Rollingrock : CharacterBody2D {
 	public Vector2? Target;
 
 	public float DespawnDistance = 2000;
+
+	public static int CollisionDamage = 2;
+	/// <summary>
+	/// How much of the rock's current velocity should go to pushing back the player
+	/// </summary>
+	public static float CollisionKnockbackPercent = 0.1f;
 	
 	private static double NormalizeAngle(double angle) {
 		return (angle % (Math.PI * 2) + Math.PI * 2) % (Math.PI * 2);
@@ -34,6 +40,16 @@ public partial class Rollingrock : CharacterBody2D {
 			
 			Velocity = velocity;
 			MoveAndSlide();
+
+			for (int i = 0; i < GetSlideCollisionCount(); i++) {
+				var collision = GetSlideCollision(i);
+				if (collision.GetCollider() is Player player) {
+					player.PlayerHp -= CollisionDamage;
+					player.Position += velocity * CollisionKnockbackPercent;
+					// Delete self after collision
+					QueueFree();
+				}
+			}
 		} else if (Target.HasValue) {
 			var angleToMove = NormalizeAngle((Position - Target.Value).Angle() - GetGravity().Angle() + Math.PI / 2);
 			var rotateDir = (Math.PI / 2 <= angleToMove && angleToMove <= 3 * Math.PI / 2) ? -1f : 1f;
