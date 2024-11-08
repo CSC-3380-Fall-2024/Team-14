@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://btyleccbpomi0"
-path="res://.godot/imported/melee_enemy.png-35ec599f12065ffebfbbbca32a06394d.ctex"
+uid="uid://dn2stq7qakgit"
+path="res://.godot/imported/fire-particle.png-042a8cf9e78ef9c4d7c847941a242023.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://melee_enemy.png"
-dest_files=["res://.godot/imported/melee_enemy.png-35ec599f12065ffebfbbbca32a06394d.ctex"]
+source_file="res://assets/fire-particle.png"
+dest_files=["res://.godot/imported/fire-particle.png-042a8cf9e78ef9c4d7c847941a242023.ctex"]
 
 [params]
 
