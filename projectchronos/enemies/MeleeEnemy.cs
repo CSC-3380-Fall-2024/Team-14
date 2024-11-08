@@ -1,7 +1,7 @@
 using Godot;
 
 public partial class MeleeEnemy : BasicEnemy {
-	public float range = 80f; //distance that enemy can attack from
+	public float range = 60f; //distance that enemy can attack from
 	public float retreat_when_health = 20f; //health that triggers a retreat
 	public float retreat_how_far = 600f; //retreat distance
 	
