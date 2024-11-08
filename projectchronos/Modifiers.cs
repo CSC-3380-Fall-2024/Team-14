@@ -11,15 +11,15 @@ public partial class Modifiers : Control
 		ProcessMode = ProcessModeEnum.WhenPaused;
 	}
 
-    public override void _Process(double delta)
-    {
-        if (Visible == true)
+	public override void _Process(double delta)
+	{
+		if (Visible == true)
 		{
 			GetTree().Paused = true;
 		}
-    }
+	}
 
-    private void OnModOnePressed()
+	private void OnModOnePressed()
 	{
 		 Visible = false;
 	}
