@@ -8,21 +8,20 @@ public partial class Modifiers : CanvasLayer
     {
         base._Ready();
 		Visible = false;
-		ProcessMode = ProcessModeEnum.Always;
+		ProcessMode = ProcessModeEnum.WhenPaused;
     }
     private void OnModOnePressed()
 	{
-		 GetTree().ChangeSceneToFile("res://.tscn");
+		 Visible = false;
 	}
 	
 	private void OnModTwoPressed()
 	{
-		 GetTree().ChangeSceneToFile("res://world.tscn");
+		 Visible = false;
 	}
 	
 	private void OnModThreePressed()
 	{
-		 GetTree().ChangeSceneToFile("res://world.tscn");
-	
+		 Visible = false;
 	}
 }
