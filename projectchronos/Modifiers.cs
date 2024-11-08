@@ -1,16 +1,16 @@
 using Godot;
 using System;
 
-public partial class Modifiers : CanvasLayer
+public partial class Modifiers : Control
 {
 
-    public override void _Ready()
-    {
-        base._Ready();
+	public override void _Ready()
+	{
+		base._Ready();
 		Visible = false;
 		ProcessMode = ProcessModeEnum.WhenPaused;
-    }
-    private void OnModOnePressed()
+	}
+	private void OnModOnePressed()
 	{
 		 Visible = false;
 	}
