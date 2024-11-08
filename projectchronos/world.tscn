@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://c6lt1tt11cqg7"]
+[gd_scene load_steps=18 format=3 uid="uid://c6lt1tt11cqg7"]
 
 [ext_resource type="Texture2D" uid="uid://bf5tqxbpmxpmu" path="res://background.png" id="1_nkqkr"]
 [ext_resource type="PackedScene" uid="uid://4kf7paebw3px" path="res://player.tscn" id="2_6xg6t"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" path="res://RangedEnemy.cs" id="8_6lus1"]
 [ext_resource type="Script" path="res://projectile.cs" id="8_grek6"]
 [ext_resource type="PackedScene" uid="uid://dka0b76vns5el" path="res://enemy_spawner.tscn" id="10_n6v34"]
+[ext_resource type="Texture2D" uid="uid://c87mqke1xgxm8" path="res://assets/arrow.png" id="10_sbyrm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j1uk3"]
 size = Vector2(1920, 1080)
@@ -129,6 +130,12 @@ debug_color = Color(0.903599, 0.298174, 0.192131, 0.42)
 [node name="MoverTimer" type="Timer" parent="projectile"]
 
 [node name="Despawner" type="Timer" parent="projectile"]
+
+[node name="Sprite2D" type="Sprite2D" parent="projectile"]
+position = Vector2(-32, 333)
+rotation = 0.806342
+scale = Vector2(0.357724, 0.297839)
+texture = ExtResource("10_sbyrm")
 
 [node name="EnemySpawner" parent="." instance=ExtResource("10_n6v34")]
 position = Vector2(-400, 100)
