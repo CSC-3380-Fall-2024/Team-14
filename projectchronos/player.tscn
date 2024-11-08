@@ -13,7 +13,6 @@ radius = 48.0104
 [node name="Player" type="CharacterBody2D"]
 position = Vector2(339, 515)
 script = ExtResource("1_3o1y4")
-metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_jyh6k")
