@@ -3,7 +3,7 @@ using Godot;
 public partial class MeleeEnemy : BasicEnemy {
 	public float range = 60f; //distance that enemy can attack from
 	public float retreat_when_health = 20f; //health that triggers a retreat
-	public float retreat_how_far = 600f; //retreat distance
+	public float retreat_how_far = 200f; //retreat distance
 	
 
 	public override void _Ready()
@@ -13,7 +13,7 @@ public partial class MeleeEnemy : BasicEnemy {
 
 	public override void _PhysicsProcess(double delta)
 	{
-		TakeDamage( 1 / DistanceToPlayer() * 1000f * (float) delta); // borrowed from basic cause it isnt implementing through inheritance??
+		//TakeDamage( 1 / DistanceToPlayer() * 1000f * (float) delta); // borrowed from basic cause it isnt implementing through inheritance??
 
 		GD.Print($"distance to p {DistanceToPlayer()}");
 		if (stats.currentLife > retreat_when_health) // checks to see if the enemies health is above the retreat value
