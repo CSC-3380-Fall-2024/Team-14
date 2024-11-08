@@ -208,7 +208,9 @@ public partial class Player : CharacterBody2D {
 	{
 		if (lives_left > 0){
 			lives_left = lives_left -1;
-			GetTree().ChangeSceneToFile("res://modifiers.tscn");
+			GetTree().Paused = true;
+			var upgrade = GetNode<Modifiers>("Modifiers");
+			upgrade.Visible = true;
 		}
 
 		if(lives_left<=0){

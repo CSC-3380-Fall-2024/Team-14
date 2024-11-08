@@ -3,9 +3,16 @@ using System;
 
 public partial class Modifiers : CanvasLayer
 {
-	private void OnModOnePressed()
+
+    public override void _Ready()
+    {
+        base._Ready();
+		Visible = false;
+		ProcessMode = ProcessModeEnum.Always;
+    }
+    private void OnModOnePressed()
 	{
-		 GetTree().ChangeSceneToFile("res://world.tscn");
+		 GetTree().ChangeSceneToFile("res://.tscn");
 	}
 	
 	private void OnModTwoPressed()

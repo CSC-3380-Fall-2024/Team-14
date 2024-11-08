@@ -36,7 +36,6 @@ offset_left = -230.0
 offset_top = -158.0
 offset_right = -226.0
 offset_bottom = -131.0
-show_percentage = false
 script = ExtResource("5_p5oxw")
 
 [connection signal="timeout" from="FallTimer" to="." method="OnFallTimerTimeout"]
