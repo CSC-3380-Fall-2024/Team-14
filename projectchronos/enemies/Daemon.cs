@@ -18,16 +18,16 @@ public partial class Daemon : BasicEnemy
 	{
 		TakeDamage( 1 / DistanceToPlayer() * 1000f * (float) delta); 
 
-		GD.Print($"distance to p {DistanceToPlayer()}");
+		//GD.Print($"distance to p {DistanceToPlayer()}");
 		
 			if (DistanceToPlayer() <= MeleeRange) //checks to see if enemy is within attack range
 			{
-				GD.Print("in melee range");
+				//GD.Print("in melee range");
 				Attack();
 			}
 			else if(DistanceToPlayer() <= MagicRange)
 			{
-				GD.Print("in magic range");
+				//GD.Print("in magic range");
 				MagicAttack();
 			}
 			else
@@ -37,7 +37,7 @@ public partial class Daemon : BasicEnemy
 		
 
 		if (stats.currentLife <= 0){
-			GD.Print("Killing");
+			//GD.Print("Killing");
 			kill(); //removes enemy when health hits zero
 		}
 
@@ -49,20 +49,20 @@ public partial class Daemon : BasicEnemy
 		var direction = (PlayerPosition()-Position).Normalized(); 
 		Velocity = direction * Speed; 
 		MoveAndSlide();
-		GD.Print("chasing");
+		//GD.Print("chasing");
 	}	
 
 
 	private void Attack()
 	{
-		GD.Print("Attacking");
+		//GD.Print("Attacking");
 		//placeholder for damage
 		
 	}
 
 	private void MagicAttack()
 	{
-		GD.Print("Fire");
+		//GD.Print("Fire");
         //another placeholder
 	}
 

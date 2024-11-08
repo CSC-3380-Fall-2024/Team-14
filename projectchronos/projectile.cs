@@ -71,11 +71,15 @@ public partial class projectile : Area2D
 	//detects collision and does damage
 	public void OnBodyEntered(Node body)
 	{
+		dealDamage(body);
+		QueueFree();
+
+	}
+
+	public virtual void dealDamage(Node body){
 		if (body is Player player)
 		{
 			player.PlayerHp -= Damage;
-			//GD.Print("health" + player.PlayerHp); **test code**
-			QueueFree();
 		}
 	}
 }
