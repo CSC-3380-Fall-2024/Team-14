@@ -110,7 +110,7 @@ debug_color = Color(0.839216, 0.6, 0.701961, 0.843137)
 position = Vector2(1927, -6)
 
 [node name="Daemon" parent="." instance=ExtResource("8_1mm2v")]
-position = Vector2(843, 102)
+position = Vector2(1047, -281)
 
 [node name="RangedEnemy" type="CharacterBody2D" parent="."]
 script = ExtResource("8_6lus1")
@@ -139,9 +139,10 @@ scale = Vector2(0.357724, 0.297839)
 texture = ExtResource("10_sbyrm")
 
 [node name="EnemySpawner" parent="." instance=ExtResource("10_n6v34")]
-position = Vector2(-400, 100)
+position = Vector2(1052, -604)
 
 [node name="MeleeEnemy" parent="." instance=ExtResource("11_evw3m")]
+position = Vector2(-1263, 242)
 
 [connection signal="body_entered" from="Area2D4" to="Player" method="_on_area_2d_4_body_entered"]
 [connection signal="body_entered" from="projectile" to="projectile" method="OnBodyEntered"]
