@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://d3xwews2ictv1" path="res://enemies/daemon.tscn" id="8_1mm2v"]
 [ext_resource type="Script" path="res://RangedEnemy.cs" id="8_6lus1"]
 [ext_resource type="Script" path="res://projectile.cs" id="8_grek6"]
-[ext_resource type="PackedScene" uid="uid://dka0b76vns5el" path="res://enemy_spawner.tscn" id="10_n6v34"]
+[ext_resource type="PackedScene" path="res://enemy_spawner.tscn" id="10_n6v34"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j1uk3"]
 size = Vector2(1920, 1080)
@@ -132,8 +132,6 @@ debug_color = Color(0.903599, 0.298174, 0.192131, 0.42)
 
 [node name="EnemySpawner" parent="." instance=ExtResource("10_n6v34")]
 position = Vector2(-400, 100)
-
-[node name="Modifiers" parent="." instance=ExtResource("8_etv4i")]
 
 [connection signal="body_entered" from="Area2D4" to="Player" method="_on_area_2d_4_body_entered"]
 [connection signal="body_entered" from="projectile" to="projectile" method="OnBodyEntered"]

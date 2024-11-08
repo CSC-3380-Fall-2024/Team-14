@@ -63,7 +63,7 @@ public partial class Daemon : BasicEnemy
 	private void MagicAttack()
 	{
 		GD.Print("Fire");
-        //another placeholder
+		//another placeholder
 	}
 
 }
