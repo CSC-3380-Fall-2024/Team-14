@@ -208,8 +208,7 @@ public partial class Player : CharacterBody2D {
 	{
 		if (lives_left > 0){
 			lives_left = lives_left -1;
-			GetTree().Paused = true;
-			var upgrade = GetNode<Modifiers>("Modifiers");
+			var upgrade = GetNode<Modifiers>("Main/Modifiers");
 			upgrade.Visible = true;
 		}
 
