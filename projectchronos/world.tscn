@@ -10,6 +10,7 @@
 [ext_resource type="Script" path="res://RangedEnemy.cs" id="8_6lus1"]
 [ext_resource type="Script" path="res://projectile.cs" id="8_grek6"]
 [ext_resource type="PackedScene" uid="uid://dka0b76vns5el" path="res://enemy_spawner.tscn" id="10_n6v34"]
+[ext_resource type="PackedScene" uid="uid://p8fy3nw6kmu2" path="res://melee_enemy.tscn" id="11_evw3m"]
 [ext_resource type="Texture2D" uid="uid://c87mqke1xgxm8" path="res://assets/arrow.png" id="10_sbyrm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j1uk3"]
@@ -139,6 +140,8 @@ texture = ExtResource("10_sbyrm")
 
 [node name="EnemySpawner" parent="." instance=ExtResource("10_n6v34")]
 position = Vector2(-400, 100)
+
+[node name="MeleeEnemy" parent="." instance=ExtResource("11_evw3m")]
 
 [connection signal="body_entered" from="Area2D4" to="Player" method="_on_area_2d_4_body_entered"]
 [connection signal="body_entered" from="projectile" to="projectile" method="OnBodyEntered"]
