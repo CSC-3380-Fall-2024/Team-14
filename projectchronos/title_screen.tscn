@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://6o4groqyfmp3" path="res://assets/chronos_title_background.png" id="2_ardke"]
 [ext_resource type="Texture2D" uid="uid://bhy3afpr6t4nc" path="res://assets/chronos_title_text_upscale.png" id="2_cg2b1"]
 [ext_resource type="FontFile" uid="uid://nyojpkaf8mf7" path="res://assets/chronos_font.ttf" id="3_f7bky"]
-[ext_resource type="PackedScene" uid="uid://cnv123eicw11x" path="res://settings_screen.tscn" id="5_2h74o"]
+[ext_resource type="PackedScene" uid="uid://dm5bjkvn6xxn7" path="res://settings_screen.tscn" id="5_2h74o"]
 
 [node name="TitleScreen" type="Control"]
 layout_mode = 3

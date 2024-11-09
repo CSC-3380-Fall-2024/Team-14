@@ -10,9 +10,9 @@
 [ext_resource type="PackedScene" uid="uid://d3xwews2ictv1" path="res://enemies/daemon.tscn" id="8_1mm2v"]
 [ext_resource type="Script" path="res://RangedEnemy.cs" id="8_6lus1"]
 [ext_resource type="Script" path="res://projectile.cs" id="8_grek6"]
-[ext_resource type="PackedScene" path="res://enemy_spawner.tscn" id="10_n6v34"]
-[ext_resource type="Texture2D" uid="uid://c87mqke1xgxm8" path="res://assets/arrow.png" id="10_sbyrm"]
-[ext_resource type="PackedScene" path="res://melee_enemy.tscn" id="11_evw3m"]
+[ext_resource type="PackedScene" uid="uid://dka0b76vns5el" path="res://enemy_spawner.tscn" id="10_n6v34"]
+[ext_resource type="Texture2D" uid="uid://b5bhv7lwil7kj" path="res://assets/fireball.png" id="11_3ahhb"]
+[ext_resource type="PackedScene" uid="uid://p8fy3nw6kmu2" path="res://melee_enemy.tscn" id="11_evw3m"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j1uk3"]
 size = Vector2(1920, 1080)
@@ -30,7 +30,7 @@ size = Vector2(326.5, 68)
 size = Vector2(130.5, 110)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_u22fn"]
-radius = 32.0
+radius = 78.1025
 
 [node name="World" type="Node2D"]
 
@@ -123,10 +123,11 @@ shape = SubResource("RectangleShape2D_svsvv")
 debug_color = Color(0.382172, 0.00179816, 0.791898, 0.984314)
 
 [node name="projectile" type="Area2D" parent="."]
+position = Vector2(-134, 257)
 script = ExtResource("8_grek6")
+metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="projectile"]
-position = Vector2(-134, 257)
 shape = SubResource("CircleShape2D_u22fn")
 debug_color = Color(0.903599, 0.298174, 0.192131, 0.42)
 
@@ -135,10 +136,8 @@ debug_color = Color(0.903599, 0.298174, 0.192131, 0.42)
 [node name="Despawner" type="Timer" parent="projectile"]
 
 [node name="Sprite2D" type="Sprite2D" parent="projectile"]
-position = Vector2(-32, 333)
-rotation = 0.806342
-scale = Vector2(0.357724, 0.297839)
-texture = ExtResource("10_sbyrm")
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("11_3ahhb")
 
 [node name="EnemySpawner" parent="." instance=ExtResource("10_n6v34")]
 position = Vector2(1052, -604)
