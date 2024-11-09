@@ -1,6 +1,6 @@
 using Godot;
 
-public partial class MeleeEnemy : BasicEnemy {
+public partial class MeleeEnemy : BasicEnemy, BasicEnemy.EnemyAI {
 	public float range = 200f; //distance that enemy can attack from
 	public float retreat_when_health = 10f; //health that triggers a retreat
 	public float retreat_how_far = 1000f; //retreat distance
@@ -15,49 +15,12 @@ public partial class MeleeEnemy : BasicEnemy {
 		base._Ready();
 		player = GetNode<Player>("../Player"); //find player
 
+		ai = this;
 		if (player == null) {
 			GD.Print("not found");
 			return;
 		} // verifies player exists for player hp functionality later
 
-	}
-
-	public override void _PhysicsProcess(double delta)
-	{
-		TakeDamage( 1 / DistanceToPlayer() * 500f * (float) delta);
-
-		if(CooldownUntilAttack > 0) //update attack cooldown
-		{
-			CooldownUntilAttack -= (float)delta;
-			//GD.Print("cooldown remaining" + CooldownUntilAttack); TEST**
-		}
-
-		//GD.Print("distance to p" + distanceToPlayer); **TEST
-		if (stats.currentLife > retreat_when_health) // checks to see if the enemies health is above the retreat value
-		{
-			if (DistanceToPlayer() <= range) //checks to see if enemy is within attack range
-			{
-				//GD.Print("in range"); **TEST
-				if (CooldownUntilAttack <= 0) //if colldown end attack player again
-				{
-					attack();
-				}
-			}
-			else
-			{
-				chase();
-			}
-		}
-		else
-		{
-			run();
-		}
-
-		if (stats.currentLife <= 0){
-			kill();
-		}
-
-		Show();
 	}
 
 	private void chase()
@@ -89,5 +52,34 @@ public partial class MeleeEnemy : BasicEnemy {
 		
 	}
 
-	
+
+	public void ExecuteAI(float delta)
+	{
+		if(CooldownUntilAttack > 0) //update attack cooldown
+		{
+			CooldownUntilAttack -= (float)delta;
+			//GD.Print("cooldown remaining" + CooldownUntilAttack); TEST**
+		}
+
+		//GD.Print("distance to p" + distanceToPlayer); **TEST
+		if (CurrentLife > retreat_when_health) // checks to see if the enemies health is above the retreat value
+		{
+			if (DistanceToPlayer() <= range) //checks to see if enemy is within attack range
+			{
+				//GD.Print("in range"); **TEST
+				if (CooldownUntilAttack <= 0) //if colldown end attack player again
+				{
+					attack();
+				}
+			}
+			else
+			{
+				chase();
+			}
+		}
+		else
+		{
+			run();
+		}
+	}
 }

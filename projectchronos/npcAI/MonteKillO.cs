@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-class MonteKillO : AI {
+class MonteKillO : BasicEnemy.EnemyAI {
 	private BasicEnemy enemy;
 	private Vector2 target;
 	private bool hasTarget = false;
@@ -19,7 +19,7 @@ class MonteKillO : AI {
 	}
 
 	// this is the principle entry-point of AI behavior
-	public override void ExecuteAI(float delta) {
+	public void ExecuteAI(float delta) {
 		CheckTarget();
 		Move(delta); // delta is necessary for AI processing (and not just for movement)
 	}
