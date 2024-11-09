@@ -11,8 +11,12 @@ script = ExtResource("1_l60bp")
 
 [node name="World" parent="." instance=ExtResource("2_eawby")]
 
-[node name="PauseMenu" parent="." instance=ExtResource("3_h2yh2")]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("3_h2yh2")]
 offset_left = 2.0
 offset_right = 2.0
 
-[node name="Modifiers" parent="." instance=ExtResource("4_d2emn")]
+[node name="Modifiers" parent="CanvasLayer" instance=ExtResource("4_d2emn")]
+offset_left = 1.0
+offset_right = 1.0
