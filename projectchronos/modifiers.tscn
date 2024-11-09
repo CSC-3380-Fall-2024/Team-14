@@ -2,64 +2,78 @@
 
 [ext_resource type="Script" path="res://Modifiers.cs" id="1_kykl6"]
 
-[node name="Modifiers" type="CanvasLayer"]
+[node name="Modifiers" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_kykl6")
 
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.52549, 0.52549, 0.52549, 1)
+
 [node name="Label" type="Label" parent="."]
+layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
 anchor_top = 0.497
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -120.0
-offset_top = -139.76
+offset_top = -290.76
 offset_right = -39.9999
-offset_bottom = -120.0
+offset_bottom = -271.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(3, 2.6)
 text = "Try Again?"
 
-[node name="Mod1" type="Button" parent="."]
+[node name="Label2" type="Label" parent="."]
+layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_left = 254.0
-offset_top = -49.0
-offset_right = 484.0
-offset_bottom = 16.0
+offset_left = 86.0
+offset_top = -149.0
+offset_right = 343.0
+offset_bottom = -77.0
 grow_vertical = 2
-text = "Mod 1"
+theme_override_font_sizes/font_size = 50
+text = "Category 1: "
 
-[node name="Mod2" type="Button" parent="."]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -113.0
-offset_top = -47.0
-offset_right = 117.0
-offset_bottom = 18.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "Mod 2"
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 602.0
+offset_top = 360.0
+offset_right = 1315.0
+offset_bottom = 507.0
+alignment = 1
 
-[node name="Mod3" type="Button" parent="."]
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -452.0
-offset_top = -46.0
-offset_right = -222.0
-offset_bottom = 19.0
-grow_horizontal = 0
-grow_vertical = 2
-text = "Mod 3
+[node name="Mod1" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Upgrade 1"
+
+[node name="Mod2" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Upgrade 2
 "
 
-[connection signal="pressed" from="Mod1" to="." method="OnModOnePressed"]
-[connection signal="pressed" from="Mod2" to="." method="OnModTwoPressed"]
-[connection signal="pressed" from="Mod3" to="." method="OnModThreePressed"]
+[node name="Mod3" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Upgrade 3
+"
+
+[connection signal="pressed" from="HBoxContainer/Mod1" to="." method="OnModOnePressed"]
+[connection signal="pressed" from="HBoxContainer/Mod2" to="." method="OnModTwoPressed"]
+[connection signal="pressed" from="HBoxContainer/Mod3" to="." method="OnModThreePressed"]
