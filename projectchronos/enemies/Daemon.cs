@@ -23,12 +23,12 @@ public partial class Daemon : BasicEnemy
 			if (DistanceToPlayer() <= MeleeRange) //checks to see if enemy is within attack range
 			{
 				//GD.Print("in melee range");
-				Attack();
+				MeleeAttack();
 			}
 			else if(DistanceToPlayer() <= MagicRange)
 			{
 				//GD.Print("in magic range");
-				MagicAttack();
+				FireAttack();
 			}
 			else
 			{
@@ -53,17 +53,24 @@ public partial class Daemon : BasicEnemy
 	}	
 
 
-	private void Attack()
+	private void MeleeAttack()
 	{
-		//GD.Print("Attacking");
+		//placeholder method for animations
+		var damage = 5;
+		var play = GetNode<Player>("Player");
+		play.PlayerHp -= damage;
 		//placeholder for damage
 		
 	}
 
-	private void MagicAttack()
+	private void FireAttack()
 	{
-		//GD.Print("Fire");
-        //another placeholder
+		//placeholder method for animations
+		var damage = 6;
+		var play = GetNode<Player>("Player");
+		play.PlayerHp -= damage;
+		play.SetFireDuration(5);
+		//another placeholder
 	}
 
 }

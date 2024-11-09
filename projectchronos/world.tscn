@@ -11,7 +11,7 @@
 [ext_resource type="Script" path="res://RangedEnemy.cs" id="8_6lus1"]
 [ext_resource type="Script" path="res://projectile.cs" id="8_grek6"]
 [ext_resource type="PackedScene" path="res://enemy_spawner.tscn" id="10_n6v34"]
-[ext_resource type="Texture2D" path="res://assets/arrow.png" id="10_sbyrm"]
+[ext_resource type="Texture2D" uid="uid://c87mqke1xgxm8" path="res://assets/arrow.png" id="10_sbyrm"]
 [ext_resource type="PackedScene" path="res://melee_enemy.tscn" id="11_evw3m"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j1uk3"]
