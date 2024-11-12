@@ -7,6 +7,9 @@ public partial class projectile : Area2D
 {
 	public float Speed = 200f; //speed in pix/s
 	public int Damage = 7; //damage amt
+
+	[Export]
+	public int DebuffDuration = 5; //how long it inflicts debuffs (on fire here)
 	private CharacterBody2D player; //refrences player
 	
 	//movement Velocity and Frame by Frame moven=ment timer
@@ -73,13 +76,13 @@ public partial class projectile : Area2D
 	{
 		dealDamage(body);
 		QueueFree();
-
 	}
 
 	public virtual void dealDamage(Node body){
 		if (body is Player player)
 		{
 			player.PlayerHp -= Damage;
+			player.SetFireDuration(DebuffDuration);
 		}
 	}
 }
