@@ -172,7 +172,7 @@ public partial class Player : CharacterBody2D {
 			PlayerHp += 2;
 		}
 		
-		var hud = GetNode<HUD>(new NodePath("../HUD"));
+		var hud = GetNode<HUD>(new NodePath("HUD"));
 		hud.SetLives(lives_left);
 		
 		Velocity = velocity;
@@ -197,13 +197,13 @@ public partial class Player : CharacterBody2D {
 
 	// method 1 for the all-purpose player status bar, getting the state
 	public int GetBarProgress() {
-		var progressBarGeneric = GetNode<ProgressBarGeneric>("./HUD/ProgressBarGeneric");
+		var progressBarGeneric = GetNode<ProgressBarGeneric>("HUD/ProgressBarGeneric");
 		return (int) progressBarGeneric.Value;
 	}
 
 	// method 2 for the all-purpose player status bar, setting the state
 	public void SetBarProgress(int value) {
-		var progressBarGeneric = GetNode<ProgressBarGeneric>("./HUD/ProgressBarGeneric");
+		var progressBarGeneric = GetNode<ProgressBarGeneric>("HUD/ProgressBarGeneric");
 		progressBarGeneric.Value = value;
 	}
 

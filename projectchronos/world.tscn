@@ -1,11 +1,9 @@
-[gd_scene load_steps=20 format=3 uid="uid://c6lt1tt11cqg7"]
+[gd_scene load_steps=18 format=3 uid="uid://c6lt1tt11cqg7"]
 
 [ext_resource type="Texture2D" uid="uid://bf5tqxbpmxpmu" path="res://background.png" id="1_nkqkr"]
 [ext_resource type="PackedScene" uid="uid://4kf7paebw3px" path="res://player.tscn" id="2_6xg6t"]
 [ext_resource type="PackedScene" uid="uid://tt3kaocr7444" path="res://enemies/basic_enemy.tscn" id="3_ld203"]
 [ext_resource type="Script" path="res://Camera2d.cs" id="3_tia5n"]
-[ext_resource type="Script" path="res://HUD.cs" id="4_5dip8"]
-[ext_resource type="Texture2D" uid="uid://byu3sp5ap7x0c" path="res://heart.png" id="5_7t4v6"]
 [ext_resource type="Script" path="res://KillingSquare.cs" id="6_xvjpd"]
 [ext_resource type="PackedScene" uid="uid://d3xwews2ictv1" path="res://enemies/daemon.tscn" id="8_1mm2v"]
 [ext_resource type="Script" path="res://RangedEnemy.cs" id="8_6lus1"]
@@ -55,31 +53,6 @@ polygon = PackedVector2Array(-1364, 540, 1240, 536, 1240, 328, 584, 328, 1240, 2
 
 [node name="Camera2D" type="Camera2D" parent="."]
 script = ExtResource("3_tia5n")
-
-[node name="HUD" type="CanvasLayer" parent="."]
-script = ExtResource("4_5dip8")
-
-[node name="Container" type="Control" parent="HUD"]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="DO NOT CHANGE WILL BREAK HUD" type="Label" parent="HUD/Container"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
-text = "."
-
-[node name="LivesContainer" type="FlowContainer" parent="HUD/Container"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-vertical = true
-
-[node name="LifeHeart" type="TextureRect" parent="HUD/Container/LivesContainer"]
-layout_mode = 2
-texture = ExtResource("5_7t4v6")
 
 [node name="Area2D2" type="Area2D" parent="."]
 gravity_space_override = 3
