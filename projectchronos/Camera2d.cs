@@ -8,7 +8,7 @@ public partial class Camera2d : Camera2D {
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready() {
-		player = GetNode<CharacterBody2D>(new NodePath("../Player"));
+		player = GetNode<CharacterBody2D>(new NodePath("../../"));
 		ScreenSize = GetViewportRect().Size;
 		Position = player.Position;
 	}
