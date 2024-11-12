@@ -34,7 +34,11 @@ public partial class Player : CharacterBody2D {
 			if(_playerHp <= 0 && lives_left >= 0)
 			{
 				Kill_Reset();
-				_playerHp = PlayerMaxHp;
+				_playerHp = PlayerMaxHp; 
+				var upgrade = GetNode<Modifiers>("/root/Main/CanvasLayer/Modifiers");
+				upgrade.Show();
+				GetTree().Paused = true;
+					
 			}
 		}
 	}
@@ -208,7 +212,6 @@ public partial class Player : CharacterBody2D {
 	{
 		if (lives_left > 0){
 			lives_left = lives_left -1;
-			GetTree().ChangeSceneToFile("res://modifiers.tscn");
 		}
 
 		if(lives_left<=0){
@@ -282,14 +285,19 @@ public partial class Player : CharacterBody2D {
 	private void ProcessFire(double delta) {
 		if (_fireSecondsRemaining > 0) {
 			Main mainNode = (Main)GetParent().GetParent();
+			CpuParticles2D fireAnimation = GetChild<CpuParticles2D>(5);
 			if (_sinceLastFireTick > 1) {
 				PlayerHp -= mainNode.getConfig().FireDamagePerSecond;
 				_sinceLastFireTick -= 1;
+				fireAnimation.Emitting = true;
 			}
 
 			_sinceLastFireTick += delta;
 			_fireSecondsRemaining -= delta;
-			if (_fireSecondsRemaining < 0) _fireSecondsRemaining = 0;
+			if (_fireSecondsRemaining < 0) {
+				_fireSecondsRemaining = 0;
+				fireAnimation.Emitting = false;
+			}
 		}
 	}
 

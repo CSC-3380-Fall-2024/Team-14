@@ -1,15 +1,18 @@
-[gd_scene load_steps=17 format=3 uid="uid://c6lt1tt11cqg7"]
+[gd_scene load_steps=20 format=3 uid="uid://c6lt1tt11cqg7"]
 
 [ext_resource type="Texture2D" uid="uid://bf5tqxbpmxpmu" path="res://background.png" id="1_nkqkr"]
 [ext_resource type="PackedScene" uid="uid://4kf7paebw3px" path="res://player.tscn" id="2_6xg6t"]
 [ext_resource type="PackedScene" uid="uid://tt3kaocr7444" path="res://enemies/basic_enemy.tscn" id="3_ld203"]
 [ext_resource type="Script" path="res://Camera2d.cs" id="3_tia5n"]
 [ext_resource type="Script" path="res://HUD.cs" id="4_5dip8"]
+[ext_resource type="Texture2D" uid="uid://byu3sp5ap7x0c" path="res://heart.png" id="5_7t4v6"]
 [ext_resource type="Script" path="res://KillingSquare.cs" id="6_xvjpd"]
 [ext_resource type="PackedScene" uid="uid://d3xwews2ictv1" path="res://enemies/daemon.tscn" id="8_1mm2v"]
 [ext_resource type="Script" path="res://RangedEnemy.cs" id="8_6lus1"]
 [ext_resource type="Script" path="res://projectile.cs" id="8_grek6"]
 [ext_resource type="PackedScene" uid="uid://dka0b76vns5el" path="res://enemy_spawner.tscn" id="10_n6v34"]
+[ext_resource type="Texture2D" uid="uid://b5bhv7lwil7kj" path="res://assets/fireball.png" id="11_3ahhb"]
+[ext_resource type="PackedScene" path="res://melee_enemy.tscn" id="11_evw3m"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j1uk3"]
 size = Vector2(1920, 1080)
@@ -27,7 +30,7 @@ size = Vector2(326.5, 68)
 size = Vector2(130.5, 110)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_u22fn"]
-radius = 32.0
+radius = 78.1025
 
 [node name="World" type="Node2D"]
 
@@ -43,7 +46,7 @@ position = Vector2(641, 541)
 shape = SubResource("RectangleShape2D_j1uk3")
 
 [node name="Player" parent="." instance=ExtResource("2_6xg6t")]
-position = Vector2(-659, 424)
+position = Vector2(-812.707, 290.783)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
@@ -76,6 +79,7 @@ vertical = true
 
 [node name="LifeHeart" type="TextureRect" parent="HUD/Container/LivesContainer"]
 layout_mode = 2
+texture = ExtResource("5_7t4v6")
 
 [node name="Area2D2" type="Area2D" parent="."]
 gravity_space_override = 3
@@ -108,7 +112,7 @@ debug_color = Color(0.839216, 0.6, 0.701961, 0.843137)
 position = Vector2(1927, -6)
 
 [node name="Daemon" parent="." instance=ExtResource("8_1mm2v")]
-position = Vector2(843, 102)
+position = Vector2(1047, -281)
 
 [node name="RangedEnemy" type="CharacterBody2D" parent="."]
 script = ExtResource("8_6lus1")
@@ -119,10 +123,11 @@ shape = SubResource("RectangleShape2D_svsvv")
 debug_color = Color(0.382172, 0.00179816, 0.791898, 0.984314)
 
 [node name="projectile" type="Area2D" parent="."]
+position = Vector2(-134, 257)
 script = ExtResource("8_grek6")
+metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="projectile"]
-position = Vector2(-31, 340)
 shape = SubResource("CircleShape2D_u22fn")
 debug_color = Color(0.903599, 0.298174, 0.192131, 0.42)
 
@@ -130,8 +135,15 @@ debug_color = Color(0.903599, 0.298174, 0.192131, 0.42)
 
 [node name="Despawner" type="Timer" parent="projectile"]
 
+[node name="Sprite2D" type="Sprite2D" parent="projectile"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("11_3ahhb")
+
 [node name="EnemySpawner" parent="." instance=ExtResource("10_n6v34")]
-position = Vector2(-400, 100)
+position = Vector2(1052, -604)
+
+[node name="MeleeEnemy" parent="." instance=ExtResource("11_evw3m")]
+position = Vector2(-1263, 242)
 
 [connection signal="body_entered" from="Area2D4" to="Player" method="_on_area_2d_4_body_entered"]
 [connection signal="body_entered" from="projectile" to="projectile" method="OnBodyEntered"]

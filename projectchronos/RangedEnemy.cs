@@ -1,9 +1,8 @@
 using Godot;
 using System;
 
-public partial class RangedEnemy : CharacterBody2D
+public partial class RangedEnemy : BasicEnemy, BasicEnemy.EnemyAI
 {
-	public float Speed = 200f;
 	public float CloseToPlayer = 1000f; //max chase detection distance
 	float StopDist = 450f; //stop if within thsi distance
 
@@ -12,13 +11,15 @@ public partial class RangedEnemy : CharacterBody2D
 
 	public override void _Ready() {
 		player = GetNode<Player>("../Player"); //finding player node
+		Speed = 200f;
+		ai = this;
 		if (player == null)
 			{
 				GD.Print("Player Not Found");
 			}
 	}
-
-	public override void _PhysicsProcess(double delta)
+	
+	public void ExecuteAI(float delta)
 	{
 		float PlayersDistance = player.Position.DistanceTo(Position); //finds player distance form objcet
 		//GD.Print("pd " + PlayersDistance); ** tests how far player is from objcet

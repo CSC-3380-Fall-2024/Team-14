@@ -13,7 +13,6 @@ radius = 48.0104
 [node name="Player" type="CharacterBody2D"]
 position = Vector2(339, 515)
 script = ExtResource("1_3o1y4")
-metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_jyh6k")
@@ -41,7 +40,8 @@ offset_right = -226.0
 offset_bottom = -131.0
 script = ExtResource("5_p5oxw")
 
-[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+[node name="FireAnimation" type="CPUParticles2D" parent="."]
+emitting = false
 amount = 24
 lifetime = 2.0
 explosiveness = 0.24
