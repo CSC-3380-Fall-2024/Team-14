@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://4kf7paebw3px"]
+[gd_scene load_steps=11 format=3 uid="uid://4kf7paebw3px"]
 
 [ext_resource type="Script" path="res://Player.cs" id="1_3o1y4"]
 [ext_resource type="Texture2D" uid="uid://bbentnu2sv5qx" path="res://player.png" id="1_c8gss"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://dn2stq7qakgit" path="res://assets/fire-particle.png" id="6_hie02"]
 [ext_resource type="Script" path="res://HUD.cs" id="7_54acc"]
 [ext_resource type="Texture2D" uid="uid://byu3sp5ap7x0c" path="res://heart.png" id="8_gilvh"]
+[ext_resource type="Script" path="res://Camera2d.cs" id="9_glunf"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jyh6k"]
 radius = 48.0104
@@ -80,5 +81,11 @@ vertical = true
 [node name="LifeHeart" type="TextureRect" parent="HUD/Container/LivesContainer"]
 layout_mode = 2
 texture = ExtResource("8_gilvh")
+
+[node name="Node" type="Node" parent="."]
+
+[node name="Camera2D" type="Camera2D" parent="Node"]
+position = Vector2(339, 515)
+script = ExtResource("9_glunf")
 
 [connection signal="timeout" from="FallTimer" to="." method="OnFallTimerTimeout"]
