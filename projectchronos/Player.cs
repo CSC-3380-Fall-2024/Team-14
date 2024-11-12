@@ -285,14 +285,19 @@ public partial class Player : CharacterBody2D {
 	private void ProcessFire(double delta) {
 		if (_fireSecondsRemaining > 0) {
 			Main mainNode = (Main)GetParent().GetParent();
+			CpuParticles2D fireAnimation = GetChild<CpuParticles2D>(5);
 			if (_sinceLastFireTick > 1) {
 				PlayerHp -= mainNode.getConfig().FireDamagePerSecond;
 				_sinceLastFireTick -= 1;
+				fireAnimation.Emitting = true;
 			}
 
 			_sinceLastFireTick += delta;
 			_fireSecondsRemaining -= delta;
-			if (_fireSecondsRemaining < 0) _fireSecondsRemaining = 0;
+			if (_fireSecondsRemaining < 0) {
+				_fireSecondsRemaining = 0;
+				fireAnimation.Emitting = false;
+			}
 		}
 	}
 
