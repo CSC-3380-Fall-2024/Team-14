@@ -13,6 +13,7 @@ public partial class Main : Node {
 		//Call start on player
 		Player player = GetNode<Player>("World/Player");
 		player.Start(new Godot.Vector2 (0,0));
+		GetTree().Paused = false;
 
 	}
 
