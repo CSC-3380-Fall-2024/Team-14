@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=4 uid="uid://recpmccpyv0o"]
+[gd_scene load_steps=5 format=4 uid="uid://cka5h2jm4nmuj"]
 
 [ext_resource type="Texture2D" uid="uid://dlwm8yyiwdelo" path="res://assets/tartarus_tileset_1.png" id="1_3uly6"]
 [ext_resource type="PackedScene" uid="uid://4kf7paebw3px" path="res://player.tscn" id="2_422y7"]
