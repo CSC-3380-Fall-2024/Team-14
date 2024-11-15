@@ -75,6 +75,7 @@ flat = true
 alignment = 0
 
 [node name="SettingsScreen" parent="." instance=ExtResource("5_2h74o")]
+visible = false
 layout_mode = 1
 
 [connection signal="pressed" from="Menu/CenterRow/Buttons/StartButton" to="." method="OnStartButtonPressed"]

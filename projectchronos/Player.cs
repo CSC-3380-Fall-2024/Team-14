@@ -215,7 +215,7 @@ public partial class Player : CharacterBody2D {
 		}
 
 		if(lives_left<=0){
-			ShowExitScreen();
+			GetTree().ChangeSceneToFile("res://game_over.tscn");
 		}
 
 		// make dead and move back to starting position
@@ -230,26 +230,6 @@ public partial class Player : CharacterBody2D {
 			reset=false; //reset complete
 		}
 		
-	}
-
-	public void ShowExitScreen() 
-	{
-		//find the parent node 
-		Node currnetNode = GetParent();
-		while (currnetNode != null){
-			currnetNode = currnetNode.GetParent();
-		}
-	
-		//try to find main
-		//runs the show exit code
-		Node currentParent = GetParent();
-		while(currentParent!=null){
-			if (currentParent is Main mainNode){
-				mainNode.ShowExit();
-				return;
-			}
-			currentParent = currentParent.GetParent();
-		}
 	}
 	
 	public void Start(Godot.Vector2 position)
