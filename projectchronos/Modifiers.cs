@@ -4,7 +4,9 @@ using System.ComponentModel.Design;
 
 public partial class Modifiers : Control
 {
-	
+	public string UpgradeName { get; set; }
+	public string Description { get; set; }
+	public Action<Player> ApplyUpgrade { get; set; }
 
 	public override void _Ready()
 	{
@@ -15,9 +17,11 @@ public partial class Modifiers : Control
 		GetNode<Button>("/root/Main/CanvasLayer/Modifiers/HBoxContainer/Mod3").Disabled = true;
 	}
 
-	public override void _Process(double delta)
+	public void Upgrade(string name, string description, Action<Player> applyUpgrade)
 	{
-		
+		UpgradeName = name;
+		Description = description;
+		ApplyUpgrade = applyUpgrade;
 	}
 
 
