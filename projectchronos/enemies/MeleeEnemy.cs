@@ -8,7 +8,7 @@ public partial class MeleeEnemy : BasicEnemy, BasicEnemy.EnemyAI {
 	private Player player;
 
 	private float CooldownUntilAttack = 0f; //time until next attack
-	private float CooldownTime = 2f; //cooldown in seconds
+	private float CooldownTime = 2f; //cooldown in second
 
 	public override void _Ready()
 	{
@@ -19,8 +19,21 @@ public partial class MeleeEnemy : BasicEnemy, BasicEnemy.EnemyAI {
 		if (player == null) {
 			GD.Print("not found");
 			return;
-		} // verifies player exists for player hp functionality later
+		} 
+		else {
+			GD.Print("player found");
+			GD.Print(player.GetPath());
+		}// verifies player exists for player hp functionality later
 
+	}
+	
+	private Vector2 PlayerPosition()
+	{
+		return player.GlobalPosition;
+	}
+	private float DistanceToPlayer()
+	{
+		return Position.DistanceTo(player.GlobalPosition);
 	}
 
 	private void chase()
