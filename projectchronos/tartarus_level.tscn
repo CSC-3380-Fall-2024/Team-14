@@ -1,7 +1,9 @@
-[gd_scene load_steps=5 format=4 uid="uid://cka5h2jm4nmuj"]
+[gd_scene load_steps=7 format=4 uid="uid://cka5h2jm4nmuj"]
 
 [ext_resource type="Texture2D" uid="uid://dlwm8yyiwdelo" path="res://assets/tartarus_tileset_1.png" id="1_3uly6"]
 [ext_resource type="PackedScene" uid="uid://4kf7paebw3px" path="res://player.tscn" id="2_422y7"]
+[ext_resource type="PackedScene" uid="uid://p8fy3nw6kmu2" path="res://melee_enemy.tscn" id="3_nsr4k"]
+[ext_resource type="PackedScene" uid="uid://tt3kaocr7444" path="res://enemies/basic_enemy.tscn" id="4_2dxhk"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_p0snp"]
 texture = ExtResource("1_3uly6")
@@ -1028,3 +1030,9 @@ tile_map_data = PackedByteArray("AAAAAAgAAAADAAIAAAABAAgAAAAHAAIAAAACAAgAAAADAAI
 tile_set = SubResource("TileSet_hph4h")
 
 [node name="Player" parent="." instance=ExtResource("2_422y7")]
+
+[node name="BasicEnemy" parent="." instance=ExtResource("4_2dxhk")]
+position = Vector2(1927, -6)
+
+[node name="MeleeEnemy" parent="." instance=ExtResource("3_nsr4k")]
+position = Vector2(946, 294)
