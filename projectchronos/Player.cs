@@ -166,6 +166,7 @@ public partial class Player : CharacterBody2D {
 		if(Input.IsActionJustPressed("HealthMinus")) {
 			PlayerHp -= 2;
 		}
+
 		//testing healing
 		if (Input.IsActionJustPressed("HealthPlus"))
 		{

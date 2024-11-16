@@ -1,7 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://4kf7paebw3px"]
+[gd_scene load_steps=13 format=3 uid="uid://4kf7paebw3px"]
 
 [ext_resource type="Script" path="res://Player.cs" id="1_3o1y4"]
-[ext_resource type="Texture2D" uid="uid://bbentnu2sv5qx" path="res://player.png" id="1_c8gss"]
+[ext_resource type="Texture2D" uid="uid://dhhualfojuq37" path="res://assets/player-rec.png" id="2_k664p"]
 [ext_resource type="PackedScene" uid="uid://cnmh3rw3roajk" path="res://HealthBar.tscn" id="3_umkuu"]
 [ext_resource type="PackedScene" uid="uid://bccchwmakcjbs" path="res://progress_bar_generic.tscn" id="4_fctfr"]
 [ext_resource type="Script" path="res://ProgressBarGeneric.cs" id="5_p5oxw"]
@@ -9,20 +9,24 @@
 [ext_resource type="Script" path="res://HUD.cs" id="7_54acc"]
 [ext_resource type="Texture2D" uid="uid://byu3sp5ap7x0c" path="res://heart.png" id="8_gilvh"]
 [ext_resource type="Script" path="res://Camera2d.cs" id="9_glunf"]
+[ext_resource type="Script" path="res://PlayerAttack.cs" id="10_tjs6j"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_jyh6k"]
-radius = 48.0104
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dplei"]
+size = Vector2(128, 246)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tgmsr"]
+size = Vector2(264, 81)
 
 [node name="Player" type="CharacterBody2D"]
 position = Vector2(339, 515)
 script = ExtResource("1_3o1y4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_jyh6k")
+position = Vector2(0, 5)
+shape = SubResource("RectangleShape2D_dplei")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.2, 0.2)
-texture = ExtResource("1_c8gss")
+texture = ExtResource("2_k664p")
 
 [node name="FallTimer" type="Timer" parent="."]
 wait_time = 10.0
@@ -30,13 +34,14 @@ wait_time = 10.0
 [node name="HealthBar" parent="." instance=ExtResource("3_umkuu")]
 z_index = 0
 offset_left = -100.0
-offset_top = -100.0
+offset_top = -200.0
 offset_right = 100.0
-offset_bottom = -60.0
+offset_bottom = -160.0
 max_value = 20.0
 value = 20.0
 
 [node name="ProgressBarGeneric" parent="." instance=ExtResource("4_fctfr")]
+visible = false
 offset_left = -230.0
 offset_top = -158.0
 offset_right = -226.0
@@ -87,5 +92,18 @@ texture = ExtResource("8_gilvh")
 [node name="Camera2D" type="Camera2D" parent="Node"]
 position = Vector2(339, 515)
 script = ExtResource("9_glunf")
+
+[node name="PlayerAttack" type="Area2D" parent="."]
+position = Vector2(0, -8)
+rotation = 1.5708
+script = ExtResource("10_tjs6j")
+
+[node name="AttackHitbox" type="CollisionShape2D" parent="PlayerAttack"]
+position = Vector2(135, 0)
+shape = SubResource("RectangleShape2D_tgmsr")
+
+[node name="AttackCiooldown" type="Timer" parent="PlayerAttack"]
+process_callback = 0
+one_shot = true
 
 [connection signal="timeout" from="FallTimer" to="." method="OnFallTimerTimeout"]
