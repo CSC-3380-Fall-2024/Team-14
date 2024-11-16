@@ -57,23 +57,23 @@ offset_right = 1315.0
 offset_bottom = 507.0
 alignment = 1
 
-[node name="Mod1" type="Button" parent="HBoxContainer"]
+[node name="UpgradeOne" type="Button" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Upgrade 1"
 
-[node name="Mod2" type="Button" parent="HBoxContainer"]
+[node name="UpgradeTwo" type="Button" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Upgrade 2
 "
 
-[node name="Mod3" type="Button" parent="HBoxContainer"]
+[node name="UpgradeThree" type="Button" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Upgrade 3
 "
 
-[connection signal="pressed" from="HBoxContainer/Mod1" to="." method="OnModOnePressed"]
-[connection signal="pressed" from="HBoxContainer/Mod2" to="." method="OnModTwoPressed"]
-[connection signal="pressed" from="HBoxContainer/Mod3" to="." method="OnModThreePressed"]
+[connection signal="pressed" from="HBoxContainer/UpgradeOne" to="." method="OnModOnePressed"]
+[connection signal="pressed" from="HBoxContainer/UpgradeTwo" to="." method="OnModTwoPressed"]
+[connection signal="pressed" from="HBoxContainer/UpgradeThree" to="." method="OnModThreePressed"]
