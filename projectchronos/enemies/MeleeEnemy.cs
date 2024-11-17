@@ -10,6 +10,11 @@ public partial class MeleeEnemy : BasicEnemy, BasicEnemy.EnemyAI {
 	private float CooldownUntilAttack = 0f; //time until next attack
 	private float CooldownTime = 2f; //cooldown in second
 
+
+	public float gravity = 500f; // gravity amt
+	private Vector2 velocity = Vector2.Zero; //defines velocity
+
+
 	public override void _Ready()
 	{
 		base._Ready();
@@ -26,22 +31,34 @@ public partial class MeleeEnemy : BasicEnemy, BasicEnemy.EnemyAI {
 		}// verifies player exists for player hp functionality later
 
 	}
-	
+	public override void _PhysicsProcess(double delta) {
+		velocity = Velocity; // updates vel
+		if (!IsOnFloor()){
+			velocity.Y += gravity * (float)delta;
+		}
+		else {
+			velocity.Y = 0;
+		} //checks for if it is already on the floor
+		ExecuteAI((float)delta);
+		Velocity = velocity; //updates vel again
+		MoveAndSlide(); //moves
+	}
+
 	private Vector2 PlayerPosition()
 	{
-		return player.GlobalPosition;
+		return player.GlobalPosition; //get player pos
 	}
 	private float DistanceToPlayer()
 	{
-		return Position.DistanceTo(player.GlobalPosition);
+		return Position.DistanceTo(player.GlobalPosition); //get player distance
 	}
 
 	private void chase()
-	{
-		
+	{		
 		var direction = (PlayerPosition()-Position).Normalized(); //moves towards player
-		Velocity = direction * Speed; //sets velocity
-		MoveAndSlide();// adds previously estabvlished physics stuff
+		velocity.X = direction.X * Speed; //sets velocity
+
+		//GD.Print("chasing" + velocity);
 	}	
 	private void run()
 	{ 
@@ -49,9 +66,8 @@ public partial class MeleeEnemy : BasicEnemy, BasicEnemy.EnemyAI {
 		if (DistanceToPlayer() <= retreat_how_far) 
 		{
 			var direction = (Position - PlayerPosition()).Normalized(); //moves away from player
-			Velocity = direction*Speed; //velocity
-			MoveAndSlide(); //prev physics
-			//GD.Print("leaving");
+			velocity.X = direction.X*Speed; //velocity
+			//GD.Print("running" + velocity);
 		}
 	}
 
