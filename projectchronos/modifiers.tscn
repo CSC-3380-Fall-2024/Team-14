@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://cxklxa2nmk4s3"]
+[gd_scene load_steps=5 format=3 uid="uid://cxklxa2nmk4s3"]
 
 [ext_resource type="Script" path="res://Modifiers.cs" id="1_kykl6"]
+[ext_resource type="Script" path="res://UpgradeOne.cs" id="2_sohu0"]
+[ext_resource type="Script" path="res://UpgradeTwo.cs" id="3_wj4wa"]
+[ext_resource type="Script" path="res://UpgradeThree.cs" id="4_ioe71"]
 
 [node name="Modifiers" type="Control"]
 layout_mode = 3
@@ -47,7 +50,7 @@ offset_right = 343.0
 offset_bottom = -77.0
 grow_vertical = 2
 theme_override_font_sizes/font_size = 50
-text = "Category 1: "
+text = "Upgrades: "
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 0
@@ -61,19 +64,22 @@ alignment = 1
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Upgrade 1"
+script = ExtResource("2_sohu0")
 
 [node name="UpgradeTwo" type="Button" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Upgrade 2
 "
+script = ExtResource("3_wj4wa")
 
 [node name="UpgradeThree" type="Button" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Upgrade 3
 "
+script = ExtResource("4_ioe71")
 
-[connection signal="pressed" from="HBoxContainer/UpgradeOne" to="." method="OnModOnePressed"]
-[connection signal="pressed" from="HBoxContainer/UpgradeTwo" to="." method="OnModTwoPressed"]
-[connection signal="pressed" from="HBoxContainer/UpgradeThree" to="." method="OnModThreePressed"]
+[connection signal="pressed" from="HBoxContainer/UpgradeOne" to="." method="OnUpgradeOnePressed"]
+[connection signal="pressed" from="HBoxContainer/UpgradeTwo" to="." method="OnUpgradeTwoPressed"]
+[connection signal="pressed" from="HBoxContainer/UpgradeThree" to="." method="OnUpgradeThreePressed"]

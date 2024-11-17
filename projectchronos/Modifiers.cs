@@ -28,21 +28,20 @@ public class Upgrade
 		new Upgrade("Dash", "Allows you to dash short distances.")
 	};
 
-	private Button UpgradeOne;
-	private Button UpgradeTwo;
-	private Button UpgradeThree;
-
 	 private List<Upgrade> displayedUpgrades = new List<Upgrade>();
 
 	 private Random rand = new Random();
 
 	public override void _Ready()
 	{
+
+		Button UpgradeOne = GetNode<UpgradeOne>("/root/Main/CanvasLayer/Modifiers/HBoxContainer/UpgradeOne");
+		Button UpgradeTwo = GetNode<UpgradeTwo>("/root/Main/CanvasLayer/Modifiers/HBoxContainer/UpgradeTwo");
+		Button UpgradeThree = GetNode<UpgradeThree>("/root/Main/CanvasLayer/Modifiers/HBoxContainer/UpgradeThree");
+		
 		base._Ready();
 		Visible = false;
 		ProcessMode = ProcessModeEnum.Always;
-		GetNode<Button>("/root/Main/CanvasLayer/Modifiers/HBoxContainer/Mod2").Disabled = true;
-		GetNode<Button>("/root/Main/CanvasLayer/Modifiers/HBoxContainer/Mod3").Disabled = true;
 
 		PickRandomUpgrades();
 
@@ -50,9 +49,6 @@ public class Upgrade
 		UpgradeTwo.Text = displayedUpgrades[1].UpgradeName;
 		UpgradeThree.Text = displayedUpgrades[2].UpgradeName;
 
-		UpgradeOne.Connect("pressed", new Callable(this, nameof(OnUpgradeButtonPressed)));
-		UpgradeTwo.Connect("pressed", new Callable(this, nameof(OnUpgradeButtonPressed)));
-		UpgradeThree.Connect("pressed", new Callable(this, nameof(OnUpgradeButtonPressed)));
 	}
 	
 	private void PickRandomUpgrades() //randomize displayed upgrades
@@ -69,16 +65,37 @@ public class Upgrade
 		}
 	}
 
-	 private void OnUpgradeButtonPressed(int upgradeIndex)
+	 private void OnUpgradeOnePressed(int upgradeIndex)
 	{
 		Upgrade selectedUpgrade = displayedUpgrades[upgradeIndex];
 		GD.Print("Selected Upgrade: " + selectedUpgrade.UpgradeName);
 
-		// Apply the upgrade logic here
 		ApplyUpgrade(selectedUpgrade);
+		
+		Visible = false;
 	}
 
-		// Apply the upgrade to the player (this is where your game-specific logic would go)
+	 private void OnUpgradeTwoPressed(int upgradeIndex)
+	{
+		Upgrade selectedUpgrade = displayedUpgrades[upgradeIndex];
+		GD.Print("Selected Upgrade: " + selectedUpgrade.UpgradeName);
+
+		ApplyUpgrade(selectedUpgrade);
+
+		Visible = false;
+	}
+
+	 private void OnUpgradeThreePressed(int upgradeIndex)
+	{
+		Upgrade selectedUpgrade = displayedUpgrades[upgradeIndex];
+		GD.Print("Selected Upgrade: " + selectedUpgrade.UpgradeName);
+
+		ApplyUpgrade(selectedUpgrade);
+
+		Visible = false;
+	}
+
+		// Apply the upgrade to the player
 	private void ApplyUpgrade(Upgrade upgrade)
 	{
 		// Example: Apply upgrade effects based on the selected upgrade
@@ -97,7 +114,6 @@ public class Upgrade
 			default:
 				break;
 		}
-		QueueFree(); 
 	}
 
 }
