@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://ceyd7jmjm7td7"]
-
+[gd_scene load_steps=3 format=3 uid="uid://ceyd7jmjm7td7"]
 [ext_resource type="Script" path="res://GameOver.cs" id="1_mdjgg"]
+[ext_resource type="FontFile" uid="uid://nyojpkaf8mf7" path="res://assets/chronos_font.ttf" id="2_p1pde"]
 
 [node name="GameOver" type="CanvasLayer"]
 script = ExtResource("1_mdjgg")
@@ -28,6 +28,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(0.945098, 0, 0, 1)
 theme_override_colors/font_shadow_color = Color(0.00392157, 0.00392157, 0.00392157, 1)
+theme_override_fonts/font = ExtResource("2_p1pde")
 theme_override_font_sizes/font_size = 60
 text = "Death"
 horizontal_alignment = 1

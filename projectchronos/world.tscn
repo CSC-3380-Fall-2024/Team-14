@@ -9,7 +9,7 @@
 [ext_resource type="Script" path="res://projectile.cs" id="8_grek6"]
 [ext_resource type="PackedScene" path="res://enemy_spawner.tscn" id="10_n6v34"]
 [ext_resource type="Texture2D" uid="uid://b5bhv7lwil7kj" path="res://assets/fireball.png" id="11_3ahhb"]
-[ext_resource type="PackedScene" path="res://melee_enemy.tscn" id="11_evw3m"]
+[ext_resource type="PackedScene" uid="uid://p8fy3nw6kmu2" path="res://melee_enemy.tscn" id="11_evw3m"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j1uk3"]
 size = Vector2(1920, 1080)
@@ -21,7 +21,7 @@ size = Vector2(297, 253)
 size = Vector2(852.909, 801)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6tewd"]
-size = Vector2(326.5, 68)
+size = Vector2(329.25, 68)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_svsvv"]
 size = Vector2(130.5, 110)
@@ -69,11 +69,11 @@ position = Vector2(845.046, -107.714)
 rotation = -0.162464
 shape = SubResource("RectangleShape2D_k1v3s")
 
-[node name="Area2D4" type="Area2D" parent="."]
+[node name="KillingSquare" type="Area2D" parent="."]
 script = ExtResource("6_xvjpd")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D4"]
-position = Vector2(659, 737)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KillingSquare"]
+position = Vector2(-444, 459)
 shape = SubResource("RectangleShape2D_6tewd")
 debug_color = Color(0.839216, 0.6, 0.701961, 0.843137)
 
@@ -114,5 +114,5 @@ position = Vector2(1052, -604)
 [node name="MeleeEnemy" parent="." instance=ExtResource("11_evw3m")]
 position = Vector2(-1263, 242)
 
-[connection signal="body_entered" from="Area2D4" to="Player" method="_on_area_2d_4_body_entered"]
+[connection signal="body_entered" from="KillingSquare" to="Player" method="_on_area_2d_4_body_entered"]
 [connection signal="body_entered" from="projectile" to="projectile" method="OnBodyEntered"]
