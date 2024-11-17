@@ -18,14 +18,14 @@ public class Upgrade
 }
 	 public List<Upgrade> allUpgrades = new List<Upgrade>
 	{
-		new Upgrade("Double Jump", "Allows you to jump twice in mid-air."),
+		new Upgrade("Increased Health", "Increases your total health."),
 		new Upgrade("Speed Boost", "Increases your movement speed."),
 		new Upgrade("Health Regen", "Regenerates health over time."),
 		new Upgrade("Increased Damage", "Increases your attack damage."),
-		new Upgrade("Shield", "Gives you a temporary shield."),
-		new Upgrade("Magnet", "Attracts nearby items."),
-		new Upgrade("Fireball", "Shoots a fireball every few seconds."),
-		new Upgrade("Dash", "Allows you to dash short distances.")
+		new Upgrade("Fire Damage Negation", "Immune to fire damage."),
+		new Upgrade("Decrease enemy spawn rate", "Lowers enemy spawns.")
+		//we can add more later im tired lmao
+	
 	};
 
 	 private List<Upgrade> displayedUpgrades = new List<Upgrade>();
@@ -49,6 +49,10 @@ public class Upgrade
 		UpgradeTwo.Text = displayedUpgrades[1].UpgradeName;
 		UpgradeThree.Text = displayedUpgrades[2].UpgradeName;
 
+		UpgradeOne.Pressed += () => OnUpgradePressed(0);
+		UpgradeTwo.Pressed += () => OnUpgradePressed(1);
+		UpgradeThree.Pressed += () => OnUpgradePressed(2);
+
 	}
 	
 	private void PickRandomUpgrades() //randomize displayed upgrades
@@ -65,7 +69,7 @@ public class Upgrade
 		}
 	}
 
-	 private void OnUpgradeOnePressed(int upgradeIndex)
+	 private void OnUpgradePressed(int upgradeIndex)
 	{
 		Upgrade selectedUpgrade = displayedUpgrades[upgradeIndex];
 		GD.Print("Selected Upgrade: " + selectedUpgrade.UpgradeName);
@@ -73,26 +77,7 @@ public class Upgrade
 		ApplyUpgrade(selectedUpgrade);
 		
 		Visible = false;
-	}
-
-	 private void OnUpgradeTwoPressed(int upgradeIndex)
-	{
-		Upgrade selectedUpgrade = displayedUpgrades[upgradeIndex];
-		GD.Print("Selected Upgrade: " + selectedUpgrade.UpgradeName);
-
-		ApplyUpgrade(selectedUpgrade);
-
-		Visible = false;
-	}
-
-	 private void OnUpgradeThreePressed(int upgradeIndex)
-	{
-		Upgrade selectedUpgrade = displayedUpgrades[upgradeIndex];
-		GD.Print("Selected Upgrade: " + selectedUpgrade.UpgradeName);
-
-		ApplyUpgrade(selectedUpgrade);
-
-		Visible = false;
+		GetTree().Paused = false;
 	}
 
 		// Apply the upgrade to the player
@@ -101,17 +86,25 @@ public class Upgrade
 		// Example: Apply upgrade effects based on the selected upgrade
 		switch (upgrade.UpgradeName)
 		{
-			case "Double Jump":
-				// Enable double jump logic
+			case "Increased Health":
+				Player player = GetNode<Player>("/root/Main/World/Player");
+				player.PlayerMaxHp += 10;
 				break;
 			case "Speed Boost":
-				// Increase player speed
+				Player player1 = GetNode<Player>("/root/Main/World/Player");
+				player1.speed += 100;
 				break;
 			case "Health Regen":
 				// Start health regeneration
 				break;
-			// Add more cases for each upgrade type
-			default:
+			case "Increased Damage":
+				//placeholder
+				break;
+			case "Fire Damage Negation":
+				//placeholder
+				break;
+			case "Decrease enemy spawn rate":
+				//placeholder
 				break;
 		}
 	}
