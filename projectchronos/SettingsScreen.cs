@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Numerics;
 using System.Runtime.CompilerServices;
 
 public partial class SettingsScreen : Control {
@@ -40,8 +41,10 @@ public partial class SettingsScreen : Control {
 	private void OnAspectRatioButtonToggled(bool toggled) {
 		if (toggled) {
 			titleScreen.SetAspectRatio(AspectRatio.FourThree);
+			GetTree().Root.ContentScaleSize = new Vector2I(1920, 1440);
 		} else {
 			titleScreen.SetAspectRatio(AspectRatio.SixteenNine);
+			GetTree().Root.ContentScaleSize = new Vector2I(1920, 1080);
 		}
 	}
 
