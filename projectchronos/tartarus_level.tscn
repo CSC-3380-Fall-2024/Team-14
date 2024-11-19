@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=4 uid="uid://cka5h2jm4nmuj"]
+[gd_scene load_steps=13 format=4 uid="uid://cka5h2jm4nmuj"]
 
 [ext_resource type="Texture2D" uid="uid://dlwm8yyiwdelo" path="res://assets/tartarus_tileset_1.png" id="1_3uly6"]
 [ext_resource type="Texture2D" uid="uid://f48d3jdhhwfn" path="res://assets/tartarus-parallax/01 bg.png" id="1_4aw67"]
@@ -7,6 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://dr4doyrgh2hdx" path="res://assets/tartarus-parallax/04 rocksback.png" id="3_c0f4i"]
 [ext_resource type="PackedScene" uid="uid://tt3kaocr7444" path="res://enemies/basic_enemy.tscn" id="4_2dxhk"]
 [ext_resource type="Texture2D" uid="uid://clonye17aqh7g" path="res://assets/tartarus-parallax/05 rocksfront.png" id="4_ypa7m"]
+[ext_resource type="PackedScene" uid="uid://p8fy3nw6kmu2" path="res://melee_enemy.tscn" id="8_43eou"]
+[ext_resource type="Script" path="res://KillingSquare.cs" id="9_yckbj"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_p0snp"]
 texture = ExtResource("1_3uly6")
@@ -1026,6 +1028,9 @@ tile_size = Vector2i(128, 128)
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_p0snp")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2jg35"]
+size = Vector2(12771.6, 70)
+
 [node name="TartarusLevel" type="Node2D"]
 metadata/bound_right = 16126.0
 metadata/bound_left = 0.0
@@ -1080,3 +1085,13 @@ tile_set = SubResource("TileSet_hph4h")
 
 [node name="BasicEnemy" parent="." instance=ExtResource("4_2dxhk")]
 position = Vector2(1927, -6)
+
+[node name="MeleeEnemy" parent="." instance=ExtResource("8_43eou")]
+
+[node name="KillingSquare" type="Area2D" parent="."]
+script = ExtResource("9_yckbj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KillingSquare"]
+position = Vector2(6433.19, 1106)
+shape = SubResource("RectangleShape2D_2jg35")
+debug_color = Color(0.839216, 0.6, 0.701961, 0.843137)
