@@ -22,16 +22,16 @@ public partial class SettingsScreen : Control {
 		titleScreen = GetParent<TitleScreen>();
 	}
 
-    public override void _PhysicsProcess(double delta) {
+	public override void _PhysicsProcess(double delta) {
 		normalLabel.Visible = !titleScreen.GetDifficulty();
 		hardLabel.Visible = titleScreen.GetDifficulty();
 		labelFourThree.Visible = titleScreen.GetScreenRatio() == AspectRatio.FourThree;
 		labelSixteenNine.Visible = titleScreen.GetScreenRatio() == AspectRatio.SixteenNine;
-    }
+	}
 
-    // from difficulty selection connected in Godot
-    // difficulty button ON is hard mode
-    private void OnDifficultyButtonToggled(bool toggled) {
+	// from difficulty selection connected in Godot
+	// difficulty button ON is hard mode
+	private void OnDifficultyButtonToggled(bool toggled) {
 		titleScreen.SetDifficulty(toggled);
 	}
 
