@@ -6,9 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://d3xwews2ictv1" path="res://enemies/daemon.tscn" id="8_1mm2v"]
 [ext_resource type="Script" path="res://RangedEnemy.cs" id="8_6lus1"]
 [ext_resource type="Script" path="res://projectile.cs" id="8_grek6"]
-[ext_resource type="PackedScene" uid="uid://dka0b76vns5el" path="res://enemy_spawner.tscn" id="10_n6v34"]
+[ext_resource type="PackedScene" path="res://enemy_spawner.tscn" id="10_n6v34"]
 [ext_resource type="Texture2D" uid="uid://b5bhv7lwil7kj" path="res://assets/fireball.png" id="11_3ahhb"]
-[ext_resource type="PackedScene" uid="uid://p8fy3nw6kmu2" path="res://melee_enemy.tscn" id="11_evw3m"]
+[ext_resource type="PackedScene" path="res://melee_enemy.tscn" id="11_evw3m"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j1uk3"]
 size = Vector2(1920, 1080)

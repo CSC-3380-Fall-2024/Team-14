@@ -18,12 +18,12 @@ public class Upgrade
 }
 	 public List<Upgrade> allUpgrades = new List<Upgrade>
 	{
-		new Upgrade("Increased Health", "Increases your total health."),
-		new Upgrade("Speed Boost", "Increases your movement speed."),
-		new Upgrade("Health Regen", "Regenerates health over time."),
-		new Upgrade("Increased Damage", "Increases your attack damage."),
-		new Upgrade("Fire Damage Negation", "Immune to fire damage."),
-		new Upgrade("Decrease enemy spawn rate", "Lowers enemy spawns.")
+		new Upgrade("INCREASED HEALTH", "Increases your total health."),
+		new Upgrade("SPEED BOOST", "Increases your movement speed."),
+		new Upgrade("HEALTH REGEN", "Regenerates health over time."),
+		new Upgrade("INCREASED DAMAGE", "Increases your attack damage."),
+		new Upgrade("FIRE DAMAGE NEGATION", "Immune to fire damage."),
+		new Upgrade("DECREASE ENEMY SPAWN RATE", "Lowers enemy spawns.")
 		//we can add more later im tired lmao
 	
 	};
@@ -83,7 +83,6 @@ public class Upgrade
 		// Apply the upgrade to the player
 	private void ApplyUpgrade(Upgrade upgrade)
 	{
-		// Example: Apply upgrade effects based on the selected upgrade
 		switch (upgrade.UpgradeName)
 		{
 			case "Increased Health":
