@@ -166,13 +166,14 @@ public partial class Player : CharacterBody2D {
 		if(Input.IsActionJustPressed("HealthMinus")) {
 			PlayerHp -= 2;
 		}
+
 		//testing healing
 		if (Input.IsActionJustPressed("HealthPlus"))
 		{
 			PlayerHp += 2;
 		}
 		
-		var hud = GetNode<HUD>(new NodePath("../HUD"));
+		var hud = GetNode<HUD>(new NodePath("HUD"));
 		hud.SetLives(lives_left);
 		
 		Velocity = velocity;
@@ -197,13 +198,13 @@ public partial class Player : CharacterBody2D {
 
 	// method 1 for the all-purpose player status bar, getting the state
 	public int GetBarProgress() {
-		var progressBarGeneric = GetNode<ProgressBarGeneric>("./HUD/ProgressBarGeneric");
+		var progressBarGeneric = GetNode<ProgressBarGeneric>("HUD/ProgressBarGeneric");
 		return (int) progressBarGeneric.Value;
 	}
 
 	// method 2 for the all-purpose player status bar, setting the state
 	public void SetBarProgress(int value) {
-		var progressBarGeneric = GetNode<ProgressBarGeneric>("./HUD/ProgressBarGeneric");
+		var progressBarGeneric = GetNode<ProgressBarGeneric>("HUD/ProgressBarGeneric");
 		progressBarGeneric.Value = value;
 	}
 
@@ -215,7 +216,7 @@ public partial class Player : CharacterBody2D {
 		}
 
 		if(lives_left<=0){
-			ShowExitScreen();
+			GetTree().ChangeSceneToFile("res://game_over.tscn");
 		}
 
 		// make dead and move back to starting position
@@ -230,26 +231,6 @@ public partial class Player : CharacterBody2D {
 			reset=false; //reset complete
 		}
 		
-	}
-
-	public void ShowExitScreen() 
-	{
-		//find the parent node 
-		Node currnetNode = GetParent();
-		while (currnetNode != null){
-			currnetNode = currnetNode.GetParent();
-		}
-	
-		//try to find main
-		//runs the show exit code
-		Node currentParent = GetParent();
-		while(currentParent!=null){
-			if (currentParent is Main mainNode){
-				mainNode.ShowExit();
-				return;
-			}
-			currentParent = currentParent.GetParent();
-		}
 	}
 	
 	public void Start(Godot.Vector2 position)
@@ -300,5 +281,4 @@ public partial class Player : CharacterBody2D {
 			}
 		}
 	}
-
 }

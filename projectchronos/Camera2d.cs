@@ -8,7 +8,7 @@ public partial class Camera2d : Camera2D {
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready() {
-		player = GetNode<CharacterBody2D>(new NodePath("../Player"));
+		player = GetNode<CharacterBody2D>(new NodePath("../../"));
 		ScreenSize = GetViewportRect().Size;
 		Position = player.Position;
 	}
@@ -39,6 +39,48 @@ public partial class Camera2d : Camera2D {
 			}
 		}
 
+		var scene = GetNode<Node>("../../../");
+		pos = EnforceViewportBounds(
+			pos, 
+			ScreenSize,
+			(float) scene.GetMeta("bound_top", Variant.From(float.NegativeInfinity)).AsDouble(),
+			(float) scene.GetMeta("bound_bottom", Variant.From(float.PositiveInfinity)).AsDouble(),
+			(float) scene.GetMeta("bound_left", Variant.From(float.NegativeInfinity)).AsDouble(),
+			(float) scene.GetMeta("bound_right", Variant.From(float.PositiveInfinity)).AsDouble()
+			);
+
 		Position = pos;
+	}
+
+	/// <summary>
+	/// Enforces the provided bounds on the viewport of this camera.
+	/// Having bounds smaller than screenSize is considered undefined behavior.
+	/// </summary>
+	/// <param name="pos">The current center position of the camera.</param>
+	/// <param name="screenSize">The size of the camera's viewport</param>
+	/// <param name="boundTop">The top of the camera should not display beyond this.</param>
+	/// <param name="boundBottom">The bottom of the camera should not display beyond this.</param>
+	/// <param name="boundLeft">The left of the camera should not display beyond this.</param>
+	/// <param name="boundRight">The right of the camera should not display beyond this.</param>
+	public Vector2 EnforceViewportBounds(Vector2 pos, Vector2 screenSize, float boundTop, float boundBottom, float boundLeft, float boundRight)
+	{
+		if (pos.Y - screenSize.Y / 2 < boundTop)
+		{
+			pos.Y = boundTop + screenSize.Y / 2;
+		}
+		if (pos.Y + screenSize.Y / 2 > boundBottom)
+		{
+			pos.Y = boundBottom - screenSize.Y / 2;
+		}
+		if (pos.X - screenSize.X / 2 < boundLeft)
+		{
+			pos.X = boundLeft + screenSize.X / 2;
+		}
+		if (pos.X + screenSize.X / 2 > boundRight)
+		{
+			pos.X = boundRight - screenSize.X / 2;
+		}
+
+		return pos;
 	}
 }
