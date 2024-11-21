@@ -28,7 +28,7 @@ public partial class MeleeEnemy : BasicEnemy, BasicEnemy.EnemyAI {
 		else {
 			GD.Print("player found");
 			GD.Print(player.GetPath());
-		}// verifies player exists for player hp functionality later
+		} // verifies player exists for player hp functionality later
 
 	}
 	public override void _PhysicsProcess(double delta) {
