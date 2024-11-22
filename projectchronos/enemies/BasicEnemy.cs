@@ -38,7 +38,7 @@ public partial class BasicEnemy : CharacterBody2D {
 	}
 
 	public Vector2 PlayerPosition() {
-		return GetNode<Player>("/root/TartarusLevel/Player").Position;
+		return GetNode<Player>("/root/Main/LevelContainer/TartarusLevel/Player").Position;
 	}
 
 	public float DistanceToPlayer() {
