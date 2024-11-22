@@ -7,10 +7,10 @@
 [ext_resource type="Texture2D" uid="uid://dr4doyrgh2hdx" path="res://assets/tartarus-parallax/04 rocksback.png" id="3_c0f4i"]
 [ext_resource type="PackedScene" uid="uid://tt3kaocr7444" path="res://enemies/basic_enemy.tscn" id="4_2dxhk"]
 [ext_resource type="Texture2D" uid="uid://clonye17aqh7g" path="res://assets/tartarus-parallax/05 rocksfront.png" id="4_ypa7m"]
-[ext_resource type="PackedScene" uid="uid://p8fy3nw6kmu2" path="res://melee_enemy.tscn" id="8_43eou"]
 [ext_resource type="Script" path="res://KillingSquare.cs" id="9_yckbj"]
 [ext_resource type="Script" path="res://Area2d.cs" id="10_ogpit"]
-[ext_resource type="PackedScene" uid="uid://deqqjohs7gvx6" path="res://horde_human.tscn" id="11_k67vb"]
+[ext_resource type="PackedScene" uid="uid://bf8auywj1i1hn" path="res://enemy_spawner.tscn" id="12_ukqde"]
+[ext_resource type="PackedScene" uid="uid://d3xwews2ictv1" path="res://enemies/daemon.tscn" id="12_xt3ss"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_p0snp"]
 texture = ExtResource("1_3uly6")
@@ -1092,10 +1092,7 @@ tile_set = SubResource("TileSet_hph4h")
 [node name="Player" parent="." instance=ExtResource("2_422y7")]
 
 [node name="BasicEnemy" parent="." instance=ExtResource("4_2dxhk")]
-position = Vector2(1927, -6)
-
-[node name="MeleeEnemy" parent="." instance=ExtResource("8_43eou")]
-position = Vector2(2306, 831)
+position = Vector2(5199, 4249)
 
 [node name="KillingSquare" type="Area2D" parent="."]
 script = ExtResource("9_yckbj")
@@ -1118,4 +1115,7 @@ position = Vector2(-0.000207663, -422.5)
 scale = Vector2(324, 717)
 texture = SubResource("PlaceholderTexture2D_6y0yd")
 
-[node name="HordeHuman" parent="." instance=ExtResource("11_k67vb")]
+[node name="EnemySpawner" parent="." instance=ExtResource("12_ukqde")]
+position = Vector2(51, 155)
+
+[node name="Daemon" parent="." instance=ExtResource("12_xt3ss")]

@@ -7,12 +7,15 @@ public partial class Daemon : BasicEnemy, BasicEnemy.EnemyAI
 	
 	public float MagicRange = 600f; //magic attack range
 
+	private Player player;
+
 	public override void _Ready()
 	{
 		MaxLife = 10f;
 		CurrentLife = 10f;
 		ai = this;
 		base._Ready();
+		player = GetParent().GetChild<Player>(5);
 	}
 
 	private void Chase()
@@ -28,8 +31,7 @@ public partial class Daemon : BasicEnemy, BasicEnemy.EnemyAI
 	{
 		//placeholder method for animations
 		var damage = 5;
-		var play = GetNode<Player>("Player");
-		play.PlayerHp -= damage;
+		player.PlayerHp -= damage;
 		//placeholder for damage
 		
 	}
@@ -38,9 +40,8 @@ public partial class Daemon : BasicEnemy, BasicEnemy.EnemyAI
 	{
 		//placeholder method for animations
 		var damage = 6;
-		var play = GetNode<Player>("Player");
-		play.PlayerHp -= damage;
-		play.SetFireDuration(5);
+		player.PlayerHp -= damage;
+		player.SetFireDuration(5);
 		//another placeholder
 	}
 

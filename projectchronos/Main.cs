@@ -11,8 +11,6 @@ public partial class Main : Node {
 	public override void _Ready() {
 		
 		//Call start on player
-		Player player = GetNode<Player>("World/Player");
-		player.Start(new Godot.Vector2 (0,0));
 		GetTree().Paused = false;
 
 	}
@@ -23,5 +21,14 @@ public partial class Main : Node {
 
 	public Configuration getConfig() {
 		return this.config;
+	}
+
+	public void SwitchLevel(String path)
+	{
+		foreach (var child in GetNode("LevelContainer").GetChildren())
+		{
+			child.QueueFree();
+		}
+		GetNode("LevelContainer").AddChild(GD.Load<PackedScene>(path).Instantiate());
 	}
 }

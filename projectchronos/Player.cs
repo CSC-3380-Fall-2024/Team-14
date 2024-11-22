@@ -34,10 +34,7 @@ public partial class Player : CharacterBody2D {
 			if(_playerHp <= 0 && lives_left >= 0)
 			{
 				Kill_Reset();
-				_playerHp = PlayerMaxHp; 
-				var upgrade = GetNode<Modifiers>("/root/Main/CanvasLayer/Modifiers");
-				upgrade.Show();
-				GetTree().Paused = true;
+				
 					
 			}
 		}
@@ -77,6 +74,7 @@ public partial class Player : CharacterBody2D {
 
 		//play idle animation
 		playerSprite.Play("idle");
+		Start();
 	}
 
 	// called every frame. 'delta' is the elapsed time since the previous frame.
@@ -257,17 +255,21 @@ public partial class Player : CharacterBody2D {
 			Show();
 			MoveAndSlide();
 			reset=false; //reset complete
+			
+			_playerHp = PlayerMaxHp; 
+			var upgrade = GetNode<Modifiers>("/root/Main/CanvasLayer/Modifiers");
+			upgrade.Show();
+			GetTree().Paused = true;
 		}
 		
 	}
 	
-	public void Start(Godot.Vector2 position)
+	public void Start()
 	{
 		//find main and grab lives from it
-		Main mainNode = (Main)GetParent().GetParent();
+		Main mainNode = (Main) GetTree().GetCurrentScene();
 		lives_left = mainNode.getConfig().MaxLives;
-
-		Position = position;
+		
 		Show();
 		GetNode<CollisionShape2D>("CollisionShape2D").Disabled = false;
 	}
