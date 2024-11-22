@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=4 uid="uid://cka5h2jm4nmuj"]
+[gd_scene load_steps=17 format=4 uid="uid://cka5h2jm4nmuj"]
 
 [ext_resource type="Texture2D" uid="uid://dlwm8yyiwdelo" path="res://assets/tartarus_tileset_1.png" id="1_3uly6"]
 [ext_resource type="Texture2D" uid="uid://f48d3jdhhwfn" path="res://assets/tartarus-parallax/01 bg.png" id="1_4aw67"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://p8fy3nw6kmu2" path="res://melee_enemy.tscn" id="8_43eou"]
 [ext_resource type="Script" path="res://KillingSquare.cs" id="9_yckbj"]
 [ext_resource type="Script" path="res://Area2d.cs" id="10_ogpit"]
+[ext_resource type="PackedScene" uid="uid://deqqjohs7gvx6" path="res://horde_human.tscn" id="11_k67vb"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_p0snp"]
 texture = ExtResource("1_3uly6")
@@ -1030,7 +1031,7 @@ physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_p0snp")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2jg35"]
-size = Vector2(12771.6, 70)
+size = Vector2(15876.6, 70)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gulxh"]
 radius = 162.0
@@ -1094,12 +1095,13 @@ tile_set = SubResource("TileSet_hph4h")
 position = Vector2(1927, -6)
 
 [node name="MeleeEnemy" parent="." instance=ExtResource("8_43eou")]
+position = Vector2(2306, 831)
 
 [node name="KillingSquare" type="Area2D" parent="."]
 script = ExtResource("9_yckbj")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KillingSquare"]
-position = Vector2(6433.19, 1106)
+position = Vector2(7985.7, 1106)
 shape = SubResource("RectangleShape2D_2jg35")
 debug_color = Color(0.839216, 0.6, 0.701961, 0.843137)
 
@@ -1115,3 +1117,5 @@ shape = SubResource("CapsuleShape2D_gulxh")
 position = Vector2(-0.000207663, -422.5)
 scale = Vector2(324, 717)
 texture = SubResource("PlaceholderTexture2D_6y0yd")
+
+[node name="HordeHuman" parent="." instance=ExtResource("11_k67vb")]
