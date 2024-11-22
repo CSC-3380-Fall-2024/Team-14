@@ -1093,10 +1093,7 @@ tile_set = SubResource("TileSet_hph4h")
 [node name="Player" parent="." instance=ExtResource("2_422y7")]
 
 [node name="BasicEnemy" parent="." instance=ExtResource("4_2dxhk")]
-position = Vector2(1927, -6)
-
-[node name="MeleeEnemy" parent="." instance=ExtResource("8_43eou")]
-position = Vector2(2306, 831)
+position = Vector2(5199, 4249)
 
 [node name="KillingSquare" type="Area2D" parent="."]
 script = ExtResource("9_yckbj")

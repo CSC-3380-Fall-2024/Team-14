@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://ddn0cd47m8lvb"]
 
 [ext_resource type="Script" path="res://Main.cs" id="1_l60bp"]
-[ext_resource type="PackedScene" uid="uid://c6lt1tt11cqg7" path="res://world.tscn" id="2_eawby"]
+[ext_resource type="PackedScene" uid="uid://cka5h2jm4nmuj" path="res://tartarus_level.tscn" id="2_xp7v8"]
 [ext_resource type="PackedScene" uid="uid://l08dxvnatluh" path="res://PauseMenu.tscn" id="3_h2yh2"]
 [ext_resource type="PackedScene" uid="uid://cxklxa2nmk4s3" path="res://modifiers.tscn" id="4_d2emn"]
 
@@ -9,7 +9,9 @@
 process_mode = 1
 script = ExtResource("1_l60bp")
 
-[node name="World" parent="." instance=ExtResource("2_eawby")]
+[node name="LevelContainer" type="Node2D" parent="."]
+
+[node name="TartarusLevel" parent="LevelContainer" instance=ExtResource("2_xp7v8")]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
