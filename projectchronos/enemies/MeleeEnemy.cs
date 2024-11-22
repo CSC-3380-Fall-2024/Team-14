@@ -4,17 +4,15 @@ public partial class MeleeEnemy : BasicEnemy, BasicEnemy.EnemyAI {
 	public float range = 200f; //distance that enemy can attack from
 	public float retreat_when_health = 10f; //health that triggers a retreat
 	public float retreat_how_far = 1000f; //retreat distance
-	public float Speed = 500f;
 
 	private Player player;
 
 	private float CooldownUntilAttack = 0f; //time until next attack
 	private float CooldownTime = 2f; //cooldown in second
 
+
 	public float gravity = 500f; // gravity amt
 	private Vector2 velocity = Vector2.Zero; //defines velocity
-
-	public float CurrentLife = 45f;
 
 
 	public override void _Ready()
@@ -28,18 +26,12 @@ public partial class MeleeEnemy : BasicEnemy, BasicEnemy.EnemyAI {
 			return;
 		} 
 		else {
-			//GD.Print("player found");
-			//GD.Print(player.GetPath());
+			GD.Print("player found");
+			GD.Print(player.GetPath());
 		} // verifies player exists for player hp functionality later
 
 	}
 	public override void _PhysicsProcess(double delta) {
-
-		TakeDamage( 1 / DistanceToPlayer() * 2000f * (float) delta); // prototype enemy takes passive proximity damage for testing
-		if (CurrentLife <= 0) {
-			kill();
-		}
-
 		velocity = Velocity; // updates vel
 		if (!IsOnFloor()){
 			velocity.Y += gravity * (float)delta;
@@ -84,7 +76,7 @@ public partial class MeleeEnemy : BasicEnemy, BasicEnemy.EnemyAI {
 
 		//GD.Print("Attacking"); TEST**
 		// take damage goes here
-		player.PlayerHp -= 3;
+		player.PlayerHp -= 2;
 		CooldownUntilAttack = CooldownTime; //reset cooldwon
 		
 	}
@@ -97,8 +89,6 @@ public partial class MeleeEnemy : BasicEnemy, BasicEnemy.EnemyAI {
 			CooldownUntilAttack -= (float)delta;
 			//GD.Print("cooldown remaining" + CooldownUntilAttack); TEST**
 		}
-
-		//GD.Print(CurrentLife);
 
 		//GD.Print("distance to p" + distanceToPlayer); **TEST
 		if (CurrentLife > retreat_when_health) // checks to see if the enemies health is above the retreat value
@@ -120,9 +110,5 @@ public partial class MeleeEnemy : BasicEnemy, BasicEnemy.EnemyAI {
 		{
 			run();
 		}
-	}
-
-	public void TakeDamage(float damage) { // should not ever modify enemy health directly (from outside)
-		CurrentLife -= damage;
 	}
 }
