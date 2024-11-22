@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://cxklxa2nmk4s3"]
+[gd_scene load_steps=7 format=3 uid="uid://cxklxa2nmk4s3"]
 
 [ext_resource type="Script" path="res://Modifiers.cs" id="1_kykl6"]
 [ext_resource type="Texture2D" uid="uid://k58goajru2jl" path="res://caveRemasteredV7.png" id="2_g6fea"]
 [ext_resource type="Script" path="res://UpgradeOne.cs" id="2_sohu0"]
+[ext_resource type="FontFile" uid="uid://nyojpkaf8mf7" path="res://assets/chronos_font.ttf" id="3_h70s0"]
 [ext_resource type="Script" path="res://UpgradeTwo.cs" id="3_wj4wa"]
 [ext_resource type="Script" path="res://UpgradeThree.cs" id="4_ioe71"]
 
@@ -25,33 +26,23 @@ grow_vertical = 2
 texture = ExtResource("2_g6fea")
 
 [node name="Label" type="Label" parent="."]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.5
-anchor_top = 0.497
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -120.0
-offset_top = -290.76
-offset_right = -39.9999
-offset_bottom = -271.0
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 0
+offset_left = 746.0
+offset_top = 263.0
+offset_right = 892.0
+offset_bottom = 286.0
 scale = Vector2(3, 2.6)
-text = "Try Again?"
+theme_override_fonts/font = ExtResource("3_h70s0")
+text = "TRY AGAIN?"
 
 [node name="Label2" type="Label" parent="."]
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = 86.0
-offset_top = -50.0
-offset_right = 344.0
-offset_bottom = 22.0
-grow_vertical = 2
+layout_mode = 0
+offset_top = 490.0
+offset_right = 450.0
+offset_bottom = 562.0
+theme_override_fonts/font = ExtResource("3_h70s0")
 theme_override_font_sizes/font_size = 50
-text = "Upgrades: "
+text = "UPGRADES: "
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 0
