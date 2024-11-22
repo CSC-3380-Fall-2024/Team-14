@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=4 uid="uid://7ej6d61nirby"]
+[gd_scene load_steps=13 format=4 uid="uid://7ej6d61nirby"]
 
 [ext_resource type="Texture2D" uid="uid://drd557pffbd1w" path="res://assets/elysium-tileset.png" id="1_67etp"]
 [ext_resource type="Texture2D" uid="uid://cygi8npdhamrv" path="res://assets/elysium-parallax/1.png" id="1_mvexl"]
@@ -7,6 +7,9 @@
 [ext_resource type="Texture2D" uid="uid://dbgm4j7k1v71s" path="res://assets/elysium-parallax/3.png" id="3_jau8r"]
 [ext_resource type="Texture2D" uid="uid://dj82kjo7o1wy2" path="res://assets/elysium-parallax/4.png" id="4_d46ke"]
 [ext_resource type="Texture2D" uid="uid://d1xtvfjtm8fk0" path="res://assets/elysium-parallax/5.png" id="6_4ymsk"]
+[ext_resource type="PackedScene" uid="uid://tt3kaocr7444" path="res://enemies/basic_enemy.tscn" id="8_7jm7a"]
+[ext_resource type="PackedScene" uid="uid://p8fy3nw6kmu2" path="res://melee_enemy.tscn" id="9_xf3hi"]
+[ext_resource type="PackedScene" uid="uid://deqqjohs7gvx6" path="res://horde_human.tscn" id="10_tmotu"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8xl37"]
 texture = ExtResource("1_67etp")
@@ -111,3 +114,11 @@ scale = Vector2(4.26238, 4.57486)
 texture = ExtResource("6_4ymsk")
 
 [node name="Player" parent="." instance=ExtResource("2_svlur")]
+
+[node name="BasicEnemy" parent="." instance=ExtResource("8_7jm7a")]
+position = Vector2(2263, 3559)
+
+[node name="MeleeEnemy" parent="." instance=ExtResource("9_xf3hi")]
+position = Vector2(2306, 831)
+
+[node name="HordeHuman" parent="." instance=ExtResource("10_tmotu")]
