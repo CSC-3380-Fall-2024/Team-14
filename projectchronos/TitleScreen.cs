@@ -24,7 +24,7 @@ public partial class TitleScreen : Control {
 
 	// Defining the signal handler method for the start button to be connected via the Godot editor
 	private void OnStartButtonPressed() {
-		GetTree().ChangeSceneToFile("res://tartarus_level.tscn");
+		GetTree().ChangeSceneToFile("res://main.tscn");
 	}
 
 	// Defining the signal handler method for the quit button to be connected via the Godot editor
