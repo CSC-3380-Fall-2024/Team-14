@@ -18,12 +18,12 @@ public class Upgrade
 }
 	 public List<Upgrade> allUpgrades = new List<Upgrade>
 	{
-		new Upgrade("Increased Health", "Increases your total health."),
-		new Upgrade("Speed Boost", "Increases your movement speed."),
-		new Upgrade("Health Regen", "Regenerates health over time."),
-		new Upgrade("Increased Damage", "Increases your attack damage."),
-		new Upgrade("Fire Damage Negation", "Immune to fire damage."),
-		new Upgrade("Decrease enemy spawn rate", "Lowers enemy spawns.")
+		new Upgrade("INCREASED HEALTH", "Increases your total health."),
+		new Upgrade("SPEED BOOST", "Increases your movement speed."),
+		new Upgrade("HEALTH REGEN", "Regenerates health over time."),
+		new Upgrade("INCREASED DAMAGE", "Increases your attack damage."),
+		new Upgrade("FIRE DAMAGE NEGATION", "Immune to fire damage."),
+		new Upgrade("DECREASE ENEMY SPAWN RATE", "Lowers enemy spawns.")
 		//we can add more later im tired lmao
 	
 	};
@@ -83,27 +83,26 @@ public class Upgrade
 		// Apply the upgrade to the player
 	private void ApplyUpgrade(Upgrade upgrade)
 	{
-		// Example: Apply upgrade effects based on the selected upgrade
 		switch (upgrade.UpgradeName)
 		{
-			case "Increased Health":
+			case "INCREASED HEALTH":
 				Player player = GetNode<Player>("/root/Main/World/Player");
-				player.PlayerMaxHp += 10;
+				player.PlayerMaxHp += 20;
 				break;
-			case "Speed Boost":
+			case "SPEED BOOST":
 				Player player1 = GetNode<Player>("/root/Main/World/Player");
-				player1.speed += 100;
+				player1.speed += 200;
 				break;
-			case "Health Regen":
-				// Start health regeneration
+			case "HEALTH REGEN":
+				
 				break;
-			case "Increased Damage":
+			case "INCREASED DAMAGE":
 				//placeholder
 				break;
-			case "Fire Damage Negation":
+			case "FIRE DAMAGE NEGATION":
 				//placeholder
 				break;
-			case "Decrease enemy spawn rate":
+			case "DECREASE ENEMY SPAWN RATE":
 				//placeholder
 				break;
 		}
