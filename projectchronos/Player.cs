@@ -66,6 +66,8 @@ public partial class Player : CharacterBody2D {
 		var healthBar = GetNode<HealthBar>("HealthBar");
 		healthBar.Value = PlayerHp;
 		healthBar.MaxValue = PlayerHp;
+
+		Start();
 	}
 
 	// called every frame. 'delta' is the elapsed time since the previous frame.
@@ -233,13 +235,12 @@ public partial class Player : CharacterBody2D {
 		
 	}
 	
-	public void Start(Godot.Vector2 position)
+	public void Start()
 	{
 		//find main and grab lives from it
-		Main mainNode = (Main)GetParent().GetParent();
+		Main mainNode = (Main) GetTree().GetCurrentScene();
 		lives_left = mainNode.getConfig().MaxLives;
-
-		Position = position;
+		
 		Show();
 		GetNode<CollisionShape2D>("CollisionShape2D").Disabled = false;
 	}

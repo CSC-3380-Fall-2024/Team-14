@@ -28,7 +28,8 @@ public partial class Area2d : Area2D {
 
 	public void OnBodyEntered(Node body) {
 		if (body is Player) {
-			GetTree().ChangeSceneToFile("res://elysium_level.tscn");
+			// Chaneg scene
+			((Main) GetTree().CurrentScene).SwitchLevel("res://elysium_level.tscn");
 		}
 	}
 }
