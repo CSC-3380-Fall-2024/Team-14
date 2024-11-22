@@ -1,6 +1,8 @@
 using Godot;
+using System;
 
-public partial class MeleeEnemy : BasicEnemy, BasicEnemy.EnemyAI {
+public partial class HordeHuman : BasicEnemy, BasicEnemy.EnemyAI
+{
 	public float range = 200f; //distance that enemy can attack from
 	public float retreat_when_health = 10f; //health that triggers a retreat
 	public float retreat_how_far = 1000f; //retreat distance
@@ -98,7 +100,7 @@ public partial class MeleeEnemy : BasicEnemy, BasicEnemy.EnemyAI {
 			//GD.Print("cooldown remaining" + CooldownUntilAttack); TEST**
 		}
 
-		//GD.Print(CurrentLife);
+		GD.Print(CurrentLife);
 
 		//GD.Print("distance to p" + distanceToPlayer); **TEST
 		if (CurrentLife > retreat_when_health) // checks to see if the enemies health is above the retreat value
