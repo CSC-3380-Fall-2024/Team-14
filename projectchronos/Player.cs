@@ -34,10 +34,7 @@ public partial class Player : CharacterBody2D {
 			if(_playerHp <= 0 && lives_left >= 0)
 			{
 				Kill_Reset();
-				_playerHp = PlayerMaxHp; 
-				var upgrade = GetNode<Modifiers>("/root/Main/CanvasLayer/Modifiers");
-				upgrade.Show();
-				GetTree().Paused = true;
+				
 					
 			}
 		}
@@ -231,6 +228,11 @@ public partial class Player : CharacterBody2D {
 			Show();
 			MoveAndSlide();
 			reset=false; //reset complete
+			
+			_playerHp = PlayerMaxHp; 
+			var upgrade = GetNode<Modifiers>("/root/Main/CanvasLayer/Modifiers");
+			upgrade.Show();
+			GetTree().Paused = true;
 		}
 		
 	}
