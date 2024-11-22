@@ -10,8 +10,7 @@
 [ext_resource type="PackedScene" path="res://melee_enemy.tscn" id="8_43eou"]
 [ext_resource type="Script" path="res://KillingSquare.cs" id="9_yckbj"]
 [ext_resource type="Script" path="res://Area2d.cs" id="10_ogpit"]
-[ext_resource type="PackedScene" path="res://horde_human.tscn" id="11_k67vb"]
-[ext_resource type="PackedScene" uid="uid://d3xwews2ictv1" path="res://enemies/daemon.tscn" id="12_xt3ss"
+[ext_resource type="PackedScene" uid="uid://d3xwews2ictv1" path="res://enemies/daemon.tscn" id="12_xt3ss"]
 [ext_resource type="PackedScene" uid="uid://bf8auywj1i1hn" path="res://enemy_spawner.tscn" id="12_ukqde"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_p0snp"]
