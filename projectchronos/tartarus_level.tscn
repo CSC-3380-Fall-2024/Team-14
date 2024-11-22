@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=4 uid="uid://cka5h2jm4nmuj"]
+[gd_scene load_steps=17 format=4 uid="uid://cka5h2jm4nmuj"]
 
 [ext_resource type="Texture2D" uid="uid://dlwm8yyiwdelo" path="res://assets/tartarus_tileset_1.png" id="1_3uly6"]
 [ext_resource type="Texture2D" uid="uid://f48d3jdhhwfn" path="res://assets/tartarus-parallax/01 bg.png" id="1_4aw67"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" path="res://KillingSquare.cs" id="9_yckbj"]
 [ext_resource type="Script" path="res://Area2d.cs" id="10_ogpit"]
 [ext_resource type="PackedScene" uid="uid://bf8auywj1i1hn" path="res://enemy_spawner.tscn" id="12_ukqde"]
+[ext_resource type="PackedScene" uid="uid://d3xwews2ictv1" path="res://enemies/daemon.tscn" id="12_xt3ss"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_p0snp"]
 texture = ExtResource("1_3uly6")
@@ -1116,3 +1117,5 @@ texture = SubResource("PlaceholderTexture2D_6y0yd")
 
 [node name="EnemySpawner" parent="." instance=ExtResource("12_ukqde")]
 position = Vector2(51, 155)
+
+[node name="Daemon" parent="." instance=ExtResource("12_xt3ss")]
