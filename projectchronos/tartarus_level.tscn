@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=4 uid="uid://cka5h2jm4nmuj"]
+[gd_scene load_steps=16 format=4 uid="uid://cka5h2jm4nmuj"]
 
 [ext_resource type="Texture2D" uid="uid://dlwm8yyiwdelo" path="res://assets/tartarus_tileset_1.png" id="1_3uly6"]
 [ext_resource type="Texture2D" uid="uid://f48d3jdhhwfn" path="res://assets/tartarus-parallax/01 bg.png" id="1_4aw67"]
@@ -7,10 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://dr4doyrgh2hdx" path="res://assets/tartarus-parallax/04 rocksback.png" id="3_c0f4i"]
 [ext_resource type="PackedScene" uid="uid://tt3kaocr7444" path="res://enemies/basic_enemy.tscn" id="4_2dxhk"]
 [ext_resource type="Texture2D" uid="uid://clonye17aqh7g" path="res://assets/tartarus-parallax/05 rocksfront.png" id="4_ypa7m"]
-[ext_resource type="PackedScene" path="res://melee_enemy.tscn" id="8_43eou"]
 [ext_resource type="Script" path="res://KillingSquare.cs" id="9_yckbj"]
 [ext_resource type="Script" path="res://Area2d.cs" id="10_ogpit"]
-[ext_resource type="PackedScene" uid="uid://d3xwews2ictv1" path="res://enemies/daemon.tscn" id="12_xt3ss"]
 [ext_resource type="PackedScene" uid="uid://bf8auywj1i1hn" path="res://enemy_spawner.tscn" id="12_ukqde"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_p0snp"]
@@ -1116,8 +1114,5 @@ position = Vector2(-0.000207663, -422.5)
 scale = Vector2(324, 717)
 texture = SubResource("PlaceholderTexture2D_6y0yd")
 
-[node name="HordeHuman" parent="." instance=ExtResource("11_k67vb")]
-
-[node name="Daemon" parent="." instance=ExtResource("12_xt3ss")]
 [node name="EnemySpawner" parent="." instance=ExtResource("12_ukqde")]
 position = Vector2(51, 155)
