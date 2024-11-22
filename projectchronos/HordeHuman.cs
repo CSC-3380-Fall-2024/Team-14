@@ -6,7 +6,7 @@ public partial class HordeHuman : BasicEnemy, BasicEnemy.EnemyAI
 	public float range = 200f; //distance that enemy can attack from
 	public float retreat_when_health = 10f; //health that triggers a retreat
 	public float retreat_how_far = 1000f; //retreat distance
-	public float Speed = 500f;
+	public float Speed = 300f;
 
 	private Player player;
 
@@ -16,7 +16,7 @@ public partial class HordeHuman : BasicEnemy, BasicEnemy.EnemyAI
 	public float gravity = 500f; // gravity amt
 	private Vector2 velocity = Vector2.Zero; //defines velocity
 
-	public float CurrentLife = 45f;
+	public float CurrentLife = 35f;
 
 
 	public override void _Ready()
@@ -86,7 +86,7 @@ public partial class HordeHuman : BasicEnemy, BasicEnemy.EnemyAI
 
 		//GD.Print("Attacking"); TEST**
 		// take damage goes here
-		player.PlayerHp -= 3;
+		player.PlayerHp -= 1;
 		CooldownUntilAttack = CooldownTime; //reset cooldwon
 		
 	}
