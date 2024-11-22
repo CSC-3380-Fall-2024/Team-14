@@ -8,7 +8,7 @@ public partial class BasicEnemy : CharacterBody2D {
 	}
 
 	public float MaxLife = 100;
-	public float CurrentLife = 30;
+	public float CurrentLife = 0;
 	
 	public float Speed = 300.0f;
 	public float JumpVelocity = -400.0f;
