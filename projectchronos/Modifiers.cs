@@ -98,7 +98,6 @@ public class Upgrade
 		// Apply the upgrade to the player
 	private void ApplyUpgrade(Upgrade upgrade)
 	{
-		// Example: Apply upgrade effects based on the selected upgrade
 		switch (upgrade.UpgradeName)
 		{
 			case "INCREASED HEALTH":

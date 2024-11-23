@@ -34,10 +34,7 @@ public partial class Player : CharacterBody2D {
 			if(_playerHp <= 0 && lives_left >= 0)
 			{
 				Kill_Reset();
-				_playerHp = PlayerMaxHp; 
-				var upgrade = GetNode<Modifiers>("/root/Main/CanvasLayer/Modifiers");
-				upgrade.Show();
-				GetTree().Paused = true;
+				
 					
 			}
 		}
@@ -52,7 +49,12 @@ public partial class Player : CharacterBody2D {
 	private bool reset = false; //checks for being mid reset
 	private bool processed = false; //checks for key press action
 
+	//instantiate animatedSprite2D node for player sprite
+	private AnimatedSprite2D playerSprite;
+
 	public int jumpForce;
+
+	
 
 	// called when the node enters the scene tree for the first time.
 	public override void _Ready() {
@@ -66,6 +68,13 @@ public partial class Player : CharacterBody2D {
 		var healthBar = GetNode<HealthBar>("HealthBar");
 		healthBar.Value = PlayerHp;
 		healthBar.MaxValue = PlayerHp;
+
+		//get reference to player sprite node
+		playerSprite = GetNode<AnimatedSprite2D>("PlayerSprite");
+
+		//play idle animation
+		playerSprite.Play("idle");
+		Start();
 	}
 
 	// called every frame. 'delta' is the elapsed time since the previous frame.
@@ -89,6 +98,12 @@ public partial class Player : CharacterBody2D {
 		Show();
 		MoveAndSlide();
 
+		//flip sprite based on player velocity
+		if(velocity.X > 0) {
+			playerSprite.Scale = new Vector2(1, 1);
+		} else if(velocity.X < 0) {
+			playerSprite.Scale = new Vector2(-1, 1);
+		}
 	}
 	
 	/// <summary>
@@ -133,17 +148,28 @@ public partial class Player : CharacterBody2D {
 		if (Input.IsActionPressed("move_right")) {
 			velocity -= horizontalDir * velocity.Dot(horizontalDir);
 			velocity += horizontalDir * speed;
-		}
 
-		if (Input.IsActionPressed("move_left")) {
+			if (IsOnFloor()){
+				playerSprite.Play("walking");
+			}
+
+		} else if (Input.IsActionPressed("move_left")) {
 			velocity -= horizontalDir * velocity.Dot(horizontalDir);
 			velocity -= horizontalDir * speed;
-		}
 
-		if (Input.IsActionJustPressed("jump")) {
+			if (IsOnFloor()) {
+				playerSprite.Play("walking");
+			}
+
+		} else if (Input.IsActionJustPressed("jump")) {
 			if (canJump) {
 				velocity += jumpForce * UpDirection;
 				hasJumpLeft = IsOnFloor();
+				playerSprite.Play("jumping");
+			}
+		} else {
+			if (IsOnFloor()) {
+				playerSprite.Play("idle");
 			}
 		}
 
@@ -229,17 +255,21 @@ public partial class Player : CharacterBody2D {
 			Show();
 			MoveAndSlide();
 			reset=false; //reset complete
+			
+			_playerHp = PlayerMaxHp; 
+			var upgrade = GetNode<Modifiers>("/root/Main/CanvasLayer/Modifiers");
+			upgrade.Show();
+			GetTree().Paused = true;
 		}
 		
 	}
 	
-	public void Start(Godot.Vector2 position)
+	public void Start()
 	{
 		//find main and grab lives from it
-		Main mainNode = (Main)GetParent().GetParent();
+		Main mainNode = (Main) GetTree().GetCurrentScene();
 		lives_left = mainNode.getConfig().MaxLives;
-
-		Position = position;
+		
 		Show();
 		GetNode<CollisionShape2D>("CollisionShape2D").Disabled = false;
 	}
