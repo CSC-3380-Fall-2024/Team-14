@@ -23,7 +23,7 @@ public class Upgrade
 		new Upgrade("SPEED BOOST", "Increases your movement speed."),
 		new Upgrade("HEALTH REGEN", "Regenerates health over time."),
 		new Upgrade("INCREASED DAMAGE", "Increases your attack damage."),
-		new Upgrade("FIRE DAMAGE RESISTANCE", "Immune to fire damage."),
+		new Upgrade("FIRE DAMAGE RESISTANCE", "Resistant to fire damage."),
 		new Upgrade("DECREASE ENEMY SPAWN RATE", "Lowers enemy spawns."),
 		new Upgrade("INCREASED DEFENSE", "Increases player defense."),
 		new Upgrade("DOUBLE JUMP", "Allows player to jump once more mid-air")
@@ -113,14 +113,26 @@ public class Upgrade
 			case "INCREASED DAMAGE":
 				//placeholder
 				break;
-			case "FIRE DAMAGE NEGATION":
-				//placeholder
+			case "FIRE DAMAGE RESISTANCE":
+			player = GetNode<Player>("/root/Main/LevelContainer/TartarusLevel/Player");
+				player.SetFireDuration(0);
 				break;
 			case "DECREASE ENEMY SPAWN RATE":
-				//placeholder
+			var enemySpawner = GetNode<EnemySpawner>("/root/Main/LevelContainer/TartarusLevel/EnemySpawner");
+			var spawnTimer = enemySpawner.GetNode<Timer>("SpawnTimer");
+			 // Ensure the timer exists
+			if (spawnTimer != null)
+			{
+				spawnTimer.Stop();  // Stops the timer from firing
+				GD.Print("SpawnTimer stopped.");
+   			}
+			else
+			{
+				GD.Print("SpawnTimer not found!");
+   			}
 				break;
 			case "DOUBLE JUMP":
-
+			// placeholder 
 				break;
 		}
 	}
@@ -141,7 +153,7 @@ public class Upgrade
 		if (player.PlayerHp < player.PlayerMaxHp)
 		{
 			player.PlayerHp = Mathf.Min(player.PlayerHp + regenAmount, player.PlayerMaxHp);
-			GD.Print("Health regenerating: " + player.PlayerHp);
+			//GD.Print("Health regenerating: " + player.PlayerHp);
 		}
 	}
 
