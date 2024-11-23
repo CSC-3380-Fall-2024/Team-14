@@ -17,11 +17,11 @@ public partial class BasicEnemy : CharacterBody2D {
 
 	private Player player;
 
-    public override void _Ready() {
+	public override void _Ready() {
 		player = GetParent().GetChild<Player>(5);
 	}
 
-    public override void _PhysicsProcess(double delta) {
+	public override void _PhysicsProcess(double delta) {
 		TakeDamage( 1 / DistanceToPlayer() * 2000f * (float) delta); // prototype enemy takes passive proximity damage for testing
 		
 		 // die if we have zero health duh

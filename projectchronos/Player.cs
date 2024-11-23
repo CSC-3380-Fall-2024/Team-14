@@ -16,7 +16,7 @@ public partial class Player : CharacterBody2D {
 	public int fallSpeed = 8000;// temporary magic number, can set this value arbitrarily
 
 	[Export]
-	public int jumpHeight = 250; // jump values are set based on desired height
+	public int jumpHeight = 100; // jump values are set based on desired height
 
 	[Export]
 	public int PlayerMaxHp = 20;
@@ -54,7 +54,11 @@ public partial class Player : CharacterBody2D {
 
 	public int jumpForce;
 
-	
+	//double jump variables
+	public int doubleJumpHeight = 40;
+	public int doublejumpForce;
+	private bool HasDoubJumped;
+
 
 	// called when the node enters the scene tree for the first time.
 	public override void _Ready() {
@@ -62,6 +66,9 @@ public partial class Player : CharacterBody2D {
 
 		// we set jump based on desired height, but implement as a velocity delta
 		// jumpForce calculation pre-computes velocity delta with gravity
+
+		doublejumpForce = (int)Math.Sqrt(2*gravity*doubleJumpHeight); //double jump force metrics
+
 		jumpForce = (int) Math.Sqrt(2 * gravity * jumpHeight);
 
 		PlayerHp = PlayerMaxHp;
@@ -162,9 +169,17 @@ public partial class Player : CharacterBody2D {
 			}
 
 		} else if (Input.IsActionJustPressed("jump")) {
-			if (canJump) {
+			if (canJump && IsOnFloor()) {
 				velocity += jumpForce * UpDirection;
-				hasJumpLeft = IsOnFloor();
+				hasJumpLeft = true;
+				HasDoubJumped = false;
+				playerSprite.Play("jumping");
+			}		
+			else if (hasJumpLeft && !HasDoubJumped) //double jump implementation
+			{
+				velocity += doublejumpForce * UpDirection;
+				hasJumpLeft = false;
+				HasDoubJumped = true;
 				playerSprite.Play("jumping");
 			}
 		} else {

@@ -3,7 +3,7 @@ using System;
 
 public partial class Daemon : BasicEnemy, BasicEnemy.EnemyAI
 {
-	public float MeleeRange = 150f; //melee attack range
+	public float MeleeRange = 200f; //melee attack range
 	
 	public float MagicRange = 600f; //magic attack range
 
@@ -50,12 +50,12 @@ public partial class Daemon : BasicEnemy, BasicEnemy.EnemyAI
 		if (DistanceToPlayer() <= MeleeRange) //checks to see if enemy is within attack range
 		{
 			//GD.Print("in melee range");
-			MeleeAttack();
+			//MeleeAttack();
 		}
 		else if(DistanceToPlayer() <= MagicRange)
 		{
 			//GD.Print("in magic range");
-			FireAttack();
+			//FireAttack();
 		}
 		else
 		{
