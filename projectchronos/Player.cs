@@ -178,15 +178,7 @@ public partial class Player : CharacterBody2D {
 			velocity -= UpDirection * Math.Max(Velocity.Dot(UpDirection), 0);
 		}
 
-		//kills player if k is pressed **TESTING PROCESS ONLY**
-		if (Input.IsActionPressed("k")){
-			if (!reset && !processed){
-				Kill_Reset();
-				processed = true; //sets it so we know k is pressed
-			}
-		} else{
-			processed = false; //reset key press to false
-		}
+		//kills player if k is pressed **TESTING PROCESS ONLY** removed 11/23
 
 		//testing health bar depletion
 		if(Input.IsActionJustPressed("HealthMinus")) {
