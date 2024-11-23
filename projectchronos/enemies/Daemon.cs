@@ -3,7 +3,7 @@ using System;
 
 public partial class Daemon : BasicEnemy, BasicEnemy.EnemyAI
 {
-	public float MeleeRange = 150f; //melee attack range
+	public float MeleeRange = 200f; //melee attack range
 	
 	public float MagicRange = 600f; //magic attack range
 
