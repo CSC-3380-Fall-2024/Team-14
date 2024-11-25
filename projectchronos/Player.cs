@@ -7,7 +7,7 @@ using Vector2 = Godot.Vector2;
 
 public partial class Player : CharacterBody2D {
 	[Export]
-	public int speed {get; set;} = 760; // how fast the player moves in pixels/second
+	public int speed {get; set;} = 600; // how fast the player moves in pixels/second
 
 	[Export]
 	public int gravity = 4000; // gravity is player-specific not world-defined
@@ -16,7 +16,7 @@ public partial class Player : CharacterBody2D {
 	public int fallSpeed = 8000;// temporary magic number, can set this value arbitrarily
 
 	[Export]
-	public int jumpHeight = 100; // jump values are set based on desired height
+	public int jumpHeight = 70; // jump values are set based on desired height
 
 	[Export]
 	public int PlayerMaxHp = 20;

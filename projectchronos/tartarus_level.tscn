@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://clonye17aqh7g" path="res://assets/tartarus-parallax/05 rocksfront.png" id="4_ypa7m"]
 [ext_resource type="PackedScene" uid="uid://p8fy3nw6kmu2" path="res://melee_enemy.tscn" id="8_43eou"]
 [ext_resource type="Script" path="res://KillingSquare.cs" id="9_yckbj"]
-[ext_resource type="Script" path="res://Area2d.cs" id="10_ogpit"]
+[ext_resource type="Script" path="res://TartarusExit.cs" id="9_yfw54"]
 [ext_resource type="PackedScene" uid="uid://bf8auywj1i1hn" path="res://enemy_spawner.tscn" id="12_ukqde"]
 [ext_resource type="PackedScene" uid="uid://d3xwews2ictv1" path="res://enemies/daemon.tscn" id="12_xt3ss"]
 
@@ -57,7 +57,7 @@ physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_p0snp")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2jg35"]
-size = Vector2(12771.6, 70)
+size = Vector2(15577.6, 70)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gulxh"]
 radius = 162.0
@@ -118,21 +118,19 @@ tile_set = SubResource("TileSet_hph4h")
 [node name="Player" parent="." instance=ExtResource("2_422y7")]
 
 [node name="BasicEnemy" parent="." instance=ExtResource("4_2dxhk")]
-position = Vector2(1927, -6)
-
-[node name="MeleeEnemy" parent="." instance=ExtResource("8_43eou")]
+position = Vector2(7432, 6240)
 
 [node name="KillingSquare" type="Area2D" parent="."]
 script = ExtResource("9_yckbj")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KillingSquare"]
-position = Vector2(6433.19, 1106)
+position = Vector2(7836.2, 1106)
 shape = SubResource("RectangleShape2D_2jg35")
 debug_color = Color(0.839216, 0.6, 0.701961, 0.843137)
 
 [node name="TartarusExit" type="Area2D" parent="."]
 position = Vector2(15807, 1091)
-script = ExtResource("10_ogpit")
+script = ExtResource("9_yfw54")
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TartarusExit"]

@@ -8,13 +8,11 @@ public partial class Rollingrock : CharacterBody2D {
 	public float Speed = 200;
 	public Vector2? Target;
 
-	public float DespawnDistance = 2000;
-
-	public static int CollisionDamage = 2;
+	public int CollisionDamage = 2;
 	/// <summary>
 	/// How much of the rock's current velocity should go to pushing back the player
 	/// </summary>
-	public static float CollisionKnockbackPercent = 0.1f;
+	public float CollisionKnockbackPercent = 0.1f;
 	
 	private static double NormalizeAngle(double angle) {
 		return (angle % (Math.PI * 2) + Math.PI * 2) % (Math.PI * 2);
@@ -34,7 +32,7 @@ public partial class Rollingrock : CharacterBody2D {
 			}
 
 			// Delete self when travelled enough distance
-			if (startingPos.Value.DistanceTo(Position) > DespawnDistance) {
+			if (Math.Abs(velocity.X) < Speed * 0.01 && Math.Abs(velocity.Y) < Speed * 0.01) {
 				QueueFree();
 			}
 			
@@ -62,6 +60,13 @@ public partial class Rollingrock : CharacterBody2D {
 		var rock = GD.Load<PackedScene>("res://rollingrock.tscn").Instantiate<Rollingrock>();
 		rock.Position = position;
 		rock.Target = target;
+		return rock;
+	}
+	public static Rollingrock CreateRock(Vector2 position, Vector2 target, float speed, int collisionDamage, float collisionKnockbackPercent) {
+		var rock = CreateRock(position, target);
+		rock.Speed = speed;
+		rock.CollisionDamage = collisionDamage;
+		rock.CollisionKnockbackPercent = collisionKnockbackPercent;
 		return rock;
 	}
 }
