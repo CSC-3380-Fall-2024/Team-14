@@ -177,7 +177,7 @@ public partial class Player : CharacterBody2D {
 			}		
 			else if (hasJumpLeft && !HasDoubJumped) //double jump implementation
 			{
-				velocity += doublejumpForce * UpDirection;
+				velocity = doublejumpForce * UpDirection;
 				hasJumpLeft = false;
 				HasDoubJumped = true;
 				playerSprite.Play("jumping");
