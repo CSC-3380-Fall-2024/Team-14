@@ -42,7 +42,7 @@ public partial class PlayerAttack : Area2D
 
 	// setting attack frequency is more intuitive for design
 	// but attack period is more useful for implementation
-	private float AttackPeriod() {
+	public float AttackPeriod() {
 		return 1 / attacksPerSecond;
 	}
 

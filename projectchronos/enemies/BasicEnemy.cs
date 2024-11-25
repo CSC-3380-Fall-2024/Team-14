@@ -25,13 +25,17 @@ public partial class BasicEnemy : CharacterBody2D {
 		}
 	}
 
+	private PlayerAttack playerAttack;
+
 	public override void _Ready() {
-		
+		playerAttack = player.GetChild<PlayerAttack>(7);
 	}
 
 	public override void _PhysicsProcess(double delta) {
-		if (DistanceToPlayer() <= 200f && player.GetChild<PlayerAttack>(7).GetChild<Timer>(1).IsStopped()) {
-			TakeDamage(player.GetChild<PlayerAttack>(7).ScaledDamage());
+		if (DistanceToPlayer() <= 400f && !playerAttack.GetChild<Timer>(1).IsStopped()) {
+			if (playerAttack.GetChild<Timer>(1).TimeLeft < (playerAttack.AttackPeriod() / 2)) {
+				TakeDamage(player.GetChild<PlayerAttack>(7).ScaledDamage());
+			}
 		}
 		
 		 // die if we have zero health duh
