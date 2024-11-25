@@ -5,4 +5,11 @@
     <TargetFramework Condition=" '$(GodotTargetPlatform)' == 'ios' ">net8.0</TargetFramework>
     <EnableDynamicLoading>true</EnableDynamicLoading>
   </PropertyGroup>
+  <ItemGroup>
+    <Content Include="enemies\sisyphus_enemy.tscn" />
+    <Content Include="sisyphus_level.tscn" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="SisyphusExit.cs" />
+  </ItemGroup>
 </Project>

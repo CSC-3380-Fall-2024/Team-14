@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://clonye17aqh7g" path="res://assets/tartarus-parallax/05 rocksfront.png" id="4_ypa7m"]
 [ext_resource type="PackedScene" uid="uid://p8fy3nw6kmu2" path="res://melee_enemy.tscn" id="8_43eou"]
 [ext_resource type="Script" path="res://KillingSquare.cs" id="9_yckbj"]
-[ext_resource type="Script" path="res://Area2d.cs" id="10_ogpit"]
+[ext_resource type="Script" path="res://TartarusExit.cs" id="9_yfw54"]
 [ext_resource type="PackedScene" uid="uid://bf8auywj1i1hn" path="res://enemy_spawner.tscn" id="12_ukqde"]
 [ext_resource type="PackedScene" uid="uid://d3xwews2ictv1" path="res://enemies/daemon.tscn" id="12_xt3ss"]
 
@@ -130,7 +130,7 @@ debug_color = Color(0.839216, 0.6, 0.701961, 0.843137)
 
 [node name="TartarusExit" type="Area2D" parent="."]
 position = Vector2(15807, 1091)
-script = ExtResource("10_ogpit")
+script = ExtResource("9_yfw54")
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TartarusExit"]
