@@ -5,8 +5,8 @@
 [ext_resource type="PackedScene" uid="uid://bccchwmakcjbs" path="res://progress_bar_generic.tscn" id="4_fctfr"]
 [ext_resource type="Script" path="res://ProgressBarGeneric.cs" id="5_p5oxw"]
 [ext_resource type="Texture2D" uid="uid://dn2stq7qakgit" path="res://assets/fire-particle.png" id="6_hie02"]
+[ext_resource type="Texture2D" uid="uid://bnscgg2qb6aho" path="res://assets/chronos_life_sprite.png" id="7_24eqt"]
 [ext_resource type="Script" path="res://HUD.cs" id="7_54acc"]
-[ext_resource type="Texture2D" uid="uid://byu3sp5ap7x0c" path="res://heart.png" id="8_gilvh"]
 [ext_resource type="Script" path="res://Camera2d.cs" id="9_glunf"]
 [ext_resource type="Texture2D" uid="uid://b0wk216h41e6l" path="res://assets/player-tileset.png" id="10_6aj77"]
 [ext_resource type="Script" path="res://PlayerAttack.cs" id="10_tjs6j"]
@@ -176,7 +176,7 @@ vertical = true
 
 [node name="LifeHeart" type="TextureRect" parent="HUD/Container/LivesContainer"]
 layout_mode = 2
-texture = ExtResource("8_gilvh")
+texture = ExtResource("7_24eqt")
 
 [node name="Node" type="Node" parent="."]
 
