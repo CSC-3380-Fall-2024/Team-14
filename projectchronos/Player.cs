@@ -87,7 +87,7 @@ public partial class Player : CharacterBody2D {
 	// called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _PhysicsProcess(double delta)
 	{
-		UpDirection = -GetGravity().Normalized();
+		UpDirection = Vector2.Up;
 		
 		Vector2 velocity = Velocity;
 
