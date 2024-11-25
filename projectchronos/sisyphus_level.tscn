@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=4 uid="uid://c4a57aprrfoah"]
+[gd_scene load_steps=14 format=4 uid="uid://cclrfc28l0sfw"]
 
 [ext_resource type="Texture2D" uid="uid://f48d3jdhhwfn" path="res://assets/tartarus-parallax/01 bg.png" id="1_hef17"]
 [ext_resource type="Texture2D" uid="uid://d3751xqcxoc1r" path="res://assets/tartarus-parallax/02 bg2.png" id="2_417gg"]
@@ -6,7 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://clonye17aqh7g" path="res://assets/tartarus-parallax/05 rocksfront.png" id="4_wdw28"]
 [ext_resource type="Texture2D" uid="uid://dlwm8yyiwdelo" path="res://assets/tartarus_tileset_1.png" id="5_hpmoe"]
 [ext_resource type="PackedScene" uid="uid://4kf7paebw3px" path="res://player.tscn" id="6_tv61u"]
-[ext_resource type="PackedScene" uid="uid://dqm7xdma83oi7" path="res://enemies/sisyphus_enemy.tscn" id="8_g3soe"]
+[ext_resource type="PackedScene" uid="uid://04lj3ljf7sln" path="res://enemies/sisyphus_enemy.tscn" id="8_g3soe"]
+[ext_resource type="Script" path="res://enemies/Sisyphus.cs" id="9_6cgy8"]
 [ext_resource type="Script" path="res://SisyphusExit.cs" id="9_cwoc3"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_p0snp"]
@@ -1100,4 +1101,13 @@ scale = Vector2(324, 717)
 texture = SubResource("PlaceholderTexture2D_6y0yd")
 
 [node name="SisyphusEnemy" parent="." instance=ExtResource("8_g3soe")]
-position = Vector2(13439, 634)
+position = Vector2(11462, 954)
+script = ExtResource("9_6cgy8")
+metadata/jumpEvery = 9.0
+metadata/numberRocksToRoll = 2
+metadata/rollRockDelay = 2.0
+metadata/jumpPos = [11500.0, 15500.0]
+metadata/speed = 1500.0
+metadata/rockSpeed = 600.0
+metadata/rockDamage = 4
+metadata/rockKnockbackPercent = 0.3

@@ -8,13 +8,13 @@ public partial class SisyphusEnemy : CharacterBody2D
 
 	private Vector2 targetSpot;
 
-    public override void _Ready()
-    {
-        base._Ready();
+	public override void _Ready()
+	{
+		base._Ready();
 		targetSpot = new Vector2(0, 0);
-    }
+	}
 
-    public override void _PhysicsProcess(double delta)
+	public override void _PhysicsProcess(double delta)
 	{
 		Vector2 velocity = Velocity;
 
