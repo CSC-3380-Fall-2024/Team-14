@@ -35,9 +35,6 @@ public partial class PlayerAttack : Area2D
 		// find the timer and set default rate
 		timer = GetChild<Timer>(1);
 		timer.SetWaitTime((double) AttackPeriod());
-
-		// find out hitbox node
-		hitbox = GetChild<CollisionObject2D>(0);
 	}
 
 	// setting attack frequency is more intuitive for design
