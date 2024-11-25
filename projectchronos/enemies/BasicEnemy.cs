@@ -8,12 +8,18 @@ public partial class BasicEnemy : CharacterBody2D {
 	}
 
 	public float MaxLife = 100;
-	public float CurrentLife = 30;
+	public float CurrentLife = 0;
 	
 	public float Speed = 300.0f;
 	public float JumpVelocity = -400.0f;
 
 	protected EnemyAI ai = new DefaultAI();
+
+	private Player player;
+
+	public override void _Ready() {
+		player = GetParent().GetChild<Player>(5);
+	}
 
 	public override void _PhysicsProcess(double delta) {
 		TakeDamage( 1 / DistanceToPlayer() * 2000f * (float) delta); // prototype enemy takes passive proximity damage for testing
@@ -38,7 +44,7 @@ public partial class BasicEnemy : CharacterBody2D {
 	}
 
 	public Vector2 PlayerPosition() {
-		return GetNode<Player>("/root/TartarusLevel/Player").Position;
+		return player.Position;
 	}
 
 	public float DistanceToPlayer() {

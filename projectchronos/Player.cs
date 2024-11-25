@@ -16,7 +16,7 @@ public partial class Player : CharacterBody2D {
 	public int fallSpeed = 8000;// temporary magic number, can set this value arbitrarily
 
 	[Export]
-	public int jumpHeight = 250; // jump values are set based on desired height
+	public int jumpHeight = 100; // jump values are set based on desired height
 
 	[Export]
 	public int PlayerMaxHp = 20;
@@ -34,10 +34,7 @@ public partial class Player : CharacterBody2D {
 			if(_playerHp <= 0 && lives_left >= 0)
 			{
 				Kill_Reset();
-				_playerHp = PlayerMaxHp; 
-				var upgrade = GetNode<Modifiers>("/root/Main/CanvasLayer/Modifiers");
-				upgrade.Show();
-				GetTree().Paused = true;
+				
 					
 			}
 		}
@@ -52,7 +49,16 @@ public partial class Player : CharacterBody2D {
 	private bool reset = false; //checks for being mid reset
 	private bool processed = false; //checks for key press action
 
+	//instantiate animatedSprite2D node for player sprite
+	private AnimatedSprite2D playerSprite;
+
 	public int jumpForce;
+
+	//double jump variables
+	public int doubleJumpHeight = 40;
+	public int doublejumpForce;
+	private bool HasDoubJumped;
+
 
 	// called when the node enters the scene tree for the first time.
 	public override void _Ready() {
@@ -60,12 +66,22 @@ public partial class Player : CharacterBody2D {
 
 		// we set jump based on desired height, but implement as a velocity delta
 		// jumpForce calculation pre-computes velocity delta with gravity
+
+		doublejumpForce = (int)Math.Sqrt(2*gravity*doubleJumpHeight); //double jump force metrics
+
 		jumpForce = (int) Math.Sqrt(2 * gravity * jumpHeight);
 
 		PlayerHp = PlayerMaxHp;
 		var healthBar = GetNode<HealthBar>("HealthBar");
 		healthBar.Value = PlayerHp;
 		healthBar.MaxValue = PlayerHp;
+
+		//get reference to player sprite node
+		playerSprite = GetNode<AnimatedSprite2D>("PlayerSprite");
+
+		//play idle animation
+		playerSprite.Play("idle");
+		Start();
 	}
 
 	// called every frame. 'delta' is the elapsed time since the previous frame.
@@ -89,6 +105,12 @@ public partial class Player : CharacterBody2D {
 		Show();
 		MoveAndSlide();
 
+		//flip sprite based on player velocity
+		if(velocity.X > 0) {
+			playerSprite.Scale = new Vector2(1, 1);
+		} else if(velocity.X < 0) {
+			playerSprite.Scale = new Vector2(-1, 1);
+		}
 	}
 	
 	/// <summary>
@@ -133,17 +155,36 @@ public partial class Player : CharacterBody2D {
 		if (Input.IsActionPressed("move_right")) {
 			velocity -= horizontalDir * velocity.Dot(horizontalDir);
 			velocity += horizontalDir * speed;
-		}
 
-		if (Input.IsActionPressed("move_left")) {
+			if (IsOnFloor()){
+				playerSprite.Play("walking");
+			}
+
+		} else if (Input.IsActionPressed("move_left")) {
 			velocity -= horizontalDir * velocity.Dot(horizontalDir);
 			velocity -= horizontalDir * speed;
-		}
 
-		if (Input.IsActionJustPressed("jump")) {
-			if (canJump) {
+			if (IsOnFloor()) {
+				playerSprite.Play("walking");
+			}
+
+		} else if (Input.IsActionJustPressed("jump")) {
+			if (canJump && IsOnFloor()) {
 				velocity += jumpForce * UpDirection;
-				hasJumpLeft = IsOnFloor();
+				hasJumpLeft = true;
+				HasDoubJumped = false;
+				playerSprite.Play("jumping");
+			}		
+			else if (hasJumpLeft && !HasDoubJumped) //double jump implementation
+			{
+				velocity += doublejumpForce * UpDirection;
+				hasJumpLeft = false;
+				HasDoubJumped = true;
+				playerSprite.Play("jumping");
+			}
+		} else {
+			if (IsOnFloor()) {
+				playerSprite.Play("idle");
 			}
 		}
 
@@ -152,15 +193,7 @@ public partial class Player : CharacterBody2D {
 			velocity -= UpDirection * Math.Max(Velocity.Dot(UpDirection), 0);
 		}
 
-		//kills player if k is pressed **TESTING PROCESS ONLY**
-		if (Input.IsActionPressed("k")){
-			if (!reset && !processed){
-				Kill_Reset();
-				processed = true; //sets it so we know k is pressed
-			}
-		} else{
-			processed = false; //reset key press to false
-		}
+		//kills player if k is pressed **TESTING PROCESS ONLY** removed 11/23
 
 		//testing health bar depletion
 		if(Input.IsActionJustPressed("HealthMinus")) {
@@ -229,17 +262,21 @@ public partial class Player : CharacterBody2D {
 			Show();
 			MoveAndSlide();
 			reset=false; //reset complete
+			
+			_playerHp = PlayerMaxHp; 
+			var upgrade = GetNode<Modifiers>("/root/Main/CanvasLayer/Modifiers");
+			upgrade.Show();
+			GetTree().Paused = true;
 		}
 		
 	}
 	
-	public void Start(Godot.Vector2 position)
+	public void Start()
 	{
 		//find main and grab lives from it
-		Main mainNode = (Main)GetParent().GetParent();
+		Main mainNode = (Main) GetTree().GetCurrentScene();
 		lives_left = mainNode.getConfig().MaxLives;
-
-		Position = position;
+		
 		Show();
 		GetNode<CollisionShape2D>("CollisionShape2D").Disabled = false;
 	}

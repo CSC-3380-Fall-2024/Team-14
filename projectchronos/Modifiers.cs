@@ -2,6 +2,7 @@ using Godot;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
+using System.Runtime.CompilerServices;
 
 public partial class Modifiers : Control
 {
@@ -18,19 +19,25 @@ public class Upgrade
 }
 	 public List<Upgrade> allUpgrades = new List<Upgrade>
 	{
-		new Upgrade("Increased Health", "Increases your total health."),
-		new Upgrade("Speed Boost", "Increases your movement speed."),
-		new Upgrade("Health Regen", "Regenerates health over time."),
-		new Upgrade("Increased Damage", "Increases your attack damage."),
-		new Upgrade("Fire Damage Negation", "Immune to fire damage."),
-		new Upgrade("Decrease enemy spawn rate", "Lowers enemy spawns.")
-		//we can add more later im tired lmao
+		new Upgrade("INCREASED HEALTH", "Increases your total health."),
+		new Upgrade("SPEED BOOST", "Increases your movement speed."),
+		new Upgrade("HEALTH REGEN", "Regenerates health over time."),
+		new Upgrade("INCREASED DAMAGE", "Increases your attack damage."),
+		new Upgrade("FIRE DAMAGE RESISTANCE", "Resistant to fire damage."),
+		new Upgrade("DECREASE ENEMY SPAWN RATE", "Lowers enemy spawns."),
+		new Upgrade("INCREASED DEFENSE", "Increases player defense."),
+		new Upgrade("DOUBLE JUMP", "Allows player to jump once more mid-air")
 	
 	};
 
 	 private List<Upgrade> displayedUpgrades = new List<Upgrade>();
 
 	 private Random rand = new Random();
+
+	 private Timer regenTimer;
+	 private bool isHealthRegenerating = false;  // Flag to track if regen is active
+	 private int regenAmount = 2;  // Amount of health to regenerate every interval
+	 private int regenInterval = 2;
 
 	public override void _Ready()
 	{
@@ -52,6 +59,13 @@ public class Upgrade
 		UpgradeOne.Pressed += () => OnUpgradePressed(0);
 		UpgradeTwo.Pressed += () => OnUpgradePressed(1);
 		UpgradeThree.Pressed += () => OnUpgradePressed(2);
+
+		regenTimer = new Timer();
+		regenTimer.WaitTime = regenInterval;
+		regenTimer.OneShot = false;
+		regenTimer.Autostart = false;
+		regenTimer.Connect("timeout", new Callable(this, "OnHealthRegenerate"));
+		AddChild(regenTimer);
 
 	}
 	
@@ -83,29 +97,72 @@ public class Upgrade
 		// Apply the upgrade to the player
 	private void ApplyUpgrade(Upgrade upgrade)
 	{
-		// Example: Apply upgrade effects based on the selected upgrade
 		switch (upgrade.UpgradeName)
 		{
-			case "Increased Health":
-				Player player = GetNode<Player>("/root/Main/World/Player");
+			case "INCREASED HEALTH":
+			var player = GetNode<Player>("/root/Main/LevelContainer/TartarusLevel/Player");
 				player.PlayerMaxHp += 10;
 				break;
-			case "Speed Boost":
-				Player player1 = GetNode<Player>("/root/Main/World/Player");
-				player1.speed += 100;
+			case "SPEED BOOST":
+			player = GetNode<Player>("/root/Main/LevelContainer/TartarusLevel/Player");
+				player.speed += 100;
 				break;
-			case "Health Regen":
-				// Start health regeneration
+			case "HEALTH REGEN":
+				StartHealthRegeneration();
 				break;
-			case "Increased Damage":
+			case "INCREASED DAMAGE":
 				//placeholder
 				break;
-			case "Fire Damage Negation":
-				//placeholder
+			case "FIRE DAMAGE RESISTANCE":
+			player = GetNode<Player>("/root/Main/LevelContainer/TartarusLevel/Player");
+				player.SetFireDuration(0);
 				break;
-			case "Decrease enemy spawn rate":
-				//placeholder
+			case "DECREASE ENEMY SPAWN RATE":
+			var enemySpawner = GetNode<EnemySpawner>("/root/Main/LevelContainer/TartarusLevel/EnemySpawner");
+			var spawnTimer = enemySpawner.GetNode<Timer>("SpawnTimer");
+			 // Ensure the timer exists
+			if (spawnTimer != null)
+			{
+				spawnTimer.Stop();  // Stops the timer from firing
+				GD.Print("SpawnTimer stopped.");
+   			}
+			else
+			{
+				GD.Print("SpawnTimer not found!");
+   			}
 				break;
+			case "DOUBLE JUMP":
+			// placeholder 
+				break;
+		}
+	}
+
+	 // Start the health regeneration process
+	private void StartHealthRegeneration()
+	{
+		if (!isHealthRegenerating)
+		{
+			isHealthRegenerating = true;
+			regenTimer.Start();
+		}
+	}
+
+	 private void OnHealthRegenerate()
+	{
+		var player = GetNode<Player>("/root/Main/LevelContainer/TartarusLevel/Player");
+		if (player.PlayerHp < player.PlayerMaxHp)
+		{
+			player.PlayerHp = Mathf.Min(player.PlayerHp + regenAmount, player.PlayerMaxHp);
+			//GD.Print("Health regenerating: " + player.PlayerHp);
+		}
+	}
+
+	 public void StopHealthRegeneration()
+	{
+		if (isHealthRegenerating)
+		{
+			isHealthRegenerating = false;
+			regenTimer.Stop();
 		}
 	}
 
