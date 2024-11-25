@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Rollingrock.cs" id="1_2m74c"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_l7gsl"]
-radius = 32.0
+radius = 75.0067
 
 [node name="Rollingrock" type="CharacterBody2D"]
 script = ExtResource("1_2m74c")
