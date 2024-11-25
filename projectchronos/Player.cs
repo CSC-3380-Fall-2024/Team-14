@@ -168,8 +168,8 @@ public partial class Player : CharacterBody2D {
 				playerSprite.Play("walking");
 			}
 
-		} else if (Input.IsActionJustPressed("jump")) {
-			if (canJump && IsOnFloor()) {
+		} if (Input.IsActionJustPressed("jump")) {
+			if (IsOnFloor()) {
 				velocity += jumpForce * UpDirection;
 				hasJumpLeft = true;
 				HasDoubJumped = false;
