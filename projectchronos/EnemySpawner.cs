@@ -17,6 +17,6 @@ public partial class EnemySpawner : Node2D
 	}
 	private void OnSpawnTimerTimeout() {
 		Daemon enemy = EnemyScene.Instantiate<Daemon>();
-		AddChild(enemy);
+		GetParent().AddChild(enemy);
 	}
 }

@@ -15,10 +15,18 @@ public partial class BasicEnemy : CharacterBody2D {
 
 	protected EnemyAI ai = new DefaultAI();
 
-	private Player player;
+	private Player _player;
+	private Player player
+	{
+		get
+		{
+			if (_player == null) _player = GetNode<Player>("../Player");
+			return _player;
+		}
+	}
 
 	public override void _Ready() {
-		player = GetParent().GetChild<Player>(5);
+		
 	}
 
 	public override void _PhysicsProcess(double delta) {
@@ -43,7 +51,8 @@ public partial class BasicEnemy : CharacterBody2D {
 		CurrentLife -= damage;
 	}
 
-	public Vector2 PlayerPosition() {
+	public Vector2 PlayerPosition()
+	{
 		return player.Position;
 	}
 
