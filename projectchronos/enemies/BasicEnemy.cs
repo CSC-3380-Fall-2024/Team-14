@@ -22,7 +22,9 @@ public partial class BasicEnemy : CharacterBody2D {
 	}
 
 	public override void _PhysicsProcess(double delta) {
-		TakeDamage( 1 / DistanceToPlayer() * 2000f * (float) delta); // prototype enemy takes passive proximity damage for testing
+		if (DistanceToPlayer() <= 200f && player.GetChild<PlayerAttack>(7).GetChild<Timer>(1).IsStopped()) {
+			TakeDamage(player.GetChild<PlayerAttack>(7).ScaledDamage());
+		}
 		
 		 // die if we have zero health duh
 		if (CurrentLife <= 0) {
