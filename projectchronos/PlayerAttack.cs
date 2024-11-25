@@ -119,6 +119,6 @@ public partial class PlayerAttack : Area2D
 
 	// actual attack, enemies should probably handle the taking damage bit?
 	public void Attack() {
-		LookAt(GetGlobalMousePosition());
+		LookAt(GetGlobalMousePosition());	
 	}
 }
