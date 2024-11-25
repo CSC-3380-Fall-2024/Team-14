@@ -57,7 +57,7 @@ physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_p0snp")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2jg35"]
-size = Vector2(12771.6, 70)
+size = Vector2(15577.6, 70)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gulxh"]
 radius = 162.0
@@ -118,15 +118,13 @@ tile_set = SubResource("TileSet_hph4h")
 [node name="Player" parent="." instance=ExtResource("2_422y7")]
 
 [node name="BasicEnemy" parent="." instance=ExtResource("4_2dxhk")]
-position = Vector2(1927, -6)
-
-[node name="MeleeEnemy" parent="." instance=ExtResource("8_43eou")]
+position = Vector2(7432, 6240)
 
 [node name="KillingSquare" type="Area2D" parent="."]
 script = ExtResource("9_yckbj")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KillingSquare"]
-position = Vector2(6433.19, 1106)
+position = Vector2(7836.2, 1106)
 shape = SubResource("RectangleShape2D_2jg35")
 debug_color = Color(0.839216, 0.6, 0.701961, 0.843137)
 
