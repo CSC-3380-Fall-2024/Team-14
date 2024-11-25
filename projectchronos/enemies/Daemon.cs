@@ -7,17 +7,42 @@ public partial class Daemon : BasicEnemy, BasicEnemy.EnemyAI
 	
 	public float MagicRange = 600f; //magic attack range
 
+	private Vector2 velocity = Vector2.Zero;
+
+	public float gravity = 0f;
+
+	private float CooldownUntilAttack = 0f; //time until next attack
+	private float CooldownTime = 4f; //cooldown in second
+
+
 	private Player player;
 
 	public override void _Ready()
 	{
-		MaxLife = 10f;
-		CurrentLife = 10f;
+		CurrentLife = 45f;
 		ai = this;
 		base._Ready();
 		player = GetParent().GetChild<Player>(5);
 	}
 
+	public override void _PhysicsProcess(double delta)
+	{
+		TakeDamage( 1 / DistanceToPlayer() * 2000f * (float) delta); // prototype enemy takes passive proximity damage for testing
+		if (CurrentLife <= 0) {
+			kill();
+		}
+
+		velocity = Velocity; // updates vel
+		if (!IsOnFloor()){
+			velocity.Y += gravity * (float)delta;
+		}
+		else {
+			velocity.Y = 0;
+		} //checks for if it is already on the floor
+		ExecuteAI((float)delta);
+		Velocity = velocity; //updates vel again
+		MoveAndSlide(); //moves
+	}
 	private void Chase()
 	{
 		var direction = (PlayerPosition()-Position).Normalized(); 
@@ -30,36 +55,49 @@ public partial class Daemon : BasicEnemy, BasicEnemy.EnemyAI
 	private void MeleeAttack()
 	{
 		//placeholder method for animations
-		var damage = 5;
+		var damage = 4;
 		player.PlayerHp -= damage;
-		//placeholder for damage
+		CooldownUntilAttack = CooldownTime;
 		
 	}
 
 	private void FireAttack()
 	{
 		//placeholder method for animations
-		var damage = 6;
+		var damage = 3;
 		player.PlayerHp -= damage;
-		player.SetFireDuration(5);
-		//another placeholder
+		player.playerSprite.Play("Fire Animation");
+		CooldownUntilAttack = CooldownTime;
 	}
 
 	public void ExecuteAI(float delta)
 	{
+		if(CooldownUntilAttack > 0) 
+		{
+			CooldownUntilAttack -= delta;
+		}
 		if (DistanceToPlayer() <= MeleeRange) //checks to see if enemy is within attack range
 		{
 			//GD.Print("in melee range");
-			//MeleeAttack();
+			if (CooldownUntilAttack <= 0) 
+				{
+					MeleeAttack();
+				}
+				else
+				{
+					Chase();
+				}
 		}
 		else if(DistanceToPlayer() <= MagicRange)
 		{
-			//GD.Print("in magic range");
-			//FireAttack();
-		}
-		else
-		{
-			Chase();
-		}
+			if (CooldownUntilAttack <= 0) 
+				{
+					//FireAttack();
+				}
+				else
+				{
+					Chase();
+				}
 	}
+}
 }

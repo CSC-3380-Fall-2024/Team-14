@@ -50,7 +50,7 @@ public partial class Player : CharacterBody2D {
 	private bool processed = false; //checks for key press action
 
 	//instantiate animatedSprite2D node for player sprite
-	private AnimatedSprite2D playerSprite;
+	public AnimatedSprite2D playerSprite;
 
 	public int jumpForce;
 
