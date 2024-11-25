@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cl26vwgia8kcs"
-path="res://.godot/imported/exit.png-624dd767c5130df8d06e0716559d47a5.ctex"
+uid="uid://cu1v380ue40da"
+path="res://.godot/imported/tartarus_slim_platform_tileset.png-5aec308f7afa265379ac3f8641d5d9e7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://exit.png"
-dest_files=["res://.godot/imported/exit.png-624dd767c5130df8d06e0716559d47a5.ctex"]
+source_file="res://assets/tartarus_slim_platform_tileset.png"
+dest_files=["res://.godot/imported/tartarus_slim_platform_tileset.png-5aec308f7afa265379ac3f8641d5d9e7.ctex"]
 
 [params]
 

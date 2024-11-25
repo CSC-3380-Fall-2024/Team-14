@@ -1,14 +1,15 @@
 [gd_scene load_steps=15 format=3 uid="uid://c6lt1tt11cqg7"]
 
-[ext_resource type="Texture2D" uid="uid://bf5tqxbpmxpmu" path="res://background.png" id="1_nkqkr"]
 [ext_resource type="PackedScene" uid="uid://4kf7paebw3px" path="res://player.tscn" id="2_6xg6t"]
 [ext_resource type="PackedScene" uid="uid://tt3kaocr7444" path="res://enemies/basic_enemy.tscn" id="3_ld203"]
 [ext_resource type="PackedScene" uid="uid://d3xwews2ictv1" path="res://enemies/daemon.tscn" id="8_1mm2v"]
 [ext_resource type="Script" path="res://RangedEnemy.cs" id="8_6lus1"]
 [ext_resource type="Script" path="res://projectile.cs" id="8_grek6"]
-[ext_resource type="PackedScene" uid="uid://dka0b76vns5el" path="res://enemy_spawner.tscn" id="10_n6v34"]
+[ext_resource type="PackedScene" uid="uid://bf8auywj1i1hn" path="res://enemy_spawner.tscn" id="10_n6v34"]
 [ext_resource type="Texture2D" uid="uid://b5bhv7lwil7kj" path="res://assets/fireball.png" id="11_3ahhb"]
 [ext_resource type="PackedScene" uid="uid://p8fy3nw6kmu2" path="res://melee_enemy.tscn" id="11_evw3m"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_kgrct"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j1uk3"]
 size = Vector2(1920, 1080)
@@ -32,7 +33,7 @@ gravity = 3000.0
 
 [node name="Sprite2D" type="Sprite2D" parent="Area2D"]
 position = Vector2(960, 540)
-texture = ExtResource("1_nkqkr")
+texture = SubResource("CompressedTexture2D_kgrct")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(641, 541)

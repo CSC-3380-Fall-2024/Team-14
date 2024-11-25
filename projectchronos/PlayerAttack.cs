@@ -23,9 +23,6 @@ public partial class PlayerAttack : Area2D
 	// we use a timer node for handling attack rate
 	private Timer timer;
 
-	// the attack has its own hitbox
-	private CollisionObject2D hitbox;
-
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready() {
 		damage = defaultDamage;
@@ -35,14 +32,11 @@ public partial class PlayerAttack : Area2D
 		// find the timer and set default rate
 		timer = GetChild<Timer>(1);
 		timer.SetWaitTime((double) AttackPeriod());
-
-		// find out hitbox node
-		hitbox = GetChild<CollisionObject2D>(0);
 	}
 
 	// setting attack frequency is more intuitive for design
 	// but attack period is more useful for implementation
-	private float AttackPeriod() {
+	public float AttackPeriod() {
 		return 1 / attacksPerSecond;
 	}
 
@@ -119,6 +113,6 @@ public partial class PlayerAttack : Area2D
 
 	// actual attack, enemies should probably handle the taking damage bit?
 	public void Attack() {
-		LookAt(GetGlobalMousePosition());
+		LookAt(GetGlobalMousePosition());	
 	}
 }

@@ -15,8 +15,28 @@ public partial class BasicEnemy : CharacterBody2D {
 
 	protected EnemyAI ai = new DefaultAI();
 
+	private Player _player;
+	private Player player
+	{
+		get
+		{
+			if (_player == null) _player = GetNode<Player>("../Player");
+			return _player;
+		}
+	}
+
+	private PlayerAttack playerAttack;
+
+	public override void _Ready() {
+		playerAttack = player.GetChild<PlayerAttack>(7);
+	}
+
 	public override void _PhysicsProcess(double delta) {
-		TakeDamage( 1 / DistanceToPlayer() * 2000f * (float) delta); // prototype enemy takes passive proximity damage for testing
+		if (DistanceToPlayer() <= 400f && !playerAttack.GetChild<Timer>(1).IsStopped()) {
+			if (playerAttack.GetChild<Timer>(1).TimeLeft < (playerAttack.AttackPeriod() / 2)) {
+				TakeDamage(player.GetChild<PlayerAttack>(7).ScaledDamage());
+			}
+		}
 		
 		 // die if we have zero health duh
 		if (CurrentLife <= 0) {
@@ -37,8 +57,9 @@ public partial class BasicEnemy : CharacterBody2D {
 		CurrentLife -= damage;
 	}
 
-	public Vector2 PlayerPosition() {
-		return GetNode<Player>("/root/TartarusLevel/Player").Position;
+	public Vector2 PlayerPosition()
+	{
+		return player.Position;
 	}
 
 	public float DistanceToPlayer() {

@@ -3,9 +3,11 @@ using System;
 
 public partial class Daemon : BasicEnemy, BasicEnemy.EnemyAI
 {
-	public float MeleeRange = 150f; //melee attack range
+	public float MeleeRange = 200f; //melee attack range
 	
 	public float MagicRange = 600f; //magic attack range
+
+	private Player player;
 
 	public override void _Ready()
 	{
@@ -13,6 +15,7 @@ public partial class Daemon : BasicEnemy, BasicEnemy.EnemyAI
 		CurrentLife = 10f;
 		ai = this;
 		base._Ready();
+		player = GetParent().GetChild<Player>(5);
 	}
 
 	private void Chase()
@@ -28,8 +31,7 @@ public partial class Daemon : BasicEnemy, BasicEnemy.EnemyAI
 	{
 		//placeholder method for animations
 		var damage = 5;
-		var play = GetNode<Player>("Player");
-		play.PlayerHp -= damage;
+		player.PlayerHp -= damage;
 		//placeholder for damage
 		
 	}
@@ -38,9 +40,8 @@ public partial class Daemon : BasicEnemy, BasicEnemy.EnemyAI
 	{
 		//placeholder method for animations
 		var damage = 6;
-		var play = GetNode<Player>("Player");
-		play.PlayerHp -= damage;
-		play.SetFireDuration(5);
+		player.PlayerHp -= damage;
+		player.SetFireDuration(5);
 		//another placeholder
 	}
 
@@ -49,12 +50,12 @@ public partial class Daemon : BasicEnemy, BasicEnemy.EnemyAI
 		if (DistanceToPlayer() <= MeleeRange) //checks to see if enemy is within attack range
 		{
 			//GD.Print("in melee range");
-			MeleeAttack();
+			//MeleeAttack();
 		}
 		else if(DistanceToPlayer() <= MagicRange)
 		{
 			//GD.Print("in magic range");
-			FireAttack();
+			//FireAttack();
 		}
 		else
 		{

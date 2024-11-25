@@ -1,14 +1,14 @@
-[gd_scene load_steps=13 format=3 uid="uid://4kf7paebw3px"]
+[gd_scene load_steps=24 format=3 uid="uid://4kf7paebw3px"]
 
 [ext_resource type="Script" path="res://Player.cs" id="1_3o1y4"]
-[ext_resource type="Texture2D" uid="uid://dhhualfojuq37" path="res://assets/player-rec.png" id="2_k664p"]
 [ext_resource type="PackedScene" uid="uid://cnmh3rw3roajk" path="res://HealthBar.tscn" id="3_umkuu"]
 [ext_resource type="PackedScene" uid="uid://bccchwmakcjbs" path="res://progress_bar_generic.tscn" id="4_fctfr"]
 [ext_resource type="Script" path="res://ProgressBarGeneric.cs" id="5_p5oxw"]
 [ext_resource type="Texture2D" uid="uid://dn2stq7qakgit" path="res://assets/fire-particle.png" id="6_hie02"]
+[ext_resource type="Texture2D" uid="uid://bnscgg2qb6aho" path="res://assets/chronos_life_sprite.png" id="7_24eqt"]
 [ext_resource type="Script" path="res://HUD.cs" id="7_54acc"]
-[ext_resource type="Texture2D" uid="uid://byu3sp5ap7x0c" path="res://heart.png" id="8_gilvh"]
 [ext_resource type="Script" path="res://Camera2d.cs" id="9_glunf"]
+[ext_resource type="Texture2D" uid="uid://b0wk216h41e6l" path="res://assets/player-tileset.png" id="10_6aj77"]
 [ext_resource type="Script" path="res://PlayerAttack.cs" id="10_tjs6j"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dplei"]
@@ -17,16 +17,107 @@ size = Vector2(128, 246)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tgmsr"]
 size = Vector2(264, 81)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_t305s"]
+atlas = ExtResource("10_6aj77")
+region = Rect2(128, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4tg6w"]
+atlas = ExtResource("10_6aj77")
+region = Rect2(256, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jwugk"]
+atlas = ExtResource("10_6aj77")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1ondr"]
+atlas = ExtResource("10_6aj77")
+region = Rect2(0, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6ftkq"]
+atlas = ExtResource("10_6aj77")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o6jl1"]
+atlas = ExtResource("10_6aj77")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rucwy"]
+atlas = ExtResource("10_6aj77")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_454ha"]
+atlas = ExtResource("10_6aj77")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k3ys7"]
+atlas = ExtResource("10_6aj77")
+region = Rect2(512, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0bm5o"]
+atlas = ExtResource("10_6aj77")
+region = Rect2(640, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_35n61"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t305s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4tg6w")
+}],
+"loop": true,
+"name": &"attacking",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jwugk")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1ondr")
+}],
+"loop": true,
+"name": &"jumping",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6ftkq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o6jl1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rucwy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_454ha")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k3ys7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0bm5o")
+}],
+"loop": true,
+"name": &"walking",
+"speed": 6.0
+}]
+
 [node name="Player" type="CharacterBody2D"]
 position = Vector2(339, 515)
 script = ExtResource("1_3o1y4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 5)
+scale = Vector2(0.5, 0.5)
 shape = SubResource("RectangleShape2D_dplei")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_k664p")
 
 [node name="FallTimer" type="Timer" parent="."]
 wait_time = 10.0
@@ -85,7 +176,7 @@ vertical = true
 
 [node name="LifeHeart" type="TextureRect" parent="HUD/Container/LivesContainer"]
 layout_mode = 2
-texture = ExtResource("8_gilvh")
+texture = ExtResource("7_24eqt")
 
 [node name="Node" type="Node" parent="."]
 
@@ -105,5 +196,10 @@ shape = SubResource("RectangleShape2D_tgmsr")
 [node name="AttackCiooldown" type="Timer" parent="PlayerAttack"]
 process_callback = 0
 one_shot = true
+
+[node name="PlayerSprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_35n61")
+animation = &"attacking"
+frame_progress = 0.333919
 
 [connection signal="timeout" from="FallTimer" to="." method="OnFallTimerTimeout"]

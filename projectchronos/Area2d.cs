@@ -18,7 +18,7 @@ public partial class Area2d : Area2D {
 			GD.Print(player.GetPath());
 		}
 
-		//connect signalfor when collides
+		//connect signal for when collides
 		Connect("body_entered", new Callable (this, nameof(OnBodyEntered)));
 	}
 
@@ -28,7 +28,8 @@ public partial class Area2d : Area2D {
 
 	public void OnBodyEntered(Node body) {
 		if (body is Player) {
-			GetTree().ChangeSceneToFile("res://elysium_level.tscn");
+			// Change scene
+			((Main) GetTree().CurrentScene).SwitchLevel("res://elysium_level.tscn");
 		}
 	}
 }

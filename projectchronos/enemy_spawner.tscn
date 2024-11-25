@@ -1,22 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://dka0b76vns5el"]
+[gd_scene load_steps=3 format=3 uid="uid://bf8auywj1i1hn"]
 
 [ext_resource type="Script" path="res://EnemySpawner.cs" id="1_5tlim"]
 [ext_resource type="PackedScene" uid="uid://d3xwews2ictv1" path="res://enemies/daemon.tscn" id="2_mcusu"]
-
-[sub_resource type="Gradient" id="Gradient_6kmjd"]
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_tr5in"]
-gradient = SubResource("Gradient_6kmjd")
 
 [node name="EnemySpawner" type="Node2D"]
 script = ExtResource("1_5tlim")
 EnemyScene = ExtResource("2_mcusu")
 
-[node name="SpawnTimer" type="Timer" parent="."]
-wait_time = 2.0
-autostart = true
-
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = SubResource("GradientTexture2D_tr5in")
-
-[connection signal="timeout" from="SpawnTimer" to="." method="OnSpawnTimerTimeout"]
