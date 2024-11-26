@@ -118,7 +118,7 @@ public class Upgrade
 				player.SetFireDuration(0);
 				break;
 			case "DECREASE ENEMY SPAWN RATE":
-			GetNode<EnemySpawner>("/root/Main/LevelContainer/TartarusLevel/EnemySpawner").SpawnTimer.WaitTime = 4;
+			GetNode<EnemySpawner>("/root/Main/LevelContainer/TartarusLevel/EnemySpawner").SpawnTimer.WaitTime = 8;
 			
 				break;
 			case "DOUBLE JUMP":

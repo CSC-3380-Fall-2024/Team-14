@@ -158,4 +158,4 @@ texture = SubResource("PlaceholderTexture2D_6y0yd")
 position = Vector2(7962, -848)
 
 [node name="Daemon" parent="." instance=ExtResource("12_xt3ss")]
-position = Vector2(7998, -613)
+position = Vector2(123, 114)
