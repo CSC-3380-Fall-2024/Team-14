@@ -8,6 +8,8 @@ public partial class Rollingrock : CharacterBody2D {
 	public float Speed = 200;
 	public Vector2? Target;
 
+	public AnimatedSprite2D rockSprite; 
+
 	public int CollisionDamage = 2;
 	/// <summary>
 	/// How much of the rock's current velocity should go to pushing back the player
