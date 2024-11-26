@@ -12,12 +12,18 @@ public partial class Daemon : BasicEnemy, BasicEnemy.EnemyAI
 
 	private Player player;
 
+	//instantiate animatedSprite2D node for player sprite
+	public AnimatedSprite2D daemonSprite;
+
 	public override void _Ready()
 	{
 		CurrentLife = 45f;
 		ai = this;
 		base._Ready();
 		player = GetParent().GetChild<Player>(5);
+		daemonSprite = GetNode<AnimatedSprite2D>("DaemonSprite");
+
+		daemonSprite.Play("flying");
 	}
 
 	public override void _PhysicsProcess(double delta) {
@@ -26,6 +32,10 @@ public partial class Daemon : BasicEnemy, BasicEnemy.EnemyAI
 		if (CurrentLife <= 0) {
 			kill();
 		}
+
+		//flip to face player
+		FlipSpriteToPlayer(); 
+
 		ExecuteAI((float)delta);
 		MoveAndSlide(); //moves
 	}
@@ -35,13 +45,19 @@ public partial class Daemon : BasicEnemy, BasicEnemy.EnemyAI
 		var direction = (PlayerPosition()-Position).Normalized(); 
 		Velocity = direction * Speed; 
 		MoveAndSlide();
+
+		//play flying animation
+		daemonSprite.Play("flying");
+
 		//GD.Print("chasing");
 	}	
 
 
 	private void MeleeAttack()
 	{
-		//placeholder method for animations
+		//play melee attack animation
+		daemonSprite.Play("melee");
+		
 		var damage = 4;
 		player.PlayerHp -= damage;
 		CooldownUntilAttack = CooldownTime;
@@ -50,15 +66,28 @@ public partial class Daemon : BasicEnemy, BasicEnemy.EnemyAI
 		
 	}
 
-	private void FireAttack()
+	private async void FireAttack()
 	{
-		//placeholder method for animations
+		//play ranged animation
+		daemonSprite.Play("ranged");
+		
 		var damage = 3;
 		player.PlayerHp -= damage;
 		player.SetFireDuration(5);
 		CooldownUntilAttack = CooldownTime;
 		GD.Print("fire");
 		//another placeholder
+
+		//wait for animation to finish
+		await ToSignal(GetTree().CreateTimer(2), "timeout");
+		//play flying animation again
+		daemonSprite.Play("flying");
+	}
+
+	//helper method to make the sprite always face the player
+	private void FlipSpriteToPlayer() {
+		//flip sprite to face player based on player position
+		daemonSprite.FlipH = PlayerPosition().X > Position.X;
 	}
 
 	public void ExecuteAI(float delta)
