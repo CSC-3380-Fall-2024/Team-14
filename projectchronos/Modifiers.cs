@@ -121,7 +121,7 @@ public class Upgrade
 				break;
 			case "DECREASE ENEMY SPAWN RATE":
 				_ = GetNode<EnemySpawner>("/root/Main/LevelContainer/TartarusLevel/EnemySpawner").SpawnTimer.WaitTime = 12;
-				// Ensure the timer exists
+				
 
 				break;
 			case "DOUBLE JUMP":

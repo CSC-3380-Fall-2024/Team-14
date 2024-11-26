@@ -10,7 +10,7 @@ public partial class EnemySpawner : Node2D
 	{
 		base._Ready();
 		SpawnTimer = new Timer();
-		SpawnTimer.WaitTime = 8;
+		SpawnTimer.WaitTime = 2;
 		SpawnTimer.OneShot = false;
 		SpawnTimer.Autostart = true;
 		SpawnTimer.Connect("timeout", new Callable(this, "OnSpawnTimerTimeout"));

@@ -12,7 +12,7 @@ public partial class Daemon : BasicEnemy, BasicEnemy.EnemyAI
 	public override void _Ready()
 	{
 		MaxLife = 10f;
-		CurrentLife = 10f;
+		CurrentLife = 45f;
 		ai = this;
 		base._Ready();
 		player = GetParent().GetChild<Player>(5);
