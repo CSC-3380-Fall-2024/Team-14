@@ -143,4 +143,14 @@ texture = SubResource("PlaceholderTexture2D_6y0yd")
 [node name="EnemySpawner" parent="." instance=ExtResource("12_ukqde")]
 position = Vector2(51, 155)
 
+[node name="EnemySpawner2" parent="." instance=ExtResource("12_ukqde")]
+position = Vector2(6492, -907)
+
+[node name="EnemySpawner3" parent="." instance=ExtResource("12_ukqde")]
+position = Vector2(11877, -903)
+
+[node name="EnemySpawner4" parent="." instance=ExtResource("12_ukqde")]
+position = Vector2(15755, -848)
+
 [node name="Daemon" parent="." instance=ExtResource("12_xt3ss")]
+visible = false
