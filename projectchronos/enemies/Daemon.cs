@@ -10,6 +10,8 @@ public partial class Daemon : BasicEnemy, BasicEnemy.EnemyAI
 	private float CooldownUntilAttack = 0f; //time until next attack
 	private float CooldownTime = 2f; //cooldown in second
 
+	private float Speed = 400;
+
 	private Player player;
 
 	//instantiate animatedSprite2D node for player sprite
@@ -17,7 +19,7 @@ public partial class Daemon : BasicEnemy, BasicEnemy.EnemyAI
 
 	public override void _Ready()
 	{
-		CurrentLife = 45f;
+		CurrentLife = 30f;
 		ai = this;
 		base._Ready();
 		player = GetParent().GetChild<Player>(5);
