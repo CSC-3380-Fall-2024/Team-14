@@ -7,13 +7,8 @@ public partial class Daemon : BasicEnemy, BasicEnemy.EnemyAI
 	
 	public float MagicRange = 600f; //magic attack range
 
-	private Vector2 velocity = Vector2.Zero;
-
-	public float gravity = 0f;
-
 	private float CooldownUntilAttack = 0f; //time until next attack
-	private float CooldownTime = 4f; //cooldown in second
-
+	private float CooldownTime = 3f; //cooldown in second
 
 	private Player player;
 
@@ -25,24 +20,16 @@ public partial class Daemon : BasicEnemy, BasicEnemy.EnemyAI
 		player = GetParent().GetChild<Player>(5);
 	}
 
-	public override void _PhysicsProcess(double delta)
-	{
+	public override void _PhysicsProcess(double delta) {
+
 		TakeDamage( 1 / DistanceToPlayer() * 2000f * (float) delta); // prototype enemy takes passive proximity damage for testing
 		if (CurrentLife <= 0) {
 			kill();
 		}
-
-		velocity = Velocity; // updates vel
-		if (!IsOnFloor()){
-			velocity.Y += gravity * (float)delta;
-		}
-		else {
-			velocity.Y = 0;
-		} //checks for if it is already on the floor
 		ExecuteAI((float)delta);
-		Velocity = velocity; //updates vel again
 		MoveAndSlide(); //moves
 	}
+
 	private void Chase()
 	{
 		var direction = (PlayerPosition()-Position).Normalized(); 
@@ -58,6 +45,8 @@ public partial class Daemon : BasicEnemy, BasicEnemy.EnemyAI
 		var damage = 4;
 		player.PlayerHp -= damage;
 		CooldownUntilAttack = CooldownTime;
+		GD.Print("melee");
+		//placeholder for damage
 		
 	}
 
@@ -66,38 +55,40 @@ public partial class Daemon : BasicEnemy, BasicEnemy.EnemyAI
 		//placeholder method for animations
 		var damage = 3;
 		player.PlayerHp -= damage;
-		player.playerSprite.Play("Fire Animation");
+		player.SetFireDuration(5);
 		CooldownUntilAttack = CooldownTime;
+		GD.Print("fire");
+		//another placeholder
 	}
 
 	public void ExecuteAI(float delta)
 	{
-		if(CooldownUntilAttack > 0) 
+		if(CooldownUntilAttack > 0) //update attack cooldown
 		{
-			CooldownUntilAttack -= delta;
+			CooldownUntilAttack -= (float)delta;
+			//GD.Print("cooldown remaining" + CooldownUntilAttack); TEST**
 		}
+
 		if (DistanceToPlayer() <= MeleeRange) //checks to see if enemy is within attack range
 		{
-			//GD.Print("in melee range");
-			if (CooldownUntilAttack <= 0) 
+				if (CooldownUntilAttack <= 0) //if colldown end attack player again
 				{
 					MeleeAttack();
-				}
-				else
-				{
-					Chase();
 				}
 		}
 		else if(DistanceToPlayer() <= MagicRange)
 		{
-			if (CooldownUntilAttack <= 0) 
+				if (CooldownUntilAttack <= 0) //if colldown end attack player again
 				{
-					//FireAttack();
+					FireAttack();
 				}
-				else
-				{
-					Chase();
-				}
+		}
+		else
+		{
+			Chase();
+		}
 	}
-}
+	public void TakeDamage(float damage) { // should not ever modify enemy health directly (from outside)
+		CurrentLife -= damage;
+	}
 }
