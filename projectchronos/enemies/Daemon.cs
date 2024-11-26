@@ -8,7 +8,7 @@ public partial class Daemon : BasicEnemy, BasicEnemy.EnemyAI
 	public float MagicRange = 600f; //magic attack range
 
 	private float CooldownUntilAttack = 0f; //time until next attack
-	private float CooldownTime = 3f; //cooldown in second
+	private float CooldownTime = 2f; //cooldown in second
 
 	private Player player;
 
@@ -80,7 +80,7 @@ public partial class Daemon : BasicEnemy, BasicEnemy.EnemyAI
 		{
 				if (CooldownUntilAttack <= 0) //if colldown end attack player again
 				{
-					FireAttack();
+					//FireAttack();
 				}
 		}
 		else
