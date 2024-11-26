@@ -107,7 +107,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"walking",
-"speed": 6.0
+"speed": 7.0
 }]
 
 [node name="Player" type="CharacterBody2D"]
@@ -199,7 +199,8 @@ one_shot = true
 
 [node name="PlayerSprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_35n61")
-animation = &"attacking"
-frame_progress = 0.333919
+animation = &"walking"
+frame = 5
+frame_progress = 1.0
 
 [connection signal="timeout" from="FallTimer" to="." method="OnFallTimerTimeout"]

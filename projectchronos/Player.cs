@@ -81,6 +81,7 @@ public partial class Player : CharacterBody2D {
 
 		//play idle animation
 		playerSprite.Play("idle");
+		//GD.Print("idle in ready");
 		Start();
 	}
 
@@ -147,9 +148,11 @@ public partial class Player : CharacterBody2D {
 
 	private Vector2 PlayerControl(Vector2 velocity, bool canJump) {
 		var horizontalDir = UpDirection.Rotated((float) Math.PI / 2f);
+
 		if (Input.IsActionJustReleased("move_left") || Input.IsActionJustReleased("move_right") || IsOnFloor()) {
 			// Remove horizontal movement as the player is not moving
 			velocity -= horizontalDir * velocity.Dot(horizontalDir);
+
 		}
 		
 		if (Input.IsActionPressed("move_right")) {
@@ -158,16 +161,20 @@ public partial class Player : CharacterBody2D {
 
 			if (IsOnFloor()){
 				playerSprite.Play("walking");
+				//GD.Print("walking right");
 			}
+			
 
-		} else if (Input.IsActionPressed("move_left")) {
+		} 
+		if (Input.IsActionPressed("move_left")) {
 			velocity -= horizontalDir * velocity.Dot(horizontalDir);
 			velocity -= horizontalDir * speed;
 
 			if (IsOnFloor()) {
 				playerSprite.Play("walking");
+				//GD.Print("walking left");
 			}
-
+			
 		} if (Input.IsActionJustPressed("jump")) {
 			if (IsOnFloor()) {
 				velocity += jumpForce * UpDirection;
@@ -182,11 +189,22 @@ public partial class Player : CharacterBody2D {
 				HasDoubJumped = true;
 				playerSprite.Play("jumping");
 			}
-		} else {
-			if (IsOnFloor()) {
-				playerSprite.Play("idle");
-			}
 		}
+		
+		else if (IsOnFloor()) {
+			if (Input.IsActionJustReleased("move_left") || Input.IsActionJustReleased("move_right")) {
+				
+				playerSprite.Play("idle");
+				//GD.Print("idle next");
+		
+			}
+			
+		else if (Velocity.X == 0){
+			playerSprite.Play("idle");
+			//GD.Print("idle last");
+		}
+	}
+		
 
 		// you can hit down key to "cancel" partway through a jump
 		if (Input.IsActionPressed("down")) {
