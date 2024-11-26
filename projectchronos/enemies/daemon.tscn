@@ -67,6 +67,7 @@ animations = [{
 }]
 
 [node name="Daemon" type="CharacterBody2D"]
+position = Vector2(5000, 200)
 script = ExtResource("1_23rb8")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
