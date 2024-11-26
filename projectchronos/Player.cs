@@ -154,6 +154,10 @@ public partial class Player : CharacterBody2D {
 			velocity -= horizontalDir * velocity.Dot(horizontalDir);
 
 		}
+
+		if (Input.IsActionPressed("click")) {
+			GetChild<PlayerAttack>(7).Attack();
+		}
 		
 		if (Input.IsActionPressed("move_right")) {
 			velocity -= horizontalDir * velocity.Dot(horizontalDir);
