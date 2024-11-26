@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://04lj3ljf7sln"]
+[gd_scene load_steps=4 format=3 uid="uid://04lj3ljf7sln"]
 
 [ext_resource type="Script" path="res://enemies/SisyphusEnemy.cs" id="1_jhot2"]
+[ext_resource type="Texture2D" uid="uid://cgv1bugv1xjrd" path="res://assets/sisyphus.png" id="2_hfxmj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bkucv"]
 size = Vector2(141, 162)
@@ -14,5 +15,6 @@ position = Vector2(23.5, -19)
 shape = SubResource("RectangleShape2D_bkucv")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(23.5, -19)
-scale = Vector2(1.10156, 1.26562)
+position = Vector2(23.5, -92.5)
+scale = Vector2(1.10156, 1.19141)
+texture = ExtResource("2_hfxmj")
