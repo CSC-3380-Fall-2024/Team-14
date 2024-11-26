@@ -118,18 +118,8 @@ public class Upgrade
 				player.SetFireDuration(0);
 				break;
 			case "DECREASE ENEMY SPAWN RATE":
-			var enemySpawner = GetNode<EnemySpawner>("/root/Main/LevelContainer/TartarusLevel/EnemySpawner");
-			var spawnTimer = enemySpawner.GetNode<Timer>("SpawnTimer");
-			 // Ensure the timer exists
-			if (spawnTimer != null)
-			{
-				spawnTimer.Stop();  // Stops the timer from firing
-				GD.Print("SpawnTimer stopped.");
-   			}
-			else
-			{
-				GD.Print("SpawnTimer not found!");
-   			}
+			GetNode<EnemySpawner>("/root/Main/LevelContainer/TartarusLevel/EnemySpawner").SpawnTimer.WaitTime = 4;
+			
 				break;
 			case "DOUBLE JUMP":
 			// placeholder 
