@@ -18,7 +18,7 @@ public partial class TartarusExit : Area2D {
 			GD.Print(player.GetPath());
 		}
 
-		//connect signalfor when collides
+		//connect signal for when collides
 		Connect("body_entered", new Callable (this, nameof(OnBodyEntered)));
 	}
 
@@ -28,7 +28,7 @@ public partial class TartarusExit : Area2D {
 
 	public void OnBodyEntered(Node body) {
 		if (body is Player) {
-			// Chaneg scene
+			// Change scene
 			((Main) GetTree().CurrentScene).SwitchLevel("res://sisyphus_level.tscn");
 		}
 	}

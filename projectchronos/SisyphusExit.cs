@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class SisphyusExit : Area2D {
+public partial class SisyphusExit : Area2D {
 	private Player player;
 
 	// Called when the node enters the scene tree for the first time.

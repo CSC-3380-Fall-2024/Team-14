@@ -42,14 +42,6 @@ public partial class PlayerAttack : Area2D
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta) {
-		if (Input.IsActionPressed("click")) {
-			if (timer.TimeLeft <= 0.0) {
-				Attack();
-				timer.Start(AttackPeriod());
-			}
-		} else {
-			Rotation = 0;
-		}
 	}
 
 	public void SetAttack(int damage, float attacksPerSecond, float immunityDuration) {
@@ -113,6 +105,9 @@ public partial class PlayerAttack : Area2D
 
 	// actual attack, enemies should probably handle the taking damage bit?
 	public void Attack() {
-		LookAt(GetGlobalMousePosition());	
+		if (timer.TimeLeft <= 0.0) {
+			LookAt(GetGlobalMousePosition());	
+			timer.Start(AttackPeriod());
+		}
 	}
 }
