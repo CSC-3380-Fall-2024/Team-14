@@ -29,7 +29,7 @@ public partial class TartarusExit : Area2D {
 	public void OnBodyEntered(Node body) {
 		if (body is Player) {
 			// Change scene
-			((Main) GetTree().CurrentScene).SwitchLevel("res://sisyphus_level.tscn");
+			GetTree().ChangeSceneToFile("res://sisyphus_level.tscn");
 		}
 	}
 }

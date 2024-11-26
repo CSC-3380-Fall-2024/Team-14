@@ -6,9 +6,9 @@
 [ext_resource type="Texture2D" uid="uid://clonye17aqh7g" path="res://assets/tartarus-parallax/05 rocksfront.png" id="4_wdw28"]
 [ext_resource type="Texture2D" uid="uid://dlwm8yyiwdelo" path="res://assets/tartarus_tileset_1.png" id="5_hpmoe"]
 [ext_resource type="PackedScene" uid="uid://4kf7paebw3px" path="res://player.tscn" id="6_tv61u"]
+[ext_resource type="Script" path="res://SisyphusExitv2.cs" id="7_73ejk"]
 [ext_resource type="PackedScene" uid="uid://04lj3ljf7sln" path="res://enemies/sisyphus_enemy.tscn" id="8_g3soe"]
 [ext_resource type="Script" path="res://enemies/Sisyphus.cs" id="9_6cgy8"]
-[ext_resource type="Script" path="res://SisyphusExit.cs" id="9_cwoc3"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_p0snp"]
 texture = ExtResource("5_hpmoe")
@@ -59,7 +59,7 @@ height = 1612.0
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_6y0yd"]
 
-[node name="TartarusLevel" type="Node2D"]
+[node name="SisyphusLevel" type="Node2D"]
 metadata/bound_right = 16126.0
 metadata/bound_left = 0.0
 metadata/bound_bottom = 1154.0
@@ -114,7 +114,7 @@ position = Vector2(12000, 515)
 
 [node name="SisyphusExit" type="Area2D" parent="."]
 position = Vector2(15807, 1091)
-script = ExtResource("9_cwoc3")
+script = ExtResource("7_73ejk")
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SisyphusExit"]
