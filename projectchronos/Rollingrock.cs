@@ -32,11 +32,6 @@ public partial class Rollingrock : CharacterBody2D {
 			else {
 				velocity += GetGravity() * (float)delta;
 			}
-
-			// Delete self when travelled enough distance
-			if (Math.Abs(velocity.X) < Speed * 0.01 && Math.Abs(velocity.Y) < Speed * 0.01) {
-				QueueFree();
-			}
 			
 			Velocity = velocity;
 			MoveAndSlide();

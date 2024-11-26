@@ -1,8 +1,7 @@
 using Godot;
 using System;
-using System.Runtime.CompilerServices;
 
-public partial class KillingSquare : Area2D
+public partial class RockDespawn : Area2D
 {
 	public override void _Ready()
 	{
@@ -10,9 +9,8 @@ public partial class KillingSquare : Area2D
 	}
 
 	private void OnBodyEntered(Node body) {
-		if (body is Player player) {
-			GD.Print("collide"); // prints whether or not collision registers **TEST CODE
-			player.Kill_Reset(); //kills player
+		if (body is Rollingrock rollingrock) {
+			rollingrock.QueueFree();
 		} 
 	}
 }
