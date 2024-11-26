@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class SisyphusExit : Area2D {
+public partial class SisyphusExitv2 : Area2D {
 	private Player player;
 
 	// Called when the node enters the scene tree for the first time.
@@ -29,7 +29,7 @@ public partial class SisyphusExit : Area2D {
 	public void OnBodyEntered(Node body) {
 		if (body is Player) {
 			// Change scene
-			((Main) GetTree().CurrentScene).SwitchLevel("res://elysium_level.tscn");
+			GetTree().ChangeSceneToFile("res://elysium_level.tscn");
 		}
 	}
 }
