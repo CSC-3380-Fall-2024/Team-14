@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://dlwm8yyiwdelo" path="res://assets/tartarus_tileset_1.png" id="5_hpmoe"]
 [ext_resource type="PackedScene" uid="uid://4kf7paebw3px" path="res://player.tscn" id="6_tv61u"]
 [ext_resource type="Script" path="res://SisyphusExitv2.cs" id="7_73ejk"]
-[ext_resource type="Script" path="res://enemies/Sisyphus.cs" id="9_6cgy8"]
+[ext_resource type="PackedScene" uid="uid://bmjm0ssftjodu" path="res://enemies/sisyphus.tscn" id="9_p5ne5"]
 [ext_resource type="Script" path="res://RockDespawn.cs" id="10_d7axk"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_p0snp"]
@@ -130,29 +130,6 @@ position = Vector2(-0.000207663, -422.5)
 scale = Vector2(324, 717)
 texture = SubResource("PlaceholderTexture2D_6y0yd")
 
-[node name="SisyphusEnemy" parent="."]
-_import_path = NodePath("")
-unique_name_in_owner = false
-process_mode = 0
-process_priority = 0
-process_physics_priority = 0
-process_thread_group = 0
-physics_interpolation_mode = 0
-auto_translate_mode = 0
-editor_description = ""
-position = Vector2(11462, 954)
-collision_layer = 2
-collision_mask = 2
-script = ExtResource("9_6cgy8")
-metadata/jumpEvery = 9.0
-metadata/numberRocksToRoll = 2
-metadata/rollRockDelay = 2.0
-metadata/jumpPos = [11500.0, 15500.0]
-metadata/speed = 1500.0
-metadata/rockSpeed = 1000.0
-metadata/rockDamage = 4
-metadata/rockKnockbackPercent = 0.3
-
 [node name="Area2D" type="Area2D" parent="."]
 script = ExtResource("10_d7axk")
 
@@ -166,3 +143,7 @@ script = ExtResource("10_d7axk")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2"]
 position = Vector2(15928, 770)
 shape = SubResource("RectangleShape2D_pj5lw")
+
+[node name="Sisyphus" parent="." instance=ExtResource("9_p5ne5")]
+position = Vector2(12377, 574)
+metadata/_edit_group_ = true
