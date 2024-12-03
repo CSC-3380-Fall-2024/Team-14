@@ -8,12 +8,4 @@ public partial class ProgressBarGeneric : ProgressBar
 	public override void _Ready() {
 		visible = false;
 	}
-
-	public bool IsVisible() {
-		return visible;
-	}
-
-	public void SetVisible(bool value) {
-		this.visible = value;
-	}
 }
