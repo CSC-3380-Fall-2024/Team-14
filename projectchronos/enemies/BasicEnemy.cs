@@ -13,8 +13,6 @@ public partial class BasicEnemy : CharacterBody2D {
 	public float Speed = 300.0f;
 	public float JumpVelocity = -400.0f;
 
-	protected EnemyAI ai = new DefaultAI();
-
 	private Player _player;
 	private Player player
 	{
@@ -38,12 +36,10 @@ public partial class BasicEnemy : CharacterBody2D {
 			}
 		}
 		
-		 // die if we have zero health duh
+		// die if we have zero health duh
 		if (CurrentLife <= 0) {
 			kill();
 		}
-
-		ai.ExecuteAI((float) delta); // have to actually run the AI code
 
 		Show();
 	}
