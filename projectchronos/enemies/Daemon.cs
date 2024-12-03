@@ -10,7 +10,7 @@ public partial class Daemon : BasicEnemy, BasicEnemy.EnemyAI
 	private float CooldownUntilAttack = 0f; //time until next attack
 	private float CooldownTime = 2f; //cooldown in second
 
-	private float Speed = 400;
+	new private float Speed = 400;
 
 	private Player player;
 
@@ -118,8 +118,5 @@ public partial class Daemon : BasicEnemy, BasicEnemy.EnemyAI
 		{
 			Chase();
 		}
-	}
-	public void TakeDamage(float damage) { // should not ever modify enemy health directly (from outside)
-		CurrentLife -= damage;
 	}
 }

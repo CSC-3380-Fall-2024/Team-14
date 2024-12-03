@@ -44,15 +44,6 @@ public partial class MeleeEnemy : BasicEnemy, BasicEnemy.EnemyAI {
 		MoveAndSlide(); //moves
 	}
 
-	private Vector2 PlayerPosition()
-	{
-		return player.GlobalPosition; //get player pos
-	}
-	private float DistanceToPlayer()
-	{
-		return Position.DistanceTo(player.GlobalPosition); //get player distance
-	}
-
 	private void chase()
 	{		
 		var direction = (PlayerPosition()-Position).Normalized(); //moves towards player
