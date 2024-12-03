@@ -56,10 +56,6 @@ public class Upgrade
 		UpgradeTwo.Text = displayedUpgrades[1].UpgradeName;
 		UpgradeThree.Text = displayedUpgrades[2].UpgradeName;
 
-		UpgradeOne.Pressed += () => OnUpgradePressed(0);
-		UpgradeTwo.Pressed += () => OnUpgradePressed(1);
-		UpgradeThree.Pressed += () => OnUpgradePressed(2);
-
 		regenTimer = new Timer();
 		regenTimer.WaitTime = regenInterval;
 		regenTimer.OneShot = false;
@@ -83,13 +79,20 @@ public class Upgrade
 		}
 	}
 
-	 private void OnUpgradePressed(int upgradeIndex)
-	{
-		Upgrade selectedUpgrade = displayedUpgrades[upgradeIndex];
-		GD.Print("Selected Upgrade: " + selectedUpgrade.UpgradeName);
+	public void OnUpgradeOnePressed() {
+		ApplyUpgrade(displayedUpgrades[0]);
+		Visible = false;
+		GetTree().Paused = false;
+	}
 
-		ApplyUpgrade(selectedUpgrade);
-		
+	public void OnUpgradeTwoPressed() {
+		ApplyUpgrade(displayedUpgrades[1]);
+		Visible = false;
+		GetTree().Paused = false;
+	}
+
+	public void OnUpgradeThreePressed() {
+		ApplyUpgrade(displayedUpgrades[2]);
 		Visible = false;
 		GetTree().Paused = false;
 	}
