@@ -75,6 +75,6 @@ text = "UPGRADE 3
 "
 script = ExtResource("4_ioe71")
 
-[connection signal="pressed" from="HBoxContainer/UpgradeOne" to="." method="OnUpgradePressed"]
-[connection signal="pressed" from="HBoxContainer/UpgradeTwo" to="." method="OnUpgradePressed"]
-[connection signal="pressed" from="HBoxContainer/UpgradeThree" to="." method="OnUpgradePressed"]
+[connection signal="pressed" from="HBoxContainer/UpgradeOne" to="." method="OnUpgradeOnePressed"]
+[connection signal="pressed" from="HBoxContainer/UpgradeTwo" to="." method="OnUpgradeTwoPressed"]
+[connection signal="pressed" from="HBoxContainer/UpgradeThree" to="." method="OnUpgradeThreePressed"]
