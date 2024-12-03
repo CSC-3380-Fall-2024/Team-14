@@ -8,7 +8,6 @@ public partial class Sisyphus: BasicEnemy, BasicEnemy.EnemyAI {
 	{
 		MaxLife = 1000;
 		CurrentLife = 1000;
-		ai = this;
 		base._Ready();
 	}
 

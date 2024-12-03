@@ -20,7 +20,6 @@ public partial class MeleeEnemy : BasicEnemy, BasicEnemy.EnemyAI {
 		base._Ready();
 		player = GetNode<Player>("../Player"); //find player
 
-		ai = this;
 		if (player == null) {
 			GD.Print("not found");
 			return;
