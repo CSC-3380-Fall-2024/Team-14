@@ -273,7 +273,7 @@ public partial class Player : CharacterBody2D {
 		// make dead and move back to starting position
 		else{
 			Hide();
-			Position = new Godot.Vector2(0,0);
+			Position = GetParent().GetMeta("respawn_coords", Variant.From(new Vector2(0, 0))).AsVector2();
 			Velocity = Vector2.Zero;
 			processed = false; //rest key tracking
 			reset = true; //reset start
