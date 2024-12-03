@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://04lj3ljf7sln"]
 
-[ext_resource type="Script" path="res://enemies/SisyphusEnemy.cs" id="1_jhot2"]
+[ext_resource type="Script" path="res://enemies/Sisyphus.cs" id="1_jhot2"]
 [ext_resource type="Texture2D" uid="uid://cgv1bugv1xjrd" path="res://assets/sisyphus.png" id="2_hfxmj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bkucv"]
