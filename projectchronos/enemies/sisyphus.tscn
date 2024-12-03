@@ -1,9 +1,62 @@
-[gd_scene load_steps=4 format=3 uid="uid://bmjm0ssftjodu"]
+[gd_scene load_steps=10 format=3 uid="uid://bmjm0ssftjodu"]
 
 [ext_resource type="Script" path="res://enemies/Sisyphus.cs" id="1_tosnm"]
-[ext_resource type="Texture2D" uid="uid://u0cd3jbfsmt6" path="res://assets/terrible_monster.png" id="2_i2f75"]
+[ext_resource type="Texture2D" uid="uid://fw4gdg0lthci" path="res://assets/sisyphus_spritesheet1.png" id="2_1c0hf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0c2kf"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6rysj"]
+atlas = ExtResource("2_1c0hf")
+region = Rect2(0, 0, 128, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pahm3"]
+atlas = ExtResource("2_1c0hf")
+region = Rect2(384, 0, 128, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u516t"]
+atlas = ExtResource("2_1c0hf")
+region = Rect2(512, 0, 128, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w70wr"]
+atlas = ExtResource("2_1c0hf")
+region = Rect2(128, 0, 128, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nlshx"]
+atlas = ExtResource("2_1c0hf")
+region = Rect2(256, 0, 128, 256)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ff3xj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6rysj")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pahm3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u516t")
+}],
+"loop": false,
+"name": &"jumping",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w70wr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nlshx")
+}],
+"loop": false,
+"name": &"throwing",
+"speed": 2.0
+}]
 
 [node name="Sisyphus" type="CharacterBody2D"]
 script = ExtResource("1_tosnm")
@@ -11,5 +64,8 @@ script = ExtResource("1_tosnm")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_0c2kf")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_i2f75")
+[node name="SisyphusSprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_ff3xj")
+animation = &"jumping"
+frame = 1
+frame_progress = 1.0
