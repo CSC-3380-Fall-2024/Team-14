@@ -97,31 +97,36 @@ public class Upgrade
 		GetTree().Paused = false;
 	}
 
+	public Player GetPlayer()
+	{
+		return GetNode("/root/Main/LevelContainer").GetChildren()[0].GetNode<Player>("Player");
+		
+	}
+
 		// Apply the upgrade to the player
 	private void ApplyUpgrade(Upgrade upgrade)
 	{
 		switch (upgrade.UpgradeName)
 		{
 			case "INCREASED HEALTH":
-			var player = GetNode<Player>("/root/Main/LevelContainer/TartarusLevel/Player");
+			var player = GetPlayer();
 				player.PlayerMaxHp += 10;
 				break;
 			case "SPEED BOOST":
-			player = GetNode<Player>("/root/Main/LevelContainer/TartarusLevel/Player");
-				player.speed += 100;
+				player = GetPlayer();
+				player.speed += 100; 
 				break;
 			case "HEALTH REGEN":
 				StartHealthRegeneration();
 				break;
 			case "INCREASED DAMAGE":
-				//placeholder
+				
 				break;
 			case "FIRE DAMAGE RESISTANCE":
-			player = GetNode<Player>("/root/Main/LevelContainer/TartarusLevel/Player");
-				player.SetFireDuration(0);
+				
 				break;
 			case "DECREASE ENEMY SPAWN RATE":
-			GetNode<EnemySpawner>("/root/Main/LevelContainer/TartarusLevel/EnemySpawner").SpawnTimer.WaitTime = 8;
+			GetNode<EnemySpawner>("../EnemySpawner").SpawnTimer.WaitTime = 8;
 			
 				break;
 			case "DOUBLE JUMP":
