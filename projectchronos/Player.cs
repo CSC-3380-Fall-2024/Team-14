@@ -105,13 +105,6 @@ public partial class Player : CharacterBody2D {
 		Velocity = velocity;
 		Show();
 		MoveAndSlide();
-
-		//flip sprite based on player velocity
-		if(velocity.X > 0) {
-			playerSprite.Scale = new Vector2(1, 1);
-		} else if(velocity.X < 0) {
-			playerSprite.Scale = new Vector2(-1, 1);
-		}
 	}
 	
 	/// <summary>
@@ -163,6 +156,7 @@ public partial class Player : CharacterBody2D {
 			velocity -= horizontalDir * velocity.Dot(horizontalDir);
 			velocity += horizontalDir * speed;
 
+			playerSprite.Scale = new Vector2(1, 1);
 			if (IsOnFloor()){
 				playerSprite.Play("walking");
 				//GD.Print("walking right");
@@ -174,6 +168,8 @@ public partial class Player : CharacterBody2D {
 			velocity -= horizontalDir * velocity.Dot(horizontalDir);
 			velocity -= horizontalDir * speed;
 
+			playerSprite.Scale = new Vector2(-1, 1);
+			
 			if (IsOnFloor()) {
 				playerSprite.Play("walking");
 				//GD.Print("walking left");
