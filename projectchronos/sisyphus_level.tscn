@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=4 uid="uid://brvalphnva0vs"]
+[gd_scene load_steps=16 format=4 uid="uid://cclrfc28l0sfw"]
 
 [ext_resource type="Texture2D" uid="uid://f48d3jdhhwfn" path="res://assets/tartarus-parallax/01 bg.png" id="1_hef17"]
 [ext_resource type="Texture2D" uid="uid://d3751xqcxoc1r" path="res://assets/tartarus-parallax/02 bg2.png" id="2_417gg"]
@@ -51,7 +51,8 @@ texture_region_size = Vector2i(128, 128)
 
 [sub_resource type="TileSet" id="TileSet_hph4h"]
 tile_size = Vector2i(128, 128)
-physics_layer_0/collision_layer = 1
+physics_layer_0/collision_layer = 3
+physics_layer_0/collision_mask = 3
 sources/0 = SubResource("TileSetAtlasSource_p0snp")
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gulxh"]
@@ -68,6 +69,7 @@ metadata/bound_right = 16126.0
 metadata/bound_left = 0.0
 metadata/bound_bottom = 1154.0
 metadata/bound_top = -1154.0
+metadata/respawn_coords = Vector2(13500, 0)
 
 [node name="Rear BG" type="Parallax2D" parent="."]
 scroll_scale = Vector2(0.2, 1)
@@ -131,6 +133,8 @@ texture = SubResource("PlaceholderTexture2D_6y0yd")
 
 [node name="SisyphusEnemy" parent="." instance=ExtResource("8_g3soe")]
 position = Vector2(11462, 954)
+collision_layer = 2
+collision_mask = 2
 script = ExtResource("9_6cgy8")
 metadata/jumpEvery = 9.0
 metadata/numberRocksToRoll = 2

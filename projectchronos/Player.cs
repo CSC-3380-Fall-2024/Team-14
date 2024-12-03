@@ -105,13 +105,6 @@ public partial class Player : CharacterBody2D {
 		Velocity = velocity;
 		Show();
 		MoveAndSlide();
-
-		//flip sprite based on player velocity
-		if(velocity.X > 0) {
-			playerSprite.Scale = new Vector2(1, 1);
-		} else if(velocity.X < 0) {
-			playerSprite.Scale = new Vector2(-1, 1);
-		}
 	}
 	
 	/// <summary>
@@ -163,6 +156,7 @@ public partial class Player : CharacterBody2D {
 			velocity -= horizontalDir * velocity.Dot(horizontalDir);
 			velocity += horizontalDir * speed;
 
+			playerSprite.Scale = new Vector2(1, 1);
 			if (IsOnFloor()){
 				playerSprite.Play("walking");
 				//GD.Print("walking right");
@@ -174,6 +168,8 @@ public partial class Player : CharacterBody2D {
 			velocity -= horizontalDir * velocity.Dot(horizontalDir);
 			velocity -= horizontalDir * speed;
 
+			playerSprite.Scale = new Vector2(-1, 1);
+			
 			if (IsOnFloor()) {
 				playerSprite.Play("walking");
 				//GD.Print("walking left");
@@ -277,7 +273,7 @@ public partial class Player : CharacterBody2D {
 		// make dead and move back to starting position
 		else{
 			Hide();
-			Position = new Godot.Vector2(0,0);
+			Position = GetParent().GetMeta("respawn_coords", Variant.From(new Vector2(0, 0))).AsVector2();
 			Velocity = Vector2.Zero;
 			processed = false; //rest key tracking
 			reset = true; //reset start
