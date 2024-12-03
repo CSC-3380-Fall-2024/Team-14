@@ -36,6 +36,8 @@ public partial class BasicEnemy : CharacterBody2D {
 			}
 		}
 		
+		if (this is EnemyAI ai) ai.ExecuteAI((float) delta);
+		
 		// die if we have zero health duh
 		if (CurrentLife <= 0) {
 			kill();
