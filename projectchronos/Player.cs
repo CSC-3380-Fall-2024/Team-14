@@ -293,11 +293,14 @@ public partial class Player : CharacterBody2D {
 		
 	}
 	
-	public void Start()
-	{
-		//find main and grab lives from it
-		Main mainNode = (Main) GetTree().GetCurrentScene();
-		lives_left = mainNode.getConfig().MaxLives;
+	public void Start() {
+		// find main and grab lives from it
+		Main mainNode;
+		Node node = GetTree().GetCurrentScene();
+		if (node is Main main) {
+			mainNode = main;
+			lives_left = mainNode.getConfig().MaxLives;
+		}
 		
 		Show();
 		GetNode<CollisionShape2D>("CollisionShape2D").Disabled = false;
