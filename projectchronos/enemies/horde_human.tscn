@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://chh53xpfqvbpl"]
 
-[ext_resource type="Script" path="res://HordeHuman.cs" id="1_hfrmi"]
+[ext_resource type="Script" path="res://enemies/HordeHuman.cs" id="1_hfrmi"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ad4la"]
 radius = 77.1298
