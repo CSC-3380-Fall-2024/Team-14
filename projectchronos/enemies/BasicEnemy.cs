@@ -26,7 +26,7 @@ public partial class BasicEnemy : CharacterBody2D {
 	private PlayerAttack playerAttack;
 
 	public override void _Ready() {
-		playerAttack = player.GetChild<PlayerAttack>(7);
+		playerAttack = player.GetChild<PlayerAttack>(6);
 	}
 
 	public override void _PhysicsProcess(double delta) {
