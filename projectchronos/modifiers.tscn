@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Modifiers.cs" id="1_kykl6"]
 [ext_resource type="Script" path="res://UpgradeOne.cs" id="2_sohu0"]
-[ext_resource type="Texture2D" uid="uid://c7kahqktm218y" path="res://caveRemasteredV7 (1).png" id="2_tbkpo"]
+[ext_resource type="Texture2D" uid="uid://c7kahqktm218y" path="res://assets/ModifierScreenBackground.png" id="2_tbkpo"]
 [ext_resource type="FontFile" uid="uid://nyojpkaf8mf7" path="res://assets/chronos_font.ttf" id="3_7liy4"]
 [ext_resource type="Script" path="res://UpgradeTwo.cs" id="3_wj4wa"]
 [ext_resource type="Script" path="res://UpgradeThree.cs" id="4_ioe71"]
