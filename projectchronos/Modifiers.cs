@@ -120,7 +120,7 @@ public class Upgrade
 				StartHealthRegeneration();
 				break;
 			case "INCREASED DAMAGE":
-				
+				GetPlayer().GetNode<PlayerAttack>("PlayerAttack").AddDamageModifier(100);
 				break;
 			case "FIRE DAMAGE RESISTANCE":
 				
@@ -147,7 +147,7 @@ public class Upgrade
 
 	 private void OnHealthRegenerate()
 	{
-		var player = GetNode<Player>("/root/Main/LevelContainer/TartarusLevel/Player");
+		var player = GetPlayer();
 		if (player.PlayerHp < player.PlayerMaxHp)
 		{
 			player.PlayerHp = Mathf.Min(player.PlayerHp + regenAmount, player.PlayerMaxHp);
