@@ -1,9 +1,7 @@
-[gd_scene load_steps=24 format=3 uid="uid://4kf7paebw3px"]
+[gd_scene load_steps=22 format=3 uid="uid://4kf7paebw3px"]
 
 [ext_resource type="Script" path="res://Player.cs" id="1_3o1y4"]
 [ext_resource type="PackedScene" uid="uid://cnmh3rw3roajk" path="res://HealthBar.tscn" id="3_umkuu"]
-[ext_resource type="PackedScene" uid="uid://bccchwmakcjbs" path="res://progress_bar_generic.tscn" id="4_fctfr"]
-[ext_resource type="Script" path="res://ProgressBarGeneric.cs" id="5_p5oxw"]
 [ext_resource type="Texture2D" uid="uid://dn2stq7qakgit" path="res://assets/fire-particle.png" id="6_hie02"]
 [ext_resource type="Texture2D" uid="uid://bnscgg2qb6aho" path="res://assets/chronos_life_sprite.png" id="7_24eqt"]
 [ext_resource type="Script" path="res://HUD.cs" id="7_54acc"]
@@ -130,14 +128,6 @@ offset_right = 100.0
 offset_bottom = -160.0
 max_value = 20.0
 value = 20.0
-
-[node name="ProgressBarGeneric" parent="." instance=ExtResource("4_fctfr")]
-visible = false
-offset_left = -230.0
-offset_top = -158.0
-offset_right = -226.0
-offset_bottom = -131.0
-script = ExtResource("5_p5oxw")
 
 [node name="FireAnimation" type="CPUParticles2D" parent="."]
 emitting = false

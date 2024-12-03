@@ -100,8 +100,6 @@ public partial class Player : CharacterBody2D {
 		
 		ProcessFire(delta);
 
-		ProgressBarHandler(); // method manages this player feature from "outside"
-
 		Velocity = velocity;
 		Show();
 		MoveAndSlide();
@@ -149,7 +147,7 @@ public partial class Player : CharacterBody2D {
 		}
 
 		if (Input.IsActionPressed("click")) {
-			GetChild<PlayerAttack>(7).Attack();
+			GetChild<PlayerAttack>(6).Attack();
 		}
 		
 		if (Input.IsActionPressed("move_right")) {
@@ -234,31 +232,6 @@ public partial class Player : CharacterBody2D {
 		return velocity;
 	}
 
-	// this method exists to isolate all the stuff our extra progress bar might have to do in _Ready()
-	// first we have to decide whether to actually show it
-	public void ProgressBarHandler() {
-		var progressBarGeneric = GetNode<ProgressBarGeneric>("ProgressBarGeneric");
-		if (progressBarGeneric.IsVisible()) {
-			progressBarGeneric.Show();
-		} else {
-			progressBarGeneric.Hide();
-		}
-
-		progressBarGeneric.SetVisible(hasJumpLeft && !IsOnFloor()); // linking visibility to double jump I guess
-	}
-
-	// method 1 for the all-purpose player status bar, getting the state
-	public int GetBarProgress() {
-		var progressBarGeneric = GetNode<ProgressBarGeneric>("HUD/ProgressBarGeneric");
-		return (int) progressBarGeneric.Value;
-	}
-
-	// method 2 for the all-purpose player status bar, setting the state
-	public void SetBarProgress(int value) {
-		var progressBarGeneric = GetNode<ProgressBarGeneric>("HUD/ProgressBarGeneric");
-		progressBarGeneric.Value = value;
-	}
-
 	// Kills player and places them back at start
 	public void Kill_Reset() 
 	{
@@ -324,7 +297,7 @@ public partial class Player : CharacterBody2D {
 	private void ProcessFire(double delta) {
 		if (_fireSecondsRemaining > 0) {
 			Main mainNode = (Main)GetParent().GetParent();
-			CpuParticles2D fireAnimation = GetChild<CpuParticles2D>(5);
+			CpuParticles2D fireAnimation = GetChild<CpuParticles2D>(3);
 			if (_sinceLastFireTick > 1) {
 				PlayerHp -= mainNode.getConfig().FireDamagePerSecond;
 				_sinceLastFireTick -= 1;

@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://drd557pffbd1w" path="res://assets/elysium-tileset.png" id="1_67etp"]
 [ext_resource type="PackedScene" uid="uid://p8fy3nw6kmu2" path="res://enemies/melee_enemy.tscn" id="2_8uojs"]
-[ext_resource type="PackedScene" uid="uid://chh53xpfqvbpl" path="res://horde_human.tscn" id="3_6u6x0"]
+[ext_resource type="PackedScene" uid="uid://chh53xpfqvbpl" path="res://enemies/horde_human.tscn" id="3_6u6x0"]
 [ext_resource type="PackedScene" uid="uid://4kf7paebw3px" path="res://player.tscn" id="4_1707f"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8xl37"]
