@@ -8,6 +8,8 @@ public partial class Rollingrock : CharacterBody2D {
 	public float Speed = 200;
 	public Vector2? Target;
 
+	public AnimatedSprite2D rockSprite; 
+
 	public int CollisionDamage = 2;
 	/// <summary>
 	/// How much of the rock's current velocity should go to pushing back the player
@@ -29,11 +31,6 @@ public partial class Rollingrock : CharacterBody2D {
 			}
 			else {
 				velocity += GetGravity() * (float)delta;
-			}
-
-			// Delete self when travelled enough distance
-			if (Math.Abs(velocity.X) < Speed * 0.01 && Math.Abs(velocity.Y) < Speed * 0.01) {
-				QueueFree();
 			}
 			
 			Velocity = velocity;

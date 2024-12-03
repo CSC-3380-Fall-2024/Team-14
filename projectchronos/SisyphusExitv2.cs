@@ -1,8 +1,9 @@
 using Godot;
 using System;
 
-public partial class SisphyusExit : Area2D {
+public partial class SisyphusExitv2 : Area2D {
 	private Player player;
+	private bool changeScene = false;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready() {
@@ -24,12 +25,14 @@ public partial class SisphyusExit : Area2D {
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta) {
+		if (changeScene) {
+			GetTree().ChangeSceneToFile("res://elysium_level.tscn");
+		}
 	}
 
 	public void OnBodyEntered(Node body) {
 		if (body is Player) {
-			// Change scene
-			((Main) GetTree().CurrentScene).SwitchLevel("res://elysium_level.tscn");
+			changeScene = true;
 		}
 	}
 }

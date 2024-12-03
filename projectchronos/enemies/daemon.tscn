@@ -1,19 +1,81 @@
-[gd_scene load_steps=4 format=3 uid="uid://d3xwews2ictv1"]
+[gd_scene load_steps=11 format=3 uid="uid://d3xwews2ictv1"]
 
 [ext_resource type="Script" path="res://enemies/Daemon.cs" id="1_23rb8"]
-[ext_resource type="Texture2D" uid="uid://doju1rtwjdbjw" path="res://Daemon_Placeholder.png" id="1_bwvvs"]
+[ext_resource type="Texture2D" uid="uid://bxbdpn858yt8v" path="res://assets/daemon_spritesheet.png" id="2_j4pth"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bkucv"]
 size = Vector2(141, 162)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_1o7br"]
+atlas = ExtResource("2_j4pth")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wnaq1"]
+atlas = ExtResource("2_j4pth")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5lvyn"]
+atlas = ExtResource("2_j4pth")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ui2tl"]
+atlas = ExtResource("2_j4pth")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_56t3i"]
+atlas = ExtResource("2_j4pth")
+region = Rect2(512, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4g358"]
+atlas = ExtResource("2_j4pth")
+region = Rect2(640, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ah6cu"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1o7br")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wnaq1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5lvyn")
+}],
+"loop": true,
+"name": &"flying",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ui2tl")
+}],
+"loop": true,
+"name": &"melee",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_56t3i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4g358")
+}],
+"loop": false,
+"name": &"ranged",
+"speed": 1.0
+}]
+
 [node name="Daemon" type="CharacterBody2D"]
+position = Vector2(5000, 200)
 script = ExtResource("1_23rb8")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(23.5, -19)
 shape = SubResource("RectangleShape2D_bkucv")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(23.5, -18.25)
-scale = Vector2(0.30787, 0.272007)
-texture = ExtResource("1_bwvvs")
+[node name="DaemonSprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_ah6cu")
+animation = &"ranged"
+frame = 1
+frame_progress = 1.0

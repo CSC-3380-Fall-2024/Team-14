@@ -3,6 +3,7 @@ using System;
 
 public partial class TartarusExit : Area2D {
 	private Player player;
+	private bool changeScene = false;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready() {
@@ -18,18 +19,20 @@ public partial class TartarusExit : Area2D {
 			GD.Print(player.GetPath());
 		}
 
-		//connect signalfor when collides
+		//connect signal for when collides
 		Connect("body_entered", new Callable (this, nameof(OnBodyEntered)));
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta) {
+		if (changeScene) {
+			GetTree().ChangeSceneToFile("res://sisyphus_level.tscn");
+		}
 	}
 
 	public void OnBodyEntered(Node body) {
 		if (body is Player) {
-			// Chaneg scene
-			((Main) GetTree().CurrentScene).SwitchLevel("res://sisyphus_level.tscn");
+			changeScene = true;
 		}
 	}
 }
