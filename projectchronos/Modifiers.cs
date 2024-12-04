@@ -2,6 +2,8 @@ using Godot;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
+using System.Diagnostics.CodeAnalysis;
+using System.Reflection.Metadata.Ecma335;
 using System.Runtime.CompilerServices;
 
 public partial class Modifiers : Control
@@ -140,9 +142,15 @@ public class Upgrade
 		}
 	}
 
-	 private void OnHealthRegenerate()
+	private void OnHealthRegenerate()
 	{
-		var player = GetNode<Player>("/root/Main/LevelContainer/TartarusLevel/Player");
+		Player player = null;
+		Node parent = GetParent();
+		for (int i = 0; i < parent.GetChildCount(); i++) {
+			if (parent.GetChild(i) is Player p) {
+				player = p;
+			}
+		}
 		if (player.PlayerHp < player.PlayerMaxHp)
 		{
 			player.PlayerHp = Mathf.Min(player.PlayerHp + regenAmount, player.PlayerMaxHp);

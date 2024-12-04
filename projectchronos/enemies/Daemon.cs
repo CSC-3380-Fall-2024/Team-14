@@ -14,6 +14,8 @@ public partial class Daemon : BasicEnemy, BasicEnemy.EnemyAI
 
 	private Player player;
 
+	private PlayerAttack playerAttack;
+
 	//instantiate animatedSprite2D node for player sprite
 	public AnimatedSprite2D daemonSprite;
 
@@ -25,13 +27,19 @@ public partial class Daemon : BasicEnemy, BasicEnemy.EnemyAI
 		daemonSprite = GetNode<AnimatedSprite2D>("DaemonSprite");
 
 		daemonSprite.Play("flying");
+
+		playerAttack = player.GetChild<PlayerAttack>(6);
 	}
 
 	public override void _PhysicsProcess(double delta) {
-
-		TakeDamage( 1 / DistanceToPlayer() * 1000f * (float) delta); // prototype enemy takes passive proximity damage for testing
 		if (CurrentLife <= 0) {
 			kill();
+		}
+
+		if (DistanceToPlayer() <= 400f && !playerAttack.GetChild<Timer>(1).IsStopped()) {
+			if (playerAttack.GetChild<Timer>(1).TimeLeft < (playerAttack.AttackPeriod() / 2)) {
+				TakeDamage(player.GetChild<PlayerAttack>(6).ScaledDamage());
+			}
 		}
 
 		//flip to face player

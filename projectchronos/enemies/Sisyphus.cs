@@ -9,6 +9,8 @@ public partial class Sisyphus: BasicEnemy, BasicEnemy.EnemyAI {
 		MaxLife = 1000;
 		CurrentLife = 1000;
 		base._Ready();
+		sisyphusSprite = GetNode<AnimatedSprite2D>("SisyphusSprite");
+
 	}
 
 	private double sinceLastJump;
@@ -20,11 +22,17 @@ public partial class Sisyphus: BasicEnemy, BasicEnemy.EnemyAI {
 
 	private double jumpT;
 
-	public void ExecuteAI(float delta)
+	//instantiate animatedSprite2D node for player sprite
+	public AnimatedSprite2D sisyphusSprite;
+
+	public async void ExecuteAI(float delta)
 	{
 		var velocity = Velocity;
 
 		var jumpEvery = GetMeta("jumpEvery", Variant.From(7d)).AsDouble();
+
+		//flip sprite to face player
+		sisyphusSprite.FlipH = PlayerPosition().X < Position.X;
 		
 		if (sinceLastJump > jumpEvery)
 		{
@@ -39,6 +47,12 @@ public partial class Sisyphus: BasicEnemy, BasicEnemy.EnemyAI {
 
 				if (jumpPos.Length > 0)
 				{
+					//play jump
+					sisyphusSprite.Play("jumping");
+					//wait one second
+					await ToSignal(GetTree().CreateTimer(0.5f), "timeout");
+
+					
 					jumpIdx = (jumpIdx + 1) % jumpPos.Length;
 					var nextJump = jumpPos[jumpIdx];
 
@@ -58,6 +72,8 @@ public partial class Sisyphus: BasicEnemy, BasicEnemy.EnemyAI {
 			jumpT -= delta;
 			if (jumpT < 0)
 			{
+				//play idle
+				sisyphusSprite.Play("idle");
 				velocity = new Vector2(0, 0);
 			}
 		}
@@ -68,6 +84,9 @@ public partial class Sisyphus: BasicEnemy, BasicEnemy.EnemyAI {
 			
 			if (sinceLastRockRoll > rollRockDelay && numberRocksRolled < numberRocksToRoll)
 			{
+				//wait one second
+				//await ToSignal(GetTree().CreateTimer(1.0f), "timeout");
+
 				var rollFrom = new Vector2(Position.X, Position.Y);
 				rollFrom.X += Math.Sign((PlayerPosition() - Position).X) *
 							  GetNode<CollisionShape2D>("./CollisionShape2D").Shape.GetRect().Size.X * 0.5f;
@@ -81,6 +100,10 @@ public partial class Sisyphus: BasicEnemy, BasicEnemy.EnemyAI {
 					));
 				sinceLastRockRoll -= rollRockDelay;
 				numberRocksRolled++;
+			} else if (sinceLastRockRoll > rollRockDelay - 0.5 && numberRocksRolled < numberRocksToRoll) {
+
+				//play rolling
+				sisyphusSprite.Play("throwing");
 			}
 			sinceLastRockRoll += delta;
 		}

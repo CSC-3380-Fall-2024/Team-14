@@ -147,3 +147,11 @@ shape = SubResource("RectangleShape2D_pj5lw")
 [node name="Sisyphus" parent="." instance=ExtResource("9_p5ne5")]
 position = Vector2(12377, 574)
 metadata/_edit_group_ = true
+metadata/jumpPos = [11500.0, 15500.0]
+metadata/rockSpeed = 1000.0
+metadata/numberRocksToRoll = 2.0
+metadata/jumpEvery = 9.0
+metadata/rollRockDelay = 2.0
+metadata/speed = 1500.0
+metadata/rockDamage = 4.0
+metadata/rockKnockbackPercent = 0.3

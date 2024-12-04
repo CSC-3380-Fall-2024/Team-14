@@ -15,12 +15,20 @@ public partial class Rollingrock : CharacterBody2D {
 	/// How much of the rock's current velocity should go to pushing back the player
 	/// </summary>
 	public float CollisionKnockbackPercent = 0.1f;
+
+	public override void _Ready()
+	{
+		rockSprite = GetNode<AnimatedSprite2D>("RockSprite");
+	}
 	
 	private static double NormalizeAngle(double angle) {
 		return (angle % (Math.PI * 2) + Math.PI * 2) % (Math.PI * 2);
 	}
 	
 	public override void _PhysicsProcess(double delta) {
+		//play rolling animation
+		rockSprite.Play("rolling");
+
 		if (moveVelocity.HasValue && startingPos.HasValue) {
 
 			Vector2 velocity = Velocity;
