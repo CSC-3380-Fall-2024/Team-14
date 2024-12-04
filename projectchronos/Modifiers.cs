@@ -25,7 +25,6 @@ public class Upgrade
 		new Upgrade("INCREASED DAMAGE", "Increases your attack damage."),
 		new Upgrade("FIRE DAMAGE RESISTANCE", "Resistant to fire damage."),
 		new Upgrade("DECREASE ENEMY SPAWN RATE", "Lowers enemy spawns."),
-		new Upgrade("INCREASED DEFENSE", "Increases player defense."),
 		new Upgrade("DOUBLE JUMP", "Allows player to jump once more mid-air")
 	
 	};
@@ -123,7 +122,7 @@ public class Upgrade
 				GetPlayer().GetNode<PlayerAttack>("PlayerAttack").AddDamageModifier(100);
 				break;
 			case "FIRE DAMAGE RESISTANCE":
-				
+				projectile.DebuffDuration = 0;
 				break;
 			case "DECREASE ENEMY SPAWN RATE":
 			GetNode<EnemySpawner>("../EnemySpawner").SpawnTimer.WaitTime = 8;

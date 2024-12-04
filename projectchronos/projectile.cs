@@ -8,8 +8,7 @@ public partial class projectile : Area2D
 	public float Speed = 200f; //speed in pix/s
 	public int Damage = 7; //damage amt
 
-	[Export]
-	public int DebuffDuration = 5; //how long it inflicts debuffs (on fire here)
+	public static int DebuffDuration = 5; //how long it inflicts debuffs (on fire here)
 	private CharacterBody2D player; //refrences player
 	
 	//movement Velocity and Frame by Frame moven=ment timer
