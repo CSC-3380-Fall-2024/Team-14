@@ -125,7 +125,7 @@ public class Upgrade
 				projectile.DebuffDuration = 0;
 				break;
 			case "DECREASE ENEMY SPAWN RATE":
-			GetNode<EnemySpawner>("../EnemySpawner").SpawnTimer.WaitTime = 8;
+			GetNode("/root/Main/LevelContainer").GetChildren()[0].GetNode<EnemySpawner>("EnemySpawner").SpawnTimer.WaitTime = 8;
 			
 				break;
 			case "DOUBLE JUMP":
