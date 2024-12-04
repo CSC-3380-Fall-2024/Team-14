@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://fw4gdg0lthci" path="res://assets/sisyphus_spritesheet1.png" id="2_1c0hf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0c2kf"]
+size = Vector2(69, 220)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6rysj"]
 atlas = ExtResource("2_1c0hf")
@@ -62,10 +63,9 @@ animations = [{
 script = ExtResource("1_tosnm")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1.5, 18)
 shape = SubResource("RectangleShape2D_0c2kf")
 
 [node name="SisyphusSprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_ff3xj")
-animation = &"jumping"
-frame = 1
-frame_progress = 1.0
+animation = &"idle"
