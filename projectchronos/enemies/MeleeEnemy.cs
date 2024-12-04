@@ -41,6 +41,8 @@ public partial class MeleeEnemy : BasicEnemy, BasicEnemy.EnemyAI {
 		ExecuteAI((float)delta);
 		Velocity = velocity; //updates vel again
 		MoveAndSlide(); //moves
+
+		DetectHit(); // necessary to take damage
 	}
 
 	private void chase()
