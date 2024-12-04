@@ -32,7 +32,7 @@ public partial class BasicEnemy : CharacterBody2D {
 	public override void _PhysicsProcess(double delta) {
 		if (DistanceToPlayer() <= 400f && !playerAttack.GetChild<Timer>(1).IsStopped()) {
 			if (playerAttack.GetChild<Timer>(1).TimeLeft < (playerAttack.AttackPeriod() / 2)) {
-				TakeDamage(player.GetChild<PlayerAttack>(7).ScaledDamage());
+				TakeDamage(player.GetChild<PlayerAttack>(6).ScaledDamage());
 			}
 		}
 		
