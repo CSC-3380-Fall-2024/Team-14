@@ -36,7 +36,8 @@ public partial class HordeHuman : BasicEnemy, BasicEnemy.EnemyAI
 	}
 	public override void _PhysicsProcess(double delta) {
 
-		TakeDamage( 1 / DistanceToPlayer() * 2000f * (float) delta); // prototype enemy takes passive proximity damage for testing
+		DetectHit(); // necessary to take damage
+		
 		if (CurrentLife <= 0) {
 			kill();
 		}

@@ -36,11 +36,7 @@ public partial class Daemon : BasicEnemy, BasicEnemy.EnemyAI
 			kill();
 		}
 
-		if (DistanceToPlayer() <= 400f && !playerAttack.GetChild<Timer>(1).IsStopped()) {
-			if (playerAttack.GetChild<Timer>(1).TimeLeft < (playerAttack.AttackPeriod() / 2)) {
-				TakeDamage(player.GetChild<PlayerAttack>(6).ScaledDamage());
-			}
-		}
+		DetectHit(); // necessary to take damage
 
 		//flip to face player
 		FlipSpriteToPlayer(); 
