@@ -90,7 +90,7 @@ public partial class HordeHuman : BasicEnemy, BasicEnemy.EnemyAI
 			//GD.Print("cooldown remaining" + CooldownUntilAttack); TEST**
 		}
 
-		GD.Print(CurrentLife);
+		//GD.Print(CurrentLife);
 
 		//GD.Print("distance to p" + distanceToPlayer); **TEST
 		if (CurrentLife > retreat_when_health) // checks to see if the enemies health is above the retreat value
