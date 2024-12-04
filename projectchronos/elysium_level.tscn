@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=4 uid="uid://82dgggl1psia"]
+[gd_scene load_steps=14 format=4 uid="uid://82dgggl1psia"]
 
 [ext_resource type="Texture2D" uid="uid://drd557pffbd1w" path="res://assets/elysium-tileset.png" id="1_67etp"]
 [ext_resource type="Texture2D" uid="uid://c52qu8nuopua4" path="res://assets/elysium-parallax/1.png" id="1_c20yd"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://8jae0h3kef14" path="res://assets/elysium-parallax/4.png" id="4_7hfru"]
 [ext_resource type="PackedScene" uid="uid://4kf7paebw3px" path="res://player.tscn" id="4_1707f"]
 [ext_resource type="Texture2D" uid="uid://cxy0h153tp84k" path="res://assets/elysium-parallax/5.png" id="6_gc3qn"]
+[ext_resource type="Script" path="res://KillingSquare.cs" id="10_kdi4l"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8xl37"]
 texture = ExtResource("1_67etp")
@@ -50,12 +51,15 @@ tile_size = Vector2i(128, 128)
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_8xl37")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o68nx"]
+size = Vector2(16132.8, 42)
+
 [node name="ElysiumLevel" type="Node2D"]
 metadata/bound_top = 0.0
 metadata/bound_bottom = 1154.0
+metadata/respawn_coords = Vector2i(339, 515)
 metadata/bound_left = 0.0
 metadata/bound_right = 16125.0
-metadata/respawn_coords = Vector2i(340, 515)
 
 [node name="rear rear trees" type="Parallax2D" parent="."]
 scroll_scale = Vector2(0.3, 1)
@@ -119,7 +123,17 @@ scale = Vector2(4.275, 4.275)
 texture = ExtResource("6_gc3qn")
 
 [node name="MeleeEnemy" parent="." instance=ExtResource("2_8uojs")]
+position = Vector2(692, 952)
 
 [node name="HordeHuman" parent="." instance=ExtResource("3_6u6x0")]
+position = Vector2(1448, 467)
 
 [node name="Player" parent="." instance=ExtResource("4_1707f")]
+
+[node name="KillingSquare" type="Area2D" parent="."]
+script = ExtResource("10_kdi4l")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KillingSquare"]
+position = Vector2(8112.6, 1212)
+shape = SubResource("RectangleShape2D_o68nx")
+debug_color = Color(0.839216, 0.6, 0.701961, 0.843137)
