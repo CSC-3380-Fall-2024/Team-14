@@ -22,6 +22,8 @@ public partial class Player : CharacterBody2D {
 	public int PlayerMaxHp = 20;
 
 	private int _playerHp;
+
+	private bool dead = false;
 	
 	[Export]
 	public int PlayerHp {
@@ -33,7 +35,7 @@ public partial class Player : CharacterBody2D {
 			healthBar.Value = _playerHp;
 			if(_playerHp <= 0 && lives_left >= 0)
 			{
-				Kill_Reset();
+				CallDeferred("Kill_Reset");
 				
 					
 			}
@@ -240,7 +242,7 @@ public partial class Player : CharacterBody2D {
 		}
 
 		if(lives_left<=0){
-			GetTree().ChangeSceneToFile("res://game_over.tscn");
+			GetTree().ChangeSceneToFile("res://game_over.tscn"); 
 		}
 
 		// make dead and move back to starting position
@@ -277,7 +279,7 @@ public partial class Player : CharacterBody2D {
 
 	// player dies after falling for too long
 	private void OnFallTimerTimeout() {
-		Kill_Reset();
+		CallDeferred("Kill_Reset");
 	}
 
 	private double _sinceLastFireTick = 0;
