@@ -19,7 +19,7 @@ public partial class Daemon : BasicEnemy, BasicEnemy.EnemyAI
 
 	public override void _Ready()
 	{
-		CurrentLife = 20f;
+		CurrentLife = 40f;
 		base._Ready();
 		player = GetParent().GetChild<Player>(5);
 		daemonSprite = GetNode<AnimatedSprite2D>("DaemonSprite");
@@ -29,7 +29,7 @@ public partial class Daemon : BasicEnemy, BasicEnemy.EnemyAI
 
 	public override void _PhysicsProcess(double delta) {
 
-		TakeDamage( 1 / DistanceToPlayer() * 2000f * (float) delta); // prototype enemy takes passive proximity damage for testing
+		TakeDamage( 1 / DistanceToPlayer() * 1000f * (float) delta); // prototype enemy takes passive proximity damage for testing
 		if (CurrentLife <= 0) {
 			kill();
 		}
