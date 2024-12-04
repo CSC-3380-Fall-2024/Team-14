@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://bmjm0ssftjodu"]
+
+[ext_resource type="Script" path="res://enemies/Sisyphus.cs" id="1_tosnm"]
+[ext_resource type="Texture2D" uid="uid://u0cd3jbfsmt6" path="res://assets/terrible_monster.png" id="2_i2f75"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0c2kf"]
+
+[node name="Sisyphus" type="CharacterBody2D"]
+script = ExtResource("1_tosnm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_0c2kf")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_i2f75")
