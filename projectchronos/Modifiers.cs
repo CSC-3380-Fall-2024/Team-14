@@ -24,9 +24,7 @@ public class Upgrade
 		new Upgrade("HEALTH REGEN", "Regenerates health over time."),
 		new Upgrade("INCREASED DAMAGE", "Increases your attack damage."),
 		new Upgrade("FIRE DAMAGE RESISTANCE", "Resistant to fire damage."),
-		new Upgrade("DECREASE ENEMY SPAWN RATE", "Lowers enemy spawns."),
-		new Upgrade("DOUBLE JUMP", "Allows player to jump once more mid-air")
-	
+		new Upgrade("DECREASE ENEMY SPAWN RATE", "Lowers enemy spawns.")
 	};
 
 	 private List<Upgrade> displayedUpgrades = new List<Upgrade>();
@@ -125,11 +123,7 @@ public class Upgrade
 				projectile.DebuffDuration = 0;
 				break;
 			case "DECREASE ENEMY SPAWN RATE":
-			GetNode("/root/Main/LevelContainer").GetChildren()[0].GetNode<EnemySpawner>("EnemySpawner").SpawnTimer.WaitTime = 8;
-			
-				break;
-			case "DOUBLE JUMP":
-			// placeholder 
+				GetNode("/root/Main/LevelContainer").GetChildren()[0].GetNode<EnemySpawner>("EnemySpawner").SpawnTimer.WaitTime = 8;
 				break;
 		}
 	}
@@ -162,5 +156,4 @@ public class Upgrade
 			regenTimer.Stop();
 		}
 	}
-
 }
