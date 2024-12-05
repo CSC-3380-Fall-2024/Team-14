@@ -21,7 +21,7 @@ public partial class Daemon : BasicEnemy, BasicEnemy.EnemyAI
 
 	public override void _Ready()
 	{
-		CurrentLife = 40f;
+		CurrentLife = 150f;
 		base._Ready();
 		player = GetParent().GetChild<Player>(5);
 		daemonSprite = GetNode<AnimatedSprite2D>("DaemonSprite");
