@@ -111,6 +111,11 @@ animations = [{
 [node name="Player" type="CharacterBody2D"]
 position = Vector2(339, 515)
 script = ExtResource("1_3o1y4")
+speed = 350
+gravity = 10000
+fallSpeed = 10000
+jumpHeight = 30
+PlayerHp = 20
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 5)
