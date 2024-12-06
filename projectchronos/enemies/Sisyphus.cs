@@ -119,4 +119,9 @@ public partial class Sisyphus: BasicEnemy, BasicEnemy.EnemyAI {
 	{
 		return base.GetGravity() * 2;
 	}
+
+	public override void kill() {
+		GetParent().GetChild<SisyphusExitv2>(9).DefeatedSisyphus();
+		QueueFree();
+	}
 }

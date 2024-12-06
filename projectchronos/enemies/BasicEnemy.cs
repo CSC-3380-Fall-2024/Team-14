@@ -52,7 +52,7 @@ public partial class BasicEnemy : CharacterBody2D {
 	}
 
 	// we wrap this in its own method just because? maybe we'll add additional behavior to the kill event
-	public void kill() {
+	public virtual void kill() {
 		QueueFree();
 	}
 

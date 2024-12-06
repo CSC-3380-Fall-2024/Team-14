@@ -29,11 +29,10 @@ public partial class SisyphusExitv2 : Area2D {
 		if (changeScene) {
 			((Main) GetTree().CurrentScene).SwitchLevel("res://the_end.tscn");
 		}
-		DefeatedSisyphus();
 	}
 
-	private void DefeatedSisyphus() {
-		isSisyphusDefeated = GetParent().GetChildCount() < 12;
+	public void DefeatedSisyphus() {
+		isSisyphusDefeated = true;
 	}
 
 	public void OnBodyEntered(Node body) {
