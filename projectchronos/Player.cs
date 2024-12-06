@@ -7,16 +7,16 @@ using Vector2 = Godot.Vector2;
 
 public partial class Player : CharacterBody2D {
 	[Export]
-	public int speed {get; set;} = 600; // how fast the player moves in pixels/second
+	public int speed {get; set;} = 350; // how fast the player moves in pixels/second
 
 	[Export]
-	public int gravity = 4000; // gravity is player-specific not world-defined
+	public int gravity = 1960; // gravity is player-specific not world-defined
 
 	[Export]
-	public int fallSpeed = 8000;// temporary magic number, can set this value arbitrarily
+	public int fallSpeed = 3000;// temporary magic number, can set this value arbitrarily
 
 	[Export]
-	public int jumpHeight = 70; // jump values are set based on desired height
+	public int jumpHeight = 250; // jump values are set based on desired height
 
 	[Export]
 	public int PlayerMaxHp = 20;
@@ -57,7 +57,7 @@ public partial class Player : CharacterBody2D {
 	public int jumpForce;
 
 	//double jump variables
-	public int doubleJumpHeight = 40;
+	public int doubleJumpHeight = 20;
 	public int doublejumpForce;
 	private bool HasDoubJumped;
 
@@ -69,7 +69,7 @@ public partial class Player : CharacterBody2D {
 		// we set jump based on desired height, but implement as a velocity delta
 		// jumpForce calculation pre-computes velocity delta with gravity
 
-		doublejumpForce = (int)Math.Sqrt(2*gravity*doubleJumpHeight); //double jump force metrics
+		doublejumpForce = (int) Math.Sqrt(2 * gravity * doubleJumpHeight); //double jump force metrics
 
 		jumpForce = (int) Math.Sqrt(2 * gravity * jumpHeight);
 
