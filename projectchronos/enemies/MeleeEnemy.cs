@@ -22,6 +22,7 @@ public partial class MeleeEnemy : BasicEnemy, BasicEnemy.EnemyAI {
 	public override void _Ready()
 	{
 		base._Ready();
+		CurrentLife = 60;
 		player = GetNode<Player>("../Player"); //find player
 
 		if (player == null) {
