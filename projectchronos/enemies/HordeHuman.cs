@@ -23,7 +23,7 @@ public partial class HordeHuman : BasicEnemy, BasicEnemy.EnemyAI
 	public override void _Ready()
 	{
 		base._Ready();
-		CurrentLife = 35f;
+		CurrentLife = 48f;
 		player = GetNode<Player>("../Player"); //find player
 
 		if (player == null) {
