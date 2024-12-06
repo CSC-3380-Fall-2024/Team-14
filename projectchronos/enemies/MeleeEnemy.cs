@@ -8,7 +8,7 @@ public partial class MeleeEnemy : BasicEnemy, BasicEnemy.EnemyAI {
 	private Player player;
 
 	private float CooldownUntilAttack = 0f; //time until next attack
-	private float CooldownTime = 2f; //cooldown in second
+	private float CooldownTime = 1.5f; //cooldown in second
 
 
 	public float gravity = 500f; // gravity amt
@@ -68,7 +68,7 @@ public partial class MeleeEnemy : BasicEnemy, BasicEnemy.EnemyAI {
 
 		//GD.Print("Attacking"); TEST**
 		// take damage goes here
-		player.PlayerHp -= 2;
+		player.PlayerHp -= 5;
 		CooldownUntilAttack = CooldownTime; //reset cooldwon
 		
 	}
