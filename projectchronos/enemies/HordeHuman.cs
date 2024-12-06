@@ -39,7 +39,6 @@ public partial class HordeHuman : BasicEnemy, BasicEnemy.EnemyAI
 		hordeHumanSprite = GetNode<AnimatedSprite2D>("HordeHumanSprite");
 
 		hordeHumanSprite.Play("idle");
-
 	}
 	public override void _PhysicsProcess(double delta) {
 

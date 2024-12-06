@@ -4,6 +4,7 @@ using System;
 public partial class SisyphusExitv2 : Area2D {
 	private Player player;
 	private bool changeScene = false;
+	private bool isSisyphusDefeated = false;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready() {
@@ -28,10 +29,15 @@ public partial class SisyphusExitv2 : Area2D {
 		if (changeScene) {
 			((Main) GetTree().CurrentScene).SwitchLevel("res://the_end.tscn");
 		}
+		DefeatedSisyphus();
+	}
+
+	private void DefeatedSisyphus() {
+		isSisyphusDefeated = GetParent().GetChildCount() < 12;
 	}
 
 	public void OnBodyEntered(Node body) {
-		if (body is Player) {
+		if (body is Player && isSisyphusDefeated) {
 			changeScene = true;
 		}
 	}
