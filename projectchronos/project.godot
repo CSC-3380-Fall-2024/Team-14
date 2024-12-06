@@ -81,6 +81,10 @@ HealthPlus={
 ]
 }
 
+[physics]
+
+2d/default_gravity=1960.0
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"
