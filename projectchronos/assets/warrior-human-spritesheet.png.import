@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dcmllqitd318v"
-path="res://.godot/imported/horde-human_spritesheet.png-3633299a2e0d31b2e1cf4e4afbec46cf.ctex"
+uid="uid://vvmg38uglbq7"
+path="res://.godot/imported/warrior-human-spritesheet.png-91d37480a45f5ec52ace7ed45fa4fbb8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/horde-human_spritesheet.png"
-dest_files=["res://.godot/imported/horde-human_spritesheet.png-3633299a2e0d31b2e1cf4e4afbec46cf.ctex"]
+source_file="res://assets/warrior-human-spritesheet.png"
+dest_files=["res://.godot/imported/warrior-human-spritesheet.png-91d37480a45f5ec52ace7ed45fa4fbb8.ctex"]
 
 [params]
 

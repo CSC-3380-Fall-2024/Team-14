@@ -1,10 +1,10 @@
 [gd_scene load_steps=14 format=3 uid="uid://chh53xpfqvbpl"]
 
 [ext_resource type="Script" path="res://enemies/HordeHuman.cs" id="1_hfrmi"]
-[ext_resource type="Texture2D" uid="uid://c2rar4owdlyfl" path="res://assets/horde-human_spritesheet.png" id="2_r0x8x"]
+[ext_resource type="Texture2D" uid="uid://dcmllqitd318v" path="res://assets/horde-human_spritesheet.png" id="2_r0x8x"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d7m3d"]
-size = Vector2(33, 117)
+size = Vector2(44, 117)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_x5mej"]
 atlas = ExtResource("2_r0x8x")
@@ -84,19 +84,19 @@ animations = [{
 }],
 "loop": true,
 "name": &"walking",
-"speed": 4.0
+"speed": 3.0
 }]
 
 [node name="HordeHuman" type="CharacterBody2D"]
 script = ExtResource("1_hfrmi")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-3.5, 5.5)
+position = Vector2(-2, 5.5)
 shape = SubResource("RectangleShape2D_d7m3d")
 one_way_collision_margin = 0.0
 debug_color = Color(0.881519, 0.540209, 0.770714, 0.42)
 
 [node name="HordeHumanSprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_dfaow")
-animation = &"idle"
-frame_progress = 0.0123736
+animation = &"walking"
+frame_progress = 0.85775

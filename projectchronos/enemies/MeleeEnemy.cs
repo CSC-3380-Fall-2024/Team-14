@@ -14,6 +14,10 @@ public partial class MeleeEnemy : BasicEnemy, BasicEnemy.EnemyAI {
 	public float gravity = 500f; // gravity amt
 	private Vector2 velocity = Vector2.Zero; //defines velocity
 
+	//instantiate animatedSprite2D node for player sprite
+	public AnimatedSprite2D meleeEnemySprite;
+
+
 
 	public override void _Ready()
 	{
@@ -29,8 +33,12 @@ public partial class MeleeEnemy : BasicEnemy, BasicEnemy.EnemyAI {
 			GD.Print(player.GetPath());
 		} // verifies player exists for player hp functionality later
 
+		meleeEnemySprite = GetNode<AnimatedSprite2D>("MeleeEnemySprite");
+		meleeEnemySprite.Play("idle");
+
 	}
 	public override void _PhysicsProcess(double delta) {
+
 		velocity = Velocity; // updates vel
 		if (!IsOnFloor()){
 			velocity.Y += gravity * (float)delta;
@@ -74,8 +82,8 @@ public partial class MeleeEnemy : BasicEnemy, BasicEnemy.EnemyAI {
 	}
 
 
-	public void ExecuteAI(float delta)
-	{
+	public void ExecuteAI(float delta) {
+
 		if(CooldownUntilAttack > 0) //update attack cooldown
 		{
 			CooldownUntilAttack -= (float)delta;
@@ -85,21 +93,30 @@ public partial class MeleeEnemy : BasicEnemy, BasicEnemy.EnemyAI {
 		//GD.Print("distance to p" + distanceToPlayer); **TEST
 		if (CurrentLife > retreat_when_health) // checks to see if the enemies health is above the retreat value
 		{
+			//flip sprite to face player based on player position
+			meleeEnemySprite.FlipH = PlayerPosition().X < Position.X;
+
 			if (DistanceToPlayer() <= range) //checks to see if enemy is within attack range
 			{
 				//GD.Print("in range"); **TEST
 				if (CooldownUntilAttack <= 0) //if colldown end attack player again
 				{
+					meleeEnemySprite.Play("melee");
 					attack();
 				}
 			}
 			else
 			{
+				meleeEnemySprite.Play("walking");
 				chase();
 			}
 		}
 		else
 		{
+			//flip sprite to face away from player based on player position
+			meleeEnemySprite.FlipH = PlayerPosition().X > Position.X;
+
+			meleeEnemySprite.Play("walking");
 			run();
 		}
 	}
