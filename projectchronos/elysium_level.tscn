@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=4 uid="uid://82dgggl1psia"]
+[gd_scene load_steps=17 format=4 uid="uid://82dgggl1psia"]
 
 [ext_resource type="Texture2D" uid="uid://drd557pffbd1w" path="res://assets/elysium-tileset.png" id="1_67etp"]
 [ext_resource type="Texture2D" uid="uid://c52qu8nuopua4" path="res://assets/elysium-parallax/1.png" id="1_c20yd"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://4kf7paebw3px" path="res://player.tscn" id="4_1707f"]
 [ext_resource type="Texture2D" uid="uid://cxy0h153tp84k" path="res://assets/elysium-parallax/5.png" id="6_gc3qn"]
 [ext_resource type="Script" path="res://KillingSquare.cs" id="10_kdi4l"]
+[ext_resource type="Script" path="res://ElysiumExit.cs" id="11_yj4r5"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8xl37"]
 texture = ExtResource("1_67etp")
@@ -57,6 +58,12 @@ sources/0 = SubResource("TileSetAtlasSource_8xl37")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o68nx"]
 size = Vector2(16132.8, 42)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rnhsm"]
+radius = 162.0
+height = 1612.0
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_03mtt"]
 
 [node name="ElysiumLevel" type="Node2D"]
 metadata/bound_top = 0.0
@@ -235,3 +242,16 @@ script = ExtResource("10_kdi4l")
 position = Vector2(8112.6, 1212)
 shape = SubResource("RectangleShape2D_o68nx")
 debug_color = Color(0.839216, 0.6, 0.701961, 0.843137)
+
+[node name="ElysiumExit" type="Area2D" parent="."]
+position = Vector2(16533, 1085)
+script = ExtResource("11_yj4r5")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ElysiumExit"]
+shape = SubResource("CapsuleShape2D_rnhsm")
+
+[node name="Sprite2D" type="Sprite2D" parent="ElysiumExit"]
+position = Vector2(-0.000207663, -422.5)
+scale = Vector2(324, 717)
+texture = SubResource("PlaceholderTexture2D_03mtt")
