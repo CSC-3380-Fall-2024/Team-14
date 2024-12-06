@@ -30,16 +30,16 @@ public partial class BasicEnemy : CharacterBody2D {
 	}
 
 	public override void _PhysicsProcess(double delta) {
-		
-		if (this is EnemyAI ai) ai.ExecuteAI((float) delta);
-
 		DetectHit(); // necessary to take damage
-		
+
 		// die if we have zero health duh
 		if (CurrentLife <= 0) {
 			kill();
 		}
 
+		if (this is EnemyAI ai) ai.ExecuteAI((float) delta);
+
+		MoveAndSlide();
 		Show();
 	}
 

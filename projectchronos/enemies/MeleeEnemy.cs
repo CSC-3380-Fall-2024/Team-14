@@ -50,6 +50,10 @@ public partial class MeleeEnemy : BasicEnemy, BasicEnemy.EnemyAI {
 		Velocity = velocity; //updates vel again
 		MoveAndSlide(); //moves
 
+		if (CurrentLife <= 0) {
+			kill();
+		}
+
 		DetectHit(); // necessary to take damage
 	}
 
