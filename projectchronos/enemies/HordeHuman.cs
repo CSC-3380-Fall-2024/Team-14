@@ -16,8 +16,6 @@ public partial class HordeHuman : BasicEnemy, BasicEnemy.EnemyAI
 	public float gravity = 500f; // gravity amt
 	private Vector2 velocity = Vector2.Zero; //defines velocity
 
-	new public float CurrentLife = 35f;
-
 	public AnimatedSprite2D hordeHumanSprite;
 
 
@@ -25,6 +23,7 @@ public partial class HordeHuman : BasicEnemy, BasicEnemy.EnemyAI
 	public override void _Ready()
 	{
 		base._Ready();
+		CurrentLife = 35f;
 		player = GetNode<Player>("../Player"); //find player
 
 		if (player == null) {
