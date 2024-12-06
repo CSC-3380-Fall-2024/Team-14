@@ -2,6 +2,8 @@ using Godot;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
+using System.Diagnostics.CodeAnalysis;
+using System.Reflection.Metadata.Ecma335;
 using System.Runtime.CompilerServices;
 
 public partial class Modifiers : Control
@@ -138,7 +140,7 @@ public class Upgrade
 		}
 	}
 
-	 private void OnHealthRegenerate()
+	private void OnHealthRegenerate()
 	{
 		var player = GetPlayer();
 		if (player.PlayerHp < player.PlayerMaxHp)

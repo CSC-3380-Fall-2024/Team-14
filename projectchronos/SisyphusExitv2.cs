@@ -26,7 +26,7 @@ public partial class SisyphusExitv2 : Area2D {
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta) {
 		if (changeScene) {
-			GetTree().ChangeSceneToFile("res://elysium_level.tscn");
+			((Main) GetTree().CurrentScene).SwitchLevel("res://the_end.tscn");
 		}
 	}
 

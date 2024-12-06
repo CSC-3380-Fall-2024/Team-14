@@ -18,6 +18,9 @@ public partial class HordeHuman : BasicEnemy, BasicEnemy.EnemyAI
 
 	new public float CurrentLife = 35f;
 
+	public AnimatedSprite2D hordeHumanSprite;
+
+
 
 	public override void _Ready()
 	{
@@ -33,10 +36,17 @@ public partial class HordeHuman : BasicEnemy, BasicEnemy.EnemyAI
 			//GD.Print(player.GetPath());
 		} // verifies player exists for player hp functionality later
 
+		hordeHumanSprite = GetNode<AnimatedSprite2D>("HordeHumanSprite");
+
+		hordeHumanSprite.Play("idle");
+
 	}
 	public override void _PhysicsProcess(double delta) {
 
-		TakeDamage( 1 / DistanceToPlayer() * 2000f * (float) delta); // prototype enemy takes passive proximity damage for testing
+		//flip sprite to face player based on player position
+		hordeHumanSprite.FlipH = PlayerPosition().X < Position.X;
+		DetectHit(); // necessary to take damage
+		
 		if (CurrentLife <= 0) {
 			kill();
 		}
@@ -90,7 +100,7 @@ public partial class HordeHuman : BasicEnemy, BasicEnemy.EnemyAI
 			//GD.Print("cooldown remaining" + CooldownUntilAttack); TEST**
 		}
 
-		GD.Print(CurrentLife);
+		//GD.Print(CurrentLife);
 
 		//GD.Print("distance to p" + distanceToPlayer); **TEST
 		if (CurrentLife > retreat_when_health) // checks to see if the enemies health is above the retreat value
@@ -100,16 +110,22 @@ public partial class HordeHuman : BasicEnemy, BasicEnemy.EnemyAI
 				//GD.Print("in range"); **TEST
 				if (CooldownUntilAttack <= 0) //if colldown end attack player again
 				{
+					//play attack animation
+					hordeHumanSprite.Play("attacking");
 					attack();
 				}
 			}
 			else
 			{
+				//play walking animation
+				hordeHumanSprite.Play("walking");
 				chase();
 			}
 		}
 		else
 		{
+			//play walking animation
+			hordeHumanSprite.Play("walking");
 			run();
 		}
 	}
