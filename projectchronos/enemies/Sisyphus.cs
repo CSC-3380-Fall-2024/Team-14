@@ -112,7 +112,6 @@ public partial class Sisyphus: BasicEnemy, BasicEnemy.EnemyAI {
 
 		velocity += GetGravity() * delta;
 		Velocity = velocity;
-		MoveAndSlide();
 	}
 
 	new Vector2 GetGravity()
