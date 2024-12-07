@@ -266,7 +266,7 @@ public partial class Player : CharacterBody2D {
 	public void Start() {
 		// find main and grab lives from it
 		Main mainNode;
-		Node node = GetTree().GetCurrentScene();
+		Node node = GetNode("/root/Main");
 		if (node is Main main) {
 			mainNode = main;
 			lives_left = mainNode.getConfig().MaxLives;

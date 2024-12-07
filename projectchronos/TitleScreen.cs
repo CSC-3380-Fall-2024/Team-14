@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using ProjectChronos;
 
 // silly little enum for silly little screen ratios
 public enum AspectRatio {
@@ -23,8 +24,18 @@ public partial class TitleScreen : Control {
 	}
 
 	// Defining the signal handler method for the start button to be connected via the Godot editor
-	private void OnStartButtonPressed() {
-		GetTree().ChangeSceneToFile("res://main.tscn");
+	private void OnStartButtonPressed()
+	{
+		QueueFree();
+		CallDeferred("SwitchToMain");
+	}
+
+	private void SwitchToMain()
+	{
+		var main = GD.Load<PackedScene>("res://main.tscn").Instantiate<Main>();
+		main.setConfig(new Configuration { MaxLives = isHardMode ? 3 : 5, FireDamagePerSecond = 2 });
+		GetTree().GetRoot().AddChild(main);
+		GetTree().CurrentScene = main;
 	}
 
 	// Defining the signal handler method for the quit button to be connected via the Godot editor
