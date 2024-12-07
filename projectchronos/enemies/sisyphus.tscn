@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://bmjm0ssftjodu"]
+[gd_scene load_steps=11 format=3 uid="uid://cnowpflheq5uu"]
 
 [ext_resource type="Script" path="res://enemies/Sisyphus.cs" id="1_tosnm"]
 [ext_resource type="Texture2D" uid="uid://fw4gdg0lthci" path="res://assets/sisyphus_spritesheet1.png" id="2_1c0hf"]
+[ext_resource type="PackedScene" uid="uid://cnmh3rw3roajk" path="res://HealthBar.tscn" id="3_yyare"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0c2kf"]
 size = Vector2(69, 220)
@@ -71,3 +72,24 @@ shape = SubResource("RectangleShape2D_0c2kf")
 [node name="SisyphusSprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_ff3xj")
 animation = &"idle"
+
+[node name="SisyphusHealth" type="CanvasLayer" parent="."]
+
+[node name="SisyphusHealthContainer" type="Control" parent="SisyphusHealth"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="SisyphusHealth/SisyphusHealthContainer"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "."
+
+[node name="HealthBar" parent="SisyphusHealth/SisyphusHealthContainer" instance=ExtResource("3_yyare")]
+layout_mode = 1
+offset_left = 75.0
+offset_top = 199.0
+offset_right = 1235.0
+offset_bottom = 259.0

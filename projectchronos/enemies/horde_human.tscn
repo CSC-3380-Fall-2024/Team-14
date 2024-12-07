@@ -1,6 +1,7 @@
-[gd_scene load_steps=14 format=3 uid="uid://chh53xpfqvbpl"]
+[gd_scene load_steps=15 format=3 uid="uid://deqqjohs7gvx6"]
 
 [ext_resource type="Script" path="res://enemies/HordeHuman.cs" id="1_hfrmi"]
+[ext_resource type="PackedScene" uid="uid://cnmh3rw3roajk" path="res://HealthBar.tscn" id="2_74rju"]
 [ext_resource type="Texture2D" uid="uid://c2rar4owdlyfl" path="res://assets/horde-human_spritesheet.png" id="2_r0x8x"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d7m3d"]
@@ -89,6 +90,12 @@ animations = [{
 
 [node name="HordeHuman" type="CharacterBody2D"]
 script = ExtResource("1_hfrmi")
+
+[node name="HealthBar" parent="." instance=ExtResource("2_74rju")]
+offset_left = -175.0
+offset_top = -111.0
+offset_right = 175.0
+offset_bottom = -71.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-3.5, 5.5)

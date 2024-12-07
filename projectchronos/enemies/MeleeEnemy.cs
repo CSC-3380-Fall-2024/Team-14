@@ -83,7 +83,7 @@ public partial class MeleeEnemy : BasicEnemy, BasicEnemy.EnemyAI {
 		}
 
 		//GD.Print("distance to p" + distanceToPlayer); **TEST
-		if (CurrentLife > retreat_when_health) // checks to see if the enemies health is above the retreat value
+		if (EnemyHp > retreat_when_health) // checks to see if the enemies health is above the retreat value
 		{
 			if (DistanceToPlayer() <= range) //checks to see if enemy is within attack range
 			{

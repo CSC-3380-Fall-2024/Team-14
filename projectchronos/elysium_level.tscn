@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://c52qu8nuopua4" path="res://assets/elysium-parallax/1.png" id="1_c20yd"]
 [ext_resource type="PackedScene" uid="uid://p8fy3nw6kmu2" path="res://enemies/melee_enemy.tscn" id="2_8uojs"]
 [ext_resource type="Texture2D" uid="uid://cib8n8dbp2ty7" path="res://assets/elysium-parallax/2.png" id="2_em70n"]
-[ext_resource type="PackedScene" uid="uid://chh53xpfqvbpl" path="res://enemies/horde_human.tscn" id="3_6u6x0"]
+[ext_resource type="PackedScene" uid="uid://deqqjohs7gvx6" path="res://enemies/horde_human.tscn" id="3_6u6x0"]
 [ext_resource type="Texture2D" uid="uid://cp6mtfp1oq2kx" path="res://assets/elysium-parallax/3.png" id="3_nsann"]
 [ext_resource type="Texture2D" uid="uid://8jae0h3kef14" path="res://assets/elysium-parallax/4.png" id="4_7hfru"]
 [ext_resource type="PackedScene" uid="uid://4kf7paebw3px" path="res://player.tscn" id="4_1707f"]

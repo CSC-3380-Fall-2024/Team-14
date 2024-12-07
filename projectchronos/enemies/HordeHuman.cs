@@ -16,7 +16,7 @@ public partial class HordeHuman : BasicEnemy, BasicEnemy.EnemyAI
 	public float gravity = 500f; // gravity amt
 	private Vector2 velocity = Vector2.Zero; //defines velocity
 
-	new public float CurrentLife = 35f;
+	
 
 	public AnimatedSprite2D hordeHumanSprite;
 
@@ -24,6 +24,12 @@ public partial class HordeHuman : BasicEnemy, BasicEnemy.EnemyAI
 
 	public override void _Ready()
 	{
+		MaxLife = 100;
+		EnemyHp = MaxLife;
+		var healthBar = GetNode<HealthBar>("HealthBar");
+		healthBar.Value = EnemyHp;
+		healthBar.MaxValue = EnemyHp;
+
 		base._Ready();
 		player = GetNode<Player>("../Player"); //find player
 
@@ -47,7 +53,7 @@ public partial class HordeHuman : BasicEnemy, BasicEnemy.EnemyAI
 		hordeHumanSprite.FlipH = PlayerPosition().X < Position.X;
 		DetectHit(); // necessary to take damage
 		
-		if (CurrentLife <= 0) {
+		if (EnemyHp <= 0) {
 			kill();
 		}
 
@@ -103,7 +109,7 @@ public partial class HordeHuman : BasicEnemy, BasicEnemy.EnemyAI
 		//GD.Print(CurrentLife);
 
 		//GD.Print("distance to p" + distanceToPlayer); **TEST
-		if (CurrentLife > retreat_when_health) // checks to see if the enemies health is above the retreat value
+		if (EnemyHp > retreat_when_health) // checks to see if the enemies health is above the retreat value
 		{
 			if (DistanceToPlayer() <= range) //checks to see if enemy is within attack range
 			{
