@@ -73,23 +73,8 @@ shape = SubResource("RectangleShape2D_0c2kf")
 sprite_frames = SubResource("SpriteFrames_ff3xj")
 animation = &"idle"
 
-[node name="SisyphusHealth" type="CanvasLayer" parent="."]
-
-[node name="SisyphusHealthContainer" type="Control" parent="SisyphusHealth"]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="Label" type="Label" parent="SisyphusHealth/SisyphusHealthContainer"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
-text = "."
-
-[node name="HealthBar" parent="SisyphusHealth/SisyphusHealthContainer" instance=ExtResource("3_yyare")]
-layout_mode = 1
-offset_left = 75.0
-offset_top = 199.0
-offset_right = 1235.0
-offset_bottom = 259.0
+[node name="HealthBar" parent="." instance=ExtResource("3_yyare")]
+offset_left = -396.0
+offset_top = -170.0
+offset_right = 404.0
+offset_bottom = -110.0

@@ -8,7 +8,7 @@ public partial class Sisyphus: BasicEnemy, BasicEnemy.EnemyAI {
 	{
 		MaxLife = 1000;
 		EnemyHp = MaxLife;
-		var healthBar = GetNode<HealthBar>("SisyphusHealth/SisyphusHealthContainer/HealthBar");
+		var healthBar = GetNode<HealthBar>("HealthBar");
 		healthBar.Value = EnemyHp;
 		healthBar.MaxValue = EnemyHp;
 		base._Ready();
