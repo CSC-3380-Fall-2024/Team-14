@@ -21,7 +21,12 @@ public partial class Daemon : BasicEnemy, BasicEnemy.EnemyAI
 
 	public override void _Ready()
 	{
-		CurrentLife = 36f;
+		MaxLife = 100;
+		EnemyHp = MaxLife;
+		var healthBar = GetNode<HealthBar>("HealthBar");
+		healthBar.Value = EnemyHp;
+		healthBar.MaxValue = EnemyHp;
+    
 		base._Ready();
 		player = GetParent().GetChild<Player>(5);
 		daemonSprite = GetNode<AnimatedSprite2D>("DaemonSprite");
@@ -32,7 +37,7 @@ public partial class Daemon : BasicEnemy, BasicEnemy.EnemyAI
 	}
 
 	public override void _PhysicsProcess(double delta) {
-		if (CurrentLife <= 0) {
+		if (EnemyHp <= 0) {
 			kill();
 		}
 

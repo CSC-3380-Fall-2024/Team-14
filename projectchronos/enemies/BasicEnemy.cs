@@ -7,11 +7,25 @@ public partial class BasicEnemy : CharacterBody2D {
 		void ExecuteAI(float delta);
 	}
 
-	public float MaxLife = 100;
-	public float CurrentLife = 30;
+	public int MaxLife = 1000;
 	
 	public float Speed = 300.0f;
 	public float JumpVelocity = -400.0f;
+
+	protected NodePath healthBarPath ="HealthBar"; 
+
+	private int _enemyHp;
+
+	public int EnemyHp {
+		get => _enemyHp;
+		set {
+			_enemyHp = (int)Mathf.Clamp(value, 0, MaxLife);
+			if( HasNode(healthBarPath) && GetNode(healthBarPath) is HealthBar healthBar){
+			healthBar.MaxValue = MaxLife;
+			healthBar.Value = _enemyHp;
+			}
+		}
+	}
 
 	private Player _player;
 	private Player player
@@ -27,13 +41,14 @@ public partial class BasicEnemy : CharacterBody2D {
 
 	public override void _Ready() {
 		playerAttack = player.GetChild<PlayerAttack>(6);
+		
 	}
 
 	public override void _PhysicsProcess(double delta) {
 		DetectHit(); // necessary to take damage
 
 		// die if we have zero health duh
-		if (CurrentLife <= 0) {
+		if (EnemyHp <= 0) {
 			kill();
 		}
 
@@ -56,8 +71,8 @@ public partial class BasicEnemy : CharacterBody2D {
 		QueueFree();
 	}
 
-	public void TakeDamage(float damage) { // should not ever modify enemy health directly (from outside)
-		CurrentLife -= damage;
+	public void TakeDamage(int damage) { // should not ever modify enemy health directly (from outside)
+		EnemyHp -= damage;
 	}
 
 	public Vector2 PlayerPosition()

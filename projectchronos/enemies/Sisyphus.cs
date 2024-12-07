@@ -7,7 +7,10 @@ public partial class Sisyphus: BasicEnemy, BasicEnemy.EnemyAI {
 	public override void _Ready()
 	{
 		MaxLife = 1000;
-		CurrentLife = 1000;
+		EnemyHp = MaxLife;
+		var healthBar = GetNode<HealthBar>("HealthBar");
+		healthBar.Value = EnemyHp;
+		healthBar.MaxValue = EnemyHp;
 		base._Ready();
 		sisyphusSprite = GetNode<AnimatedSprite2D>("SisyphusSprite");
 
