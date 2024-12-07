@@ -36,3 +36,5 @@ While Godot has the capability to edit script files natively, it is recommended 
 ## Attribution
 
 Tartarus Background by Ludenc from https://ludenc.itch.io/cave-background-and-tileset
+Elysium Background by Saurabhkgp from https://saurabhkgp.itch.io/
+Sisyphus Background by Admurin from https://admurin.itch.io/parallax-backgrounds-caves

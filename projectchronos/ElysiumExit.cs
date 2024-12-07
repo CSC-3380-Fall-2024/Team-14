@@ -1,10 +1,9 @@
 using Godot;
 using System;
 
-public partial class SisyphusExitv2 : Area2D {
+public partial class ElysiumExit : Area2D {
 	private Player player;
 	private bool changeScene = false;
-	private bool isSisyphusDefeated = false;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready() {
@@ -27,16 +26,12 @@ public partial class SisyphusExitv2 : Area2D {
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta) {
 		if (changeScene) {
-			((Main) GetTree().CurrentScene).SwitchLevel("res://the_end.tscn");
+			((Main) GetTree().CurrentScene).SwitchLevel("res://sisyphus_level.tscn");
 		}
 	}
 
-	public void DefeatedSisyphus() {
-		isSisyphusDefeated = true;
-	}
-
 	public void OnBodyEntered(Node body) {
-		if (body is Player && isSisyphusDefeated) {
+		if (body is Player) {
 			changeScene = true;
 		}
 	}

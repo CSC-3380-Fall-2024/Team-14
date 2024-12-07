@@ -12,7 +12,7 @@ public partial class KillingSquare : Area2D
 	private void OnBodyEntered(Node body) {
 		if (body is Player player) {
 			GD.Print("collide"); // prints whether or not collision registers **TEST CODE
-			player.Kill_Reset(); //kills player
+			player.CallDeferred("Kill_Reset"); //kills player
 		} 
 	}
 }
