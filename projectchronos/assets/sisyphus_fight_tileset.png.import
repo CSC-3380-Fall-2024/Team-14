@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dcmllqitd318v"
-path="res://.godot/imported/horde-human_spritesheet.png-3633299a2e0d31b2e1cf4e4afbec46cf.ctex"
+uid="uid://3lo3ync0gmgp"
+path="res://.godot/imported/sisyphus_fight_tileset.png-8196305bee979808eea978354e8f42f9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/horde-human_spritesheet.png"
-dest_files=["res://.godot/imported/horde-human_spritesheet.png-3633299a2e0d31b2e1cf4e4afbec46cf.ctex"]
+source_file="res://assets/sisyphus_fight_tileset.png"
+dest_files=["res://.godot/imported/sisyphus_fight_tileset.png-8196305bee979808eea978354e8f42f9.ctex"]
 
 [params]
 

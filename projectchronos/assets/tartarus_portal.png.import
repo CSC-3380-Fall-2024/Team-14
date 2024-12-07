@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dcmllqitd318v"
-path="res://.godot/imported/horde-human_spritesheet.png-3633299a2e0d31b2e1cf4e4afbec46cf.ctex"
+uid="uid://tvlpdruhtwmt"
+path="res://.godot/imported/tartarus_portal.png-f73f55e7b4e63b833703a02fc80a657a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/horde-human_spritesheet.png"
-dest_files=["res://.godot/imported/horde-human_spritesheet.png-3633299a2e0d31b2e1cf4e4afbec46cf.ctex"]
+source_file="res://assets/tartarus_portal.png"
+dest_files=["res://.godot/imported/tartarus_portal.png-f73f55e7b4e63b833703a02fc80a657a.ctex"]
 
 [params]
 

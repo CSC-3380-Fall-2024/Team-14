@@ -4,6 +4,7 @@ using System;
 public partial class SisyphusExitv2 : Area2D {
 	private Player player;
 	private bool changeScene = false;
+	private bool isSisyphusDefeated = false;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready() {
@@ -30,8 +31,12 @@ public partial class SisyphusExitv2 : Area2D {
 		}
 	}
 
+	public void DefeatedSisyphus() {
+		isSisyphusDefeated = true;
+	}
+
 	public void OnBodyEntered(Node body) {
-		if (body is Player) {
+		if (body is Player && isSisyphusDefeated) {
 			changeScene = true;
 		}
 	}

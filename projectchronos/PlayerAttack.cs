@@ -1,8 +1,7 @@
 using System.Numerics;
 using Godot;
 
-public partial class PlayerAttack : Area2D
-{
+public partial class PlayerAttack : Area2D {
 	// internal base values,
 	// could be changed for entire new attacks
 	private int damage;
@@ -14,7 +13,7 @@ public partial class PlayerAttack : Area2D
 	private float rateModifier = 1f;
 
 	[Export]
-	public int defaultDamage = 5;
+	public int defaultDamage = 12;
 	[Export]
 	public float defaultAttacksPerSecond = 3;
 	[Export]

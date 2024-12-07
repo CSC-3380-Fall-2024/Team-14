@@ -6,18 +6,15 @@ public partial class HordeHuman : BasicEnemy, BasicEnemy.EnemyAI
 	public float range = 200f; //distance that enemy can attack from
 	public float retreat_when_health = 10f; //health that triggers a retreat
 	public float retreat_how_far = 1000f; //retreat distance
-	new public float Speed = 300f;
+	new public float Speed = 350f;
 
 	private Player player;
 
 	private float CooldownUntilAttack = 0f; //time until next attack
-	private float CooldownTime = 2f; //cooldown in second
+	private float CooldownTime = 1f; //cooldown in second
 
 	public float gravity = 500f; // gravity amt
 	private Vector2 velocity = Vector2.Zero; //defines velocity
-
-	
-
 	public AnimatedSprite2D hordeHumanSprite;
 
 
@@ -31,6 +28,7 @@ public partial class HordeHuman : BasicEnemy, BasicEnemy.EnemyAI
 		healthBar.MaxValue = EnemyHp;
 
 		base._Ready();
+		CurrentLife = 48f;
 		player = GetNode<Player>("../Player"); //find player
 
 		if (player == null) {
@@ -45,7 +43,6 @@ public partial class HordeHuman : BasicEnemy, BasicEnemy.EnemyAI
 		hordeHumanSprite = GetNode<AnimatedSprite2D>("HordeHumanSprite");
 
 		hordeHumanSprite.Play("idle");
-
 	}
 	public override void _PhysicsProcess(double delta) {
 

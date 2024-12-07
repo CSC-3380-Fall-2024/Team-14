@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dcmllqitd318v"
-path="res://.godot/imported/horde-human_spritesheet.png-3633299a2e0d31b2e1cf4e4afbec46cf.ctex"
+uid="uid://dc8xpr552gddf"
+path="res://.godot/imported/elysium-trees-tileset.png-a26d0ad3c1b68fc20574bb9d387fd054.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/horde-human_spritesheet.png"
-dest_files=["res://.godot/imported/horde-human_spritesheet.png-3633299a2e0d31b2e1cf4e4afbec46cf.ctex"]
+source_file="res://assets/elysium-trees-tileset.png"
+dest_files=["res://.godot/imported/elysium-trees-tileset.png-a26d0ad3c1b68fc20574bb9d387fd054.ctex"]
 
 [params]
 

@@ -45,29 +45,29 @@ public partial class BasicEnemy : CharacterBody2D {
 	}
 
 	public override void _PhysicsProcess(double delta) {
-		
-		if (this is EnemyAI ai) ai.ExecuteAI((float) delta);
-
 		DetectHit(); // necessary to take damage
-		
+
 		// die if we have zero health duh
 		if (EnemyHp <= 0) {
 			kill();
 		}
 
+		if (this is EnemyAI ai) ai.ExecuteAI((float) delta);
+
+		MoveAndSlide();
 		Show();
 	}
 
 	public void DetectHit() {
 		if (DistanceToPlayer() <= 400f && !playerAttack.GetChild<Timer>(1).IsStopped()) {
-			if (playerAttack.GetChild<Timer>(1).TimeLeft < (playerAttack.AttackPeriod() / 2)) {
+			if (playerAttack.GetChild<Timer>(1).TimeLeft < (playerAttack.AttackPeriod() / 20)) {
 				TakeDamage(player.GetChild<PlayerAttack>(6).ScaledDamage());
 			}
 		}
 	}
 
 	// we wrap this in its own method just because? maybe we'll add additional behavior to the kill event
-	public void kill() {
+	public virtual void kill() {
 		QueueFree();
 	}
 

@@ -23,6 +23,11 @@ public partial class Main : Node {
 		return this.config;
 	}
 
+	public void setConfig(Configuration config)
+	{
+		this.config = config;
+	}
+
 	public void SwitchLevel(String path)
 	{
 		foreach (var child in GetNode("LevelContainer").GetChildren())
