@@ -147,6 +147,7 @@ public partial class Player : CharacterBody2D {
 		}
 
 		if (Input.IsActionPressed("click")) {
+			playerSprite.Play("attacking");
 			GetChild<PlayerAttack>(6).Attack();
 		}
 		
@@ -190,7 +191,7 @@ public partial class Player : CharacterBody2D {
 			}
 		}
 		
-		else if (IsOnFloor()) {
+		else if (IsOnFloor() && GetNode<PlayerAttack>("PlayerAttack").timer.TimeLeft <= 0) {
 			if (Input.IsActionJustReleased("move_left") || Input.IsActionJustReleased("move_right")) {
 				
 				playerSprite.Play("idle");
@@ -198,7 +199,7 @@ public partial class Player : CharacterBody2D {
 		
 			}
 			
-		else if (Velocity.X == 0){
+		else if (Velocity.X == 0 && GetNode<PlayerAttack>("PlayerAttack").timer.TimeLeft <= 0){
 			playerSprite.Play("idle");
 			//GD.Print("idle last");
 		}
