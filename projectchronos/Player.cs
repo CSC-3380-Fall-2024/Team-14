@@ -29,10 +29,12 @@ public partial class Player : CharacterBody2D {
 	public int PlayerHp {
 		get => _playerHp;
 		set {
-			var healthBar = GetNode<HealthBar>("HealthBar");
 			_playerHp = Mathf.Clamp(value, 0, PlayerMaxHp);
-			healthBar.MaxValue = PlayerMaxHp;
-			healthBar.Value = _playerHp;
+			if (HasNode("HealthBar") && GetNode("HealthBar") is HealthBar healthBar)
+			{
+				healthBar.MaxValue = PlayerMaxHp;
+				healthBar.Value = _playerHp;
+			}
 			if(_playerHp <= 0 && lives_left >= 0)
 			{
 				CallDeferred("Kill_Reset");
