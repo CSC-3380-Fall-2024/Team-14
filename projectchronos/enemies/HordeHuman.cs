@@ -88,7 +88,7 @@ public partial class HordeHuman : BasicEnemy, BasicEnemy.EnemyAI
 
 		//GD.Print("Attacking"); TEST**
 		// take damage goes here
-		player.PlayerHp -= 1;
+		player.PlayerHp -= 2;
 		CooldownUntilAttack = CooldownTime; //reset cooldwon
 		
 	}

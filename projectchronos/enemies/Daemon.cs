@@ -10,7 +10,7 @@ public partial class Daemon : BasicEnemy, BasicEnemy.EnemyAI
 	private float CooldownUntilAttack = 0f; //time until next attack
 	private float CooldownTime = 2f; //cooldown in second
 
-	new private float Speed = 350;
+	new private float Speed = 300;
 
 	private Player player;
 

@@ -21,6 +21,7 @@ public partial class MeleeEnemy : BasicEnemy, BasicEnemy.EnemyAI {
 
 	public override void _Ready()
 	{
+		
 		base._Ready();
 		EnemyHp = 60;
 		player = GetNode<Player>("../Player"); //find player
