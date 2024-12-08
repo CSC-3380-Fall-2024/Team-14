@@ -107,6 +107,17 @@ public partial class PlayerAttack : Area2D {
 		if (timer.TimeLeft <= 0.0) {
 			LookAt(GetGlobalMousePosition());	
 			timer.Start(AttackPeriod());
+			
+			// add animation here PLAYER_ATTACK
+			
+			var bodies = GetOverlappingBodies();
+			foreach (var node in bodies)
+			{
+				if (node is BasicEnemy enemy)
+				{
+					enemy.TakeDamage(ScaledDamage());
+				}
+			}
 		}
 	}
 }

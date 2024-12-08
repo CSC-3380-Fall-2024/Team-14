@@ -59,11 +59,7 @@ public partial class BasicEnemy : CharacterBody2D {
 	}
 
 	public void DetectHit() {
-		if (DistanceToPlayer() <= 400f && !playerAttack.GetChild<Timer>(1).IsStopped()) {
-			if (playerAttack.GetChild<Timer>(1).TimeLeft < (playerAttack.AttackPeriod() / 20)) {
-				TakeDamage(player.GetChild<PlayerAttack>(6).ScaledDamage());
-			}
-		}
+		
 	}
 
 	// we wrap this in its own method just because? maybe we'll add additional behavior to the kill event
