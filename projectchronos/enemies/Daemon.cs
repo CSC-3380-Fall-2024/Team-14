@@ -26,7 +26,7 @@ public partial class Daemon : BasicEnemy, BasicEnemy.EnemyAI
 		var healthBar = GetNode<HealthBar>("HealthBar");
 		healthBar.Value = EnemyHp;
 		healthBar.MaxValue = EnemyHp;
-    
+	
 		base._Ready();
 		player = GetParent().GetChild<Player>(5);
 		daemonSprite = GetNode<AnimatedSprite2D>("DaemonSprite");

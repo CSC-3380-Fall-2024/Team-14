@@ -167,18 +167,8 @@ position = Vector2(123, 114)
 collision_layer = 3
 collision_mask = 3
 
-[node name="Daemon2" parent="." instance=ExtResource("12_xt3ss")]
-position = Vector2(1162, 138)
-collision_layer = 3
-collision_mask = 3
-
 [node name="Daemon3" parent="." instance=ExtResource("12_xt3ss")]
 position = Vector2(887, -366)
-collision_layer = 3
-collision_mask = 3
-
-[node name="Daemon4" parent="." instance=ExtResource("12_xt3ss")]
-position = Vector2(1400, 604)
 collision_layer = 3
 collision_mask = 3
 
