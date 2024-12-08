@@ -65,7 +65,7 @@ public partial class Daemon : BasicEnemy, BasicEnemy.EnemyAI
 		MoveAndSlide();
 
 		//play flying animation
-		daemonSprite.Play("flying");
+		// daemonSprite.Play("flying");
 
 		//GD.Print("chasing");
 	}	
@@ -92,8 +92,9 @@ public partial class Daemon : BasicEnemy, BasicEnemy.EnemyAI
 		Velocity = Vector2.Zero;
 
 		daemonSprite.Play("ranged");
+		CooldownUntilAttack = CooldownTime;
 
-		GetTree().CreateTimer(2f).Connect("timeout", new Callable(this, nameof(SpawnProjectile)));
+		GetTree().CreateTimer(0.8f).Connect("timeout", new Callable(this, nameof(SpawnProjectile)));
 
 		//GD.Print("ranged");
 	}
@@ -108,11 +109,9 @@ public partial class Daemon : BasicEnemy, BasicEnemy.EnemyAI
 	 private void SpawnProjectile(){
         // Instantiate fireball scene
         Fireball fireball = (Fireball)fireballScene.Instantiate();
-        fireball.GlobalPosition = GlobalPosition; // Set position to Daemon's position
-        fireball.SetTarget(player.GlobalPosition, fireball.Speed, fireball.Damage); // Set target to player position
+        fireball.Init(Position, player.Position, fireball.Speed, fireball.Damage); // Set target to player position
 
         GetParent().AddChild(fireball);
-        CooldownUntilAttack = CooldownTime;
 
         OnAttackFinish(); // Finish the attack
     }
@@ -141,7 +140,7 @@ public partial class Daemon : BasicEnemy, BasicEnemy.EnemyAI
 				Chase();
 			}
 		} else if(distanceToPlayer <= MagicRange) {
-			GD.Print("in fire range");
+			// GD.Print("in fire range");
 			if(CooldownUntilAttack <= 0) {
 				FireAttack();
 			} else {
