@@ -119,7 +119,7 @@ public partial class Sisyphus: BasicEnemy, BasicEnemy.EnemyAI {
 
 	new Vector2 GetGravity()
 	{
-		return base.GetGravity() * 2;
+		return base.GetGravity();
 	}
 
 	public override void kill() {
