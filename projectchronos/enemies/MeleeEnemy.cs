@@ -22,7 +22,7 @@ public partial class MeleeEnemy : BasicEnemy, BasicEnemy.EnemyAI {
 	public override void _Ready()
 	{
 		base._Ready();
-		CurrentLife = 60;
+		EnemyHp = 60;
 		player = GetNode<Player>("../Player"); //find player
 
 		if (player == null) {
@@ -51,7 +51,7 @@ public partial class MeleeEnemy : BasicEnemy, BasicEnemy.EnemyAI {
 		Velocity = velocity; //updates vel again
 		MoveAndSlide(); //moves
 
-		if (CurrentLife <= 0) {
+		if (EnemyHp <= 0) {
 			kill();
 		}
 

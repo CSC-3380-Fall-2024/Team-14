@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=4 uid="uid://brvalphnva0vs"]
+[gd_scene load_steps=21 format=4 uid="uid://brvalphnva0vs"]
 
 [ext_resource type="Texture2D" uid="uid://b3g5bifplwa0c" path="res://assets/cave-parallax/7.png" id="1_4ncog"]
 [ext_resource type="Texture2D" uid="uid://cnjc3uicw2rv5" path="res://assets/cave-parallax/6.png" id="2_ccgie"]
@@ -10,8 +10,8 @@
 [ext_resource type="PackedScene" uid="uid://4kf7paebw3px" path="res://player.tscn" id="6_tv61u"]
 [ext_resource type="Script" path="res://SisyphusExitv2.cs" id="7_73ejk"]
 [ext_resource type="Texture2D" uid="uid://cguwfufgsh6uq" path="res://assets/cave-parallax/1.png" id="7_gaw03"]
-[ext_resource type="PackedScene" uid="uid://cnowpflheq5uu" path="res://enemies/sisyphus.tscn" id="9_p5ne5"]
 [ext_resource type="Texture2D" uid="uid://3lo3ync0gmgp" path="res://assets/sisyphus_fight_tileset.png" id="9_4xfrv"]
+[ext_resource type="PackedScene" uid="uid://cnowpflheq5uu" path="res://enemies/sisyphus.tscn" id="9_p5ne5"]
 [ext_resource type="Script" path="res://RockDespawn.cs" id="10_d7axk"]
 [ext_resource type="Texture2D" uid="uid://tvlpdruhtwmt" path="res://assets/tartarus_portal.png" id="10_hbkk1"]
 
