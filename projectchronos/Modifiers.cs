@@ -108,6 +108,7 @@ public class Upgrade
 			case "INCREASED HEALTH":
 			var player = GetPlayer();
 				player.PlayerMaxHp += 10;
+				player.PlayerHp = player.PlayerMaxHp;
 				break;
 			case "SPEED BOOST":
 				player = GetPlayer();
