@@ -3,7 +3,7 @@ using System;
 using System.ComponentModel;
 using System.Numerics;
 
-public partial class projectile : Area2D
+public partial class Fireball : Area2D
 {
 	public float Speed = 200f; //speed in pix/s
 	public int Damage = 7; //damage amt
@@ -22,7 +22,7 @@ public partial class projectile : Area2D
 	public override void _Ready()
 	{
 		//find player node
-		player = GetNode<CharacterBody2D>("../Player");
+		player = GetNode<CharacterBody2D>("res://player.tscn");
 		//set pos, speed, damage
 		SetTarget(player.GlobalPosition, Speed, Damage);
 
@@ -58,7 +58,8 @@ public partial class projectile : Area2D
 		Velocity = (Direction * Speed);
 		
 	}
-	
+
+
 	//updateposition of projectile
 	public void OnMoveTimerTimeout(){
 		float delta = (float)MoverTimer.WaitTime;
@@ -73,11 +74,11 @@ public partial class projectile : Area2D
 	//detects collision and does damage
 	public void OnBodyEntered(Node body)
 	{
-		dealDamage(body);
+		DealDamage(body);
 		QueueFree();
 	}
 
-	public virtual void dealDamage(Node body){
+	public virtual void DealDamage(Node body){
 		if (body is Player player)
 		{
 			player.PlayerHp -= Damage;

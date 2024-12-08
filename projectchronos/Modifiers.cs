@@ -120,7 +120,7 @@ public class Upgrade
 				GetPlayer().GetNode<PlayerAttack>("PlayerAttack").AddDamageModifier(100);
 				break;
 			case "FIRE DAMAGE RESISTANCE":
-				projectile.DebuffDuration = 0;
+				Fireball.DebuffDuration = 0;
 				break;
 		}
 	}

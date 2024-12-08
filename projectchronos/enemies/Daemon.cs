@@ -16,8 +16,14 @@ public partial class Daemon : BasicEnemy, BasicEnemy.EnemyAI
 
 	private PlayerAttack playerAttack;
 
+	PackedScene fireballScene = (PackedScene)ResourceLoader.Load("res://Fireball.tscn");
+
+
 	//instantiate animatedSprite2D node for player sprite
 	public AnimatedSprite2D daemonSprite;
+
+	//flag to check attack state
+	private bool isAttacking = false;
 
 	public override void _Ready()
 	{
@@ -46,7 +52,9 @@ public partial class Daemon : BasicEnemy, BasicEnemy.EnemyAI
 		//flip to face player
 		FlipSpriteToPlayer(); 
 
-		ExecuteAI((float)delta);
+		if(!isAttacking) {
+			ExecuteAI((float)delta);
+		}
 		MoveAndSlide(); //moves
 	}
 
@@ -67,32 +75,48 @@ public partial class Daemon : BasicEnemy, BasicEnemy.EnemyAI
 	{
 		//play melee attack animation
 		daemonSprite.Play("melee");
+
+		isAttacking = true;
 		
 		var damage = 2;
 		player.PlayerHp -= damage;
 		CooldownUntilAttack = CooldownTime;
 		GD.Print("melee");
 		//placeholder for damage
-		
+
+		GetTree().CreateTimer(1f).Connect("timeout", new Callable(this, nameof(OnAttackFinish)));
+
 	}
 
-	private async void FireAttack()
-	{
-		//play ranged animation
+	private void FireAttack() {
+		Velocity = Vector2.Zero;
+
 		daemonSprite.Play("ranged");
-		
-		var damage = 3;
-		player.PlayerHp -= damage;
-		player.SetFireDuration(5);
-		CooldownUntilAttack = CooldownTime;
-		GD.Print("fire");
-		//another placeholder
 
-		//wait for animation to finish
-		await ToSignal(GetTree().CreateTimer(2), "timeout");
-		//play flying animation again
-		daemonSprite.Play("flying");
+		GetTree().CreateTimer(2f).Connect("timeout", new Callable(this, nameof(SpawnProjectile)));
+
+		//GD.Print("ranged");
 	}
+
+	private void OnAttackFinish() {
+		isAttacking = false;
+    	//resume movement after ranged attack animation finishes
+    	daemonSprite.Play("flying");
+    	Chase(); 
+	}
+
+	 private void SpawnProjectile(){
+        // Instantiate fireball scene
+        Fireball fireball = (Fireball)fireballScene.Instantiate();
+        fireball.GlobalPosition = GlobalPosition; // Set position to Daemon's position
+        fireball.SetTarget(player.GlobalPosition, fireball.Speed, fireball.Damage); // Set target to player position
+
+        GetParent().AddChild(fireball);
+        CooldownUntilAttack = CooldownTime;
+
+        OnAttackFinish(); // Finish the attack
+    }
+
 
 	//helper method to make the sprite always face the player
 	private void FlipSpriteToPlayer() {
@@ -108,22 +132,23 @@ public partial class Daemon : BasicEnemy, BasicEnemy.EnemyAI
 			//GD.Print("cooldown remaining" + CooldownUntilAttack); TEST**
 		}
 
-		if (DistanceToPlayer() <= MeleeRange) //checks to see if enemy is within attack range
-		{
-				if (CooldownUntilAttack <= 0) //if colldown end attack player again
-				{
-					MeleeAttack();
-				}
-		}
-		else if(DistanceToPlayer() <= MagicRange)
-		{
-				if (CooldownUntilAttack <= 0) //if colldown end attack player again
-				{
-					//FireAttack();
-				}
-		}
-		else
-		{
+		float distanceToPlayer = DistanceToPlayer();
+
+		if (distanceToPlayer <= MeleeRange) {
+			if(CooldownUntilAttack <= 0) {
+				MeleeAttack();
+			} else {
+				Chase();
+			}
+		} else if(distanceToPlayer <= MagicRange) {
+			GD.Print("in fire range");
+			if(CooldownUntilAttack <= 0) {
+				FireAttack();
+			} else {
+				Chase();
+			}
+		} else {
+			//GD.Print("Outside range, chasing player");
 			Chase();
 		}
 	}

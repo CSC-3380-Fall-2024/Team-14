@@ -1,0 +1,34 @@
+[gd_scene load_steps=6 format=3 uid="uid://b673r8pjlxxpv"]
+
+[ext_resource type="Script" path="res://Fireball.cs" id="1_a76c0"]
+[ext_resource type="Texture2D" uid="uid://bxbdpn858yt8v" path="res://assets/daemon_spritesheet.png" id="2_yc5bs"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lm87t"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dyno7"]
+atlas = ExtResource("2_yc5bs")
+region = Rect2(768, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3shns"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dyno7")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="FireballArea2D" type="Area2D"]
+script = ExtResource("1_a76c0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_lm87t")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_3shns")
+
+[node name="MoverTimer" type="Timer" parent="."]
+
+[node name="Despawner" type="Timer" parent="."]
