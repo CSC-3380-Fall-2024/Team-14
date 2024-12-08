@@ -64,9 +64,9 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_4tg6w")
 }],
-"loop": true,
+"loop": false,
 "name": &"attacking",
-"speed": 2.0
+"speed": 6.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -192,8 +192,8 @@ one_shot = true
 
 [node name="PlayerSprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_35n61")
-animation = &"walking"
-frame = 5
+animation = &"attacking"
+frame = 1
 frame_progress = 1.0
 
 [connection signal="timeout" from="FallTimer" to="." method="OnFallTimerTimeout"]

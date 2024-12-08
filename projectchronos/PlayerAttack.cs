@@ -20,7 +20,7 @@ public partial class PlayerAttack : Area2D {
 	public float defaultImmunityDuration = 0.1f;
 
 	// we use a timer node for handling attack rate
-	private Timer timer;
+	public Timer timer;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready() {
