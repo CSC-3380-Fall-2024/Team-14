@@ -21,7 +21,7 @@ public partial class HordeHuman : BasicEnemy, BasicEnemy.EnemyAI
 
 	public override void _Ready()
 	{
-		MaxLife = 100;
+		MaxLife = 75;
 		EnemyHp = MaxLife;
 		var healthBar = GetNode<HealthBar>("HealthBar");
 		healthBar.Value = EnemyHp;

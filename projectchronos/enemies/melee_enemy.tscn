@@ -1,7 +1,8 @@
-[gd_scene load_steps=16 format=3 uid="uid://p8fy3nw6kmu2"]
+[gd_scene load_steps=17 format=3 uid="uid://p8fy3nw6kmu2"]
 
 [ext_resource type="Script" path="res://enemies/MeleeEnemy.cs" id="1_yrp3j"]
 [ext_resource type="Texture2D" uid="uid://vvmg38uglbq7" path="res://assets/warrior-human-spritesheet.png" id="2_leqg1"]
+[ext_resource type="PackedScene" uid="uid://cnmh3rw3roajk" path="res://HealthBar.tscn" id="3_38c6q"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kt140"]
 size = Vector2(53, 121)
@@ -119,3 +120,9 @@ debug_color = Color(0.228432, 0.631926, 0.259977, 0.42)
 sprite_frames = SubResource("SpriteFrames_yt8bi")
 animation = &"walking"
 frame_progress = 0.960109
+
+[node name="HealthBar" parent="." instance=ExtResource("3_38c6q")]
+offset_left = -175.0
+offset_top = -111.0
+offset_right = 175.0
+offset_bottom = -71.0

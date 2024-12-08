@@ -23,7 +23,11 @@ public partial class MeleeEnemy : BasicEnemy, BasicEnemy.EnemyAI {
 	{
 		
 		base._Ready();
-		EnemyHp = 60;
+		MaxLife = 100;
+		EnemyHp = MaxLife;
+		var healthBar = GetNode<HealthBar>("HealthBar");
+		healthBar.Value = EnemyHp;
+		healthBar.MaxValue = EnemyHp;
 		player = GetNode<Player>("../Player"); //find player
 
 		if (player == null) {

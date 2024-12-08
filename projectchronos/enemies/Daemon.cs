@@ -21,7 +21,7 @@ public partial class Daemon : BasicEnemy, BasicEnemy.EnemyAI
 
 	public override void _Ready()
 	{
-		MaxLife = 100;
+		MaxLife = 40;
 		EnemyHp = MaxLife;
 		var healthBar = GetNode<HealthBar>("HealthBar");
 		healthBar.Value = EnemyHp;

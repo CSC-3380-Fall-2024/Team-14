@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://enemies/HordeHuman.cs" id="1_hfrmi"]
 [ext_resource type="PackedScene" uid="uid://cnmh3rw3roajk" path="res://HealthBar.tscn" id="2_74rju"]
-[ext_resource type="Texture2D" uid="uid://c2rar4owdlyfl" path="res://assets/horde-human_spritesheet.png" id="2_r0x8x"]
+[ext_resource type="Texture2D" uid="uid://dcmllqitd318v" path="res://assets/horde-human_spritesheet.png" id="2_r0x8x"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d7m3d"]
 size = Vector2(44, 117)
