@@ -28,7 +28,7 @@ public partial class HordeHuman : BasicEnemy, BasicEnemy.EnemyAI
 		healthBar.MaxValue = EnemyHp;
 
 		base._Ready();
-		CurrentLife = 48f;
+		EnemyHp = 48;
 		player = GetNode<Player>("../Player"); //find player
 
 		if (player == null) {
