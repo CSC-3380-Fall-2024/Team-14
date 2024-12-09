@@ -10,29 +10,38 @@ public partial class Daemon : BasicEnemy, BasicEnemy.EnemyAI
 	private float CooldownUntilAttack = 0f; //time until next attack
 	private float CooldownTime = 2f; //cooldown in second
 
-	new private float Speed = 400;
+	new private float Speed = 300;
 
 	private Player player;
+
+	private PlayerAttack playerAttack;
 
 	//instantiate animatedSprite2D node for player sprite
 	public AnimatedSprite2D daemonSprite;
 
 	public override void _Ready()
 	{
-		CurrentLife = 30f;
+		MaxLife = 40;
+		EnemyHp = MaxLife;
+		var healthBar = GetNode<HealthBar>("HealthBar");
+		healthBar.Value = EnemyHp;
+		healthBar.MaxValue = EnemyHp;
+	
 		base._Ready();
 		player = GetParent().GetChild<Player>(5);
 		daemonSprite = GetNode<AnimatedSprite2D>("DaemonSprite");
 
 		daemonSprite.Play("flying");
+
+		playerAttack = player.GetChild<PlayerAttack>(6);
 	}
 
 	public override void _PhysicsProcess(double delta) {
-
-		TakeDamage( 1 / DistanceToPlayer() * 2000f * (float) delta); // prototype enemy takes passive proximity damage for testing
-		if (CurrentLife <= 0) {
+		if (EnemyHp <= 0) {
 			kill();
 		}
+
+		DetectHit(); // necessary to take damage
 
 		//flip to face player
 		FlipSpriteToPlayer(); 
@@ -59,7 +68,7 @@ public partial class Daemon : BasicEnemy, BasicEnemy.EnemyAI
 		//play melee attack animation
 		daemonSprite.Play("melee");
 		
-		var damage = 4;
+		var damage = 2;
 		player.PlayerHp -= damage;
 		CooldownUntilAttack = CooldownTime;
 		GD.Print("melee");

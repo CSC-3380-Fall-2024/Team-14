@@ -1,14 +1,109 @@
-[gd_scene load_steps=3 format=3 uid="uid://chh53xpfqvbpl"]
+[gd_scene load_steps=15 format=3 uid="uid://deqqjohs7gvx6"]
 
 [ext_resource type="Script" path="res://enemies/HordeHuman.cs" id="1_hfrmi"]
+[ext_resource type="PackedScene" uid="uid://cnmh3rw3roajk" path="res://HealthBar.tscn" id="2_74rju"]
+[ext_resource type="Texture2D" uid="uid://dcmllqitd318v" path="res://assets/horde-human_spritesheet.png" id="2_r0x8x"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_ad4la"]
-radius = 77.1298
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d7m3d"]
+size = Vector2(44, 117)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x5mej"]
+atlas = ExtResource("2_r0x8x")
+region = Rect2(128, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3hnmn"]
+atlas = ExtResource("2_r0x8x")
+region = Rect2(0, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n4vya"]
+atlas = ExtResource("2_r0x8x")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sm158"]
+atlas = ExtResource("2_r0x8x")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dshcw"]
+atlas = ExtResource("2_r0x8x")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u5q3u"]
+atlas = ExtResource("2_r0x8x")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_daqdx"]
+atlas = ExtResource("2_r0x8x")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p068e"]
+atlas = ExtResource("2_r0x8x")
+region = Rect2(512, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ujfyr"]
+atlas = ExtResource("2_r0x8x")
+region = Rect2(640, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dfaow"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x5mej")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3hnmn")
+}],
+"loop": true,
+"name": &"attacking",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n4vya")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sm158")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dshcw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u5q3u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_daqdx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p068e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ujfyr")
+}],
+"loop": true,
+"name": &"walking",
+"speed": 3.0
+}]
 
 [node name="HordeHuman" type="CharacterBody2D"]
 script = ExtResource("1_hfrmi")
 
+[node name="HealthBar" parent="." instance=ExtResource("2_74rju")]
+offset_left = -175.0
+offset_top = -111.0
+offset_right = 175.0
+offset_bottom = -71.0
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_ad4la")
+position = Vector2(-2, 5.5)
+shape = SubResource("RectangleShape2D_d7m3d")
 one_way_collision_margin = 0.0
 debug_color = Color(0.881519, 0.540209, 0.770714, 0.42)
+
+[node name="HordeHumanSprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_dfaow")
+animation = &"walking"
+frame_progress = 0.85775

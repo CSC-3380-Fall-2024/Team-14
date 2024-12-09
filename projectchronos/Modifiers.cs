@@ -23,11 +23,7 @@ public class Upgrade
 		new Upgrade("SPEED BOOST", "Increases your movement speed."),
 		new Upgrade("HEALTH REGEN", "Regenerates health over time."),
 		new Upgrade("INCREASED DAMAGE", "Increases your attack damage."),
-		new Upgrade("FIRE DAMAGE RESISTANCE", "Resistant to fire damage."),
-		new Upgrade("DECREASE ENEMY SPAWN RATE", "Lowers enemy spawns."),
-		new Upgrade("INCREASED DEFENSE", "Increases player defense."),
-		new Upgrade("DOUBLE JUMP", "Allows player to jump once more mid-air")
-	
+		new Upgrade("FIRE DAMAGE RESISTANCE", "Resistant to fire damage.")
 	};
 
 	 private List<Upgrade> displayedUpgrades = new List<Upgrade>();
@@ -97,35 +93,39 @@ public class Upgrade
 		GetTree().Paused = false;
 	}
 
+	public Player GetPlayer() {
+		Player p;
+		try {
+			p = GetNode("/root/Main/LevelContainer").GetChildren()[0].GetNode<Player>("Player");
+		} catch {
+			p = new Player(); // this is stupid but it prevents errors in edge cases where practical behavior is irrelevant.
+		}
+		
+		return p;
+	}
+
 		// Apply the upgrade to the player
 	private void ApplyUpgrade(Upgrade upgrade)
 	{
 		switch (upgrade.UpgradeName)
 		{
 			case "INCREASED HEALTH":
-			var player = GetNode<Player>("/root/Main/LevelContainer/TartarusLevel/Player");
+			var player = GetPlayer();
 				player.PlayerMaxHp += 10;
+				player.PlayerHp = player.PlayerMaxHp;
 				break;
 			case "SPEED BOOST":
-			player = GetNode<Player>("/root/Main/LevelContainer/TartarusLevel/Player");
-				player.speed += 100;
+				player = GetPlayer();
+				player.speed += 100; 
 				break;
 			case "HEALTH REGEN":
 				StartHealthRegeneration();
 				break;
 			case "INCREASED DAMAGE":
-				//placeholder
+				GetPlayer().GetNode<PlayerAttack>("PlayerAttack").AddDamageModifier(100);
 				break;
 			case "FIRE DAMAGE RESISTANCE":
-			player = GetNode<Player>("/root/Main/LevelContainer/TartarusLevel/Player");
-				player.SetFireDuration(0);
-				break;
-			case "DECREASE ENEMY SPAWN RATE":
-			GetNode<EnemySpawner>("/root/Main/LevelContainer/TartarusLevel/EnemySpawner").SpawnTimer.WaitTime = 8;
-			
-				break;
-			case "DOUBLE JUMP":
-			// placeholder 
+				projectile.DebuffDuration = 0;
 				break;
 		}
 	}
@@ -142,7 +142,7 @@ public class Upgrade
 
 	 private void OnHealthRegenerate()
 	{
-		var player = GetNode<Player>("/root/Main/LevelContainer/TartarusLevel/Player");
+		var player = GetPlayer();
 		if (player.PlayerHp < player.PlayerMaxHp)
 		{
 			player.PlayerHp = Mathf.Min(player.PlayerHp + regenAmount, player.PlayerMaxHp);
@@ -158,5 +158,4 @@ public class Upgrade
 			regenTimer.Stop();
 		}
 	}
-
 }

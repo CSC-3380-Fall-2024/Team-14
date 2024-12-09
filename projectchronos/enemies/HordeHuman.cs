@@ -6,21 +6,27 @@ public partial class HordeHuman : BasicEnemy, BasicEnemy.EnemyAI
 	public float range = 200f; //distance that enemy can attack from
 	public float retreat_when_health = 10f; //health that triggers a retreat
 	public float retreat_how_far = 1000f; //retreat distance
-	new public float Speed = 300f;
+	new public float Speed = 350f;
 
 	private Player player;
 
 	private float CooldownUntilAttack = 0f; //time until next attack
-	private float CooldownTime = 2f; //cooldown in second
+	private float CooldownTime = 1f; //cooldown in second
 
 	public float gravity = 500f; // gravity amt
 	private Vector2 velocity = Vector2.Zero; //defines velocity
+	public AnimatedSprite2D hordeHumanSprite;
 
-	new public float CurrentLife = 35f;
 
 
 	public override void _Ready()
 	{
+		MaxLife = 75;
+		EnemyHp = MaxLife;
+		var healthBar = GetNode<HealthBar>("HealthBar");
+		healthBar.Value = EnemyHp;
+		healthBar.MaxValue = EnemyHp;
+
 		base._Ready();
 		player = GetNode<Player>("../Player"); //find player
 
@@ -33,11 +39,17 @@ public partial class HordeHuman : BasicEnemy, BasicEnemy.EnemyAI
 			//GD.Print(player.GetPath());
 		} // verifies player exists for player hp functionality later
 
+		hordeHumanSprite = GetNode<AnimatedSprite2D>("HordeHumanSprite");
+
+		hordeHumanSprite.Play("idle");
 	}
 	public override void _PhysicsProcess(double delta) {
 
-		TakeDamage( 1 / DistanceToPlayer() * 2000f * (float) delta); // prototype enemy takes passive proximity damage for testing
-		if (CurrentLife <= 0) {
+		//flip sprite to face player based on player position
+		hordeHumanSprite.FlipH = PlayerPosition().X < Position.X;
+		DetectHit(); // necessary to take damage
+		
+		if (EnemyHp <= 0) {
 			kill();
 		}
 
@@ -76,7 +88,7 @@ public partial class HordeHuman : BasicEnemy, BasicEnemy.EnemyAI
 
 		//GD.Print("Attacking"); TEST**
 		// take damage goes here
-		player.PlayerHp -= 1;
+		player.PlayerHp -= 2;
 		CooldownUntilAttack = CooldownTime; //reset cooldwon
 		
 	}
@@ -90,26 +102,32 @@ public partial class HordeHuman : BasicEnemy, BasicEnemy.EnemyAI
 			//GD.Print("cooldown remaining" + CooldownUntilAttack); TEST**
 		}
 
-		GD.Print(CurrentLife);
+		//GD.Print(CurrentLife);
 
 		//GD.Print("distance to p" + distanceToPlayer); **TEST
-		if (CurrentLife > retreat_when_health) // checks to see if the enemies health is above the retreat value
+		if (EnemyHp > retreat_when_health) // checks to see if the enemies health is above the retreat value
 		{
 			if (DistanceToPlayer() <= range) //checks to see if enemy is within attack range
 			{
 				//GD.Print("in range"); **TEST
 				if (CooldownUntilAttack <= 0) //if colldown end attack player again
 				{
+					//play attack animation
+					hordeHumanSprite.Play("attacking");
 					attack();
 				}
 			}
 			else
 			{
+				//play walking animation
+				hordeHumanSprite.Play("walking");
 				chase();
 			}
 		}
 		else
 		{
+			//play walking animation
+			hordeHumanSprite.Play("walking");
 			run();
 		}
 	}

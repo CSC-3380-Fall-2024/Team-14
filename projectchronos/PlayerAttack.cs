@@ -1,8 +1,7 @@
 using System.Numerics;
 using Godot;
 
-public partial class PlayerAttack : Area2D
-{
+public partial class PlayerAttack : Area2D {
 	// internal base values,
 	// could be changed for entire new attacks
 	private int damage;
@@ -14,14 +13,14 @@ public partial class PlayerAttack : Area2D
 	private float rateModifier = 1f;
 
 	[Export]
-	public int defaultDamage = 5;
+	public int defaultDamage = 12;
 	[Export]
 	public float defaultAttacksPerSecond = 3;
 	[Export]
 	public float defaultImmunityDuration = 0.1f;
 
 	// we use a timer node for handling attack rate
-	private Timer timer;
+	public Timer timer;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready() {
@@ -108,6 +107,17 @@ public partial class PlayerAttack : Area2D
 		if (timer.TimeLeft <= 0.0) {
 			LookAt(GetGlobalMousePosition());	
 			timer.Start(AttackPeriod());
+			
+			// add animation here PLAYER_ATTACK
+			
+			var bodies = GetOverlappingBodies();
+			foreach (var node in bodies)
+			{
+				if (node is BasicEnemy enemy)
+				{
+					enemy.TakeDamage(ScaledDamage());
+				}
+			}
 		}
 	}
 }

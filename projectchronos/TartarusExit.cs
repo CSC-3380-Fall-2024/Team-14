@@ -26,7 +26,7 @@ public partial class TartarusExit : Area2D {
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta) {
 		if (changeScene) {
-			((Main) GetTree().CurrentScene).SwitchLevel("res://sisyphus_level.tscn");
+			((Main) GetTree().CurrentScene).SwitchLevel("res://elysium_level.tscn");
 		}
 	}
 

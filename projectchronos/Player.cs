@@ -7,35 +7,37 @@ using Vector2 = Godot.Vector2;
 
 public partial class Player : CharacterBody2D {
 	[Export]
-	public int speed {get; set;} = 600; // how fast the player moves in pixels/second
+	public int speed {get; set;} = 350; // how fast the player moves in pixels/second
 
 	[Export]
-	public int gravity = 4000; // gravity is player-specific not world-defined
+	public int gravity = 1960; // gravity is player-specific not world-defined
 
 	[Export]
-	public int fallSpeed = 8000;// temporary magic number, can set this value arbitrarily
+	public int fallSpeed = 3000;// temporary magic number, can set this value arbitrarily
 
 	[Export]
-	public int jumpHeight = 70; // jump values are set based on desired height
+	public int jumpHeight = 250; // jump values are set based on desired height
 
 	[Export]
 	public int PlayerMaxHp = 20;
 
 	private int _playerHp;
+
+	private bool dead = false;
 	
 	[Export]
 	public int PlayerHp {
 		get => _playerHp;
 		set {
-			var healthBar = GetNode<HealthBar>("HealthBar");
 			_playerHp = Mathf.Clamp(value, 0, PlayerMaxHp);
-			healthBar.MaxValue = PlayerMaxHp;
-			healthBar.Value = _playerHp;
+			if (HasNode("HealthBar") && GetNode("HealthBar") is HealthBar healthBar)
+			{
+				healthBar.MaxValue = PlayerMaxHp;
+				healthBar.Value = _playerHp;
+			}
 			if(_playerHp <= 0 && lives_left >= 0)
 			{
-				Kill_Reset();
-				
-					
+				CallDeferred("Kill_Reset");
 			}
 		}
 	}
@@ -55,7 +57,7 @@ public partial class Player : CharacterBody2D {
 	public int jumpForce;
 
 	//double jump variables
-	public int doubleJumpHeight = 40;
+	public int doubleJumpHeight = 20;
 	public int doublejumpForce;
 	private bool HasDoubJumped;
 
@@ -67,7 +69,7 @@ public partial class Player : CharacterBody2D {
 		// we set jump based on desired height, but implement as a velocity delta
 		// jumpForce calculation pre-computes velocity delta with gravity
 
-		doublejumpForce = (int)Math.Sqrt(2*gravity*doubleJumpHeight); //double jump force metrics
+		doublejumpForce = (int) Math.Sqrt(2 * gravity * doubleJumpHeight); //double jump force metrics
 
 		jumpForce = (int) Math.Sqrt(2 * gravity * jumpHeight);
 
@@ -147,6 +149,7 @@ public partial class Player : CharacterBody2D {
 		}
 
 		if (Input.IsActionPressed("click")) {
+			playerSprite.Play("attacking");
 			GetChild<PlayerAttack>(6).Attack();
 		}
 		
@@ -182,14 +185,15 @@ public partial class Player : CharacterBody2D {
 			}		
 			else if (hasJumpLeft && !HasDoubJumped) //double jump implementation
 			{
-				velocity = doublejumpForce * UpDirection;
+				velocity = Vector2.Zero;
+				velocity += jumpForce * UpDirection;
 				hasJumpLeft = false;
 				HasDoubJumped = true;
 				playerSprite.Play("jumping");
 			}
 		}
 		
-		else if (IsOnFloor()) {
+		else if (IsOnFloor() && GetNode<PlayerAttack>("PlayerAttack").timer.TimeLeft <= 0) {
 			if (Input.IsActionJustReleased("move_left") || Input.IsActionJustReleased("move_right")) {
 				
 				playerSprite.Play("idle");
@@ -197,7 +201,7 @@ public partial class Player : CharacterBody2D {
 		
 			}
 			
-		else if (Velocity.X == 0){
+		else if (Velocity.X == 0 && GetNode<PlayerAttack>("PlayerAttack").timer.TimeLeft <= 0){
 			playerSprite.Play("idle");
 			//GD.Print("idle last");
 		}
@@ -240,7 +244,7 @@ public partial class Player : CharacterBody2D {
 		}
 
 		if(lives_left<=0){
-			GetTree().ChangeSceneToFile("res://game_over.tscn");
+			GetTree().ChangeSceneToFile("res://game_over.tscn"); 
 		}
 
 		// make dead and move back to starting position
@@ -254,7 +258,7 @@ public partial class Player : CharacterBody2D {
 			MoveAndSlide();
 			reset=false; //reset complete
 			
-			_playerHp = PlayerMaxHp; 
+			PlayerHp = PlayerMaxHp;
 			var upgrade = GetNode<Modifiers>("/root/Main/CanvasLayer/Modifiers");
 			upgrade.Show();
 			GetTree().Paused = true;
@@ -265,7 +269,7 @@ public partial class Player : CharacterBody2D {
 	public void Start() {
 		// find main and grab lives from it
 		Main mainNode;
-		Node node = GetTree().GetCurrentScene();
+		Node node = GetNode("/root/Main");
 		if (node is Main main) {
 			mainNode = main;
 			lives_left = mainNode.getConfig().MaxLives;
@@ -277,7 +281,7 @@ public partial class Player : CharacterBody2D {
 
 	// player dies after falling for too long
 	private void OnFallTimerTimeout() {
-		Kill_Reset();
+		CallDeferred("Kill_Reset");
 	}
 
 	private double _sinceLastFireTick = 0;

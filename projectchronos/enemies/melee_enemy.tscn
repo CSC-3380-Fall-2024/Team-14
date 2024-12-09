@@ -1,14 +1,128 @@
-[gd_scene load_steps=3 format=3 uid="uid://p8fy3nw6kmu2"]
+[gd_scene load_steps=17 format=3 uid="uid://p8fy3nw6kmu2"]
 
 [ext_resource type="Script" path="res://enemies/MeleeEnemy.cs" id="1_yrp3j"]
+[ext_resource type="Texture2D" uid="uid://vvmg38uglbq7" path="res://assets/warrior-human-spritesheet.png" id="2_leqg1"]
+[ext_resource type="PackedScene" uid="uid://cnmh3rw3roajk" path="res://HealthBar.tscn" id="3_38c6q"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_k1w6m"]
-radius = 61.2
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kt140"]
+size = Vector2(53, 121)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d4y3b"]
+atlas = ExtResource("2_leqg1")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xubpe"]
+atlas = ExtResource("2_leqg1")
+region = Rect2(128, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cj6ds"]
+atlas = ExtResource("2_leqg1")
+region = Rect2(0, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sqjlb"]
+atlas = ExtResource("2_leqg1")
+region = Rect2(256, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_evsry"]
+atlas = ExtResource("2_leqg1")
+region = Rect2(0, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7ob3x"]
+atlas = ExtResource("2_leqg1")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4bpal"]
+atlas = ExtResource("2_leqg1")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jtx2v"]
+atlas = ExtResource("2_leqg1")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jwo1m"]
+atlas = ExtResource("2_leqg1")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r3fqg"]
+atlas = ExtResource("2_leqg1")
+region = Rect2(512, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i4qmk"]
+atlas = ExtResource("2_leqg1")
+region = Rect2(640, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yt8bi"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d4y3b")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xubpe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cj6ds")
+}],
+"loop": true,
+"name": &"melee",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sqjlb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_evsry")
+}],
+"loop": false,
+"name": &"ranged",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7ob3x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4bpal")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jtx2v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jwo1m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r3fqg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i4qmk")
+}],
+"loop": true,
+"name": &"walking",
+"speed": 5.0
+}]
 
 [node name="MeleeEnemy" type="CharacterBody2D"]
 script = ExtResource("1_yrp3j")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_k1w6m")
+position = Vector2(2.5, 3.5)
+shape = SubResource("RectangleShape2D_kt140")
 one_way_collision_margin = 0.0
 debug_color = Color(0.228432, 0.631926, 0.259977, 0.42)
+
+[node name="MeleeEnemySprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_yt8bi")
+animation = &"walking"
+frame_progress = 0.960109
+
+[node name="HealthBar" parent="." instance=ExtResource("3_38c6q")]
+offset_left = -175.0
+offset_top = -111.0
+offset_right = 175.0
+offset_bottom = -71.0

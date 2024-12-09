@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://d3xwews2ictv1"]
+[gd_scene load_steps=12 format=3 uid="uid://d3xwews2ictv1"]
 
 [ext_resource type="Script" path="res://enemies/Daemon.cs" id="1_23rb8"]
 [ext_resource type="Texture2D" uid="uid://bxbdpn858yt8v" path="res://assets/daemon_spritesheet.png" id="2_j4pth"]
+[ext_resource type="PackedScene" uid="uid://cnmh3rw3roajk" path="res://HealthBar.tscn" id="3_6ujev"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bkucv"]
-size = Vector2(141, 162)
+size = Vector2(66, 108)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1o7br"]
 atlas = ExtResource("2_j4pth")
@@ -68,10 +69,11 @@ animations = [{
 
 [node name="Daemon" type="CharacterBody2D"]
 position = Vector2(5000, 200)
+collision_layer = 2
 script = ExtResource("1_23rb8")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(23.5, -19)
+position = Vector2(-8, 8)
 shape = SubResource("RectangleShape2D_bkucv")
 
 [node name="DaemonSprite" type="AnimatedSprite2D" parent="."]
@@ -79,3 +81,9 @@ sprite_frames = SubResource("SpriteFrames_ah6cu")
 animation = &"ranged"
 frame = 1
 frame_progress = 1.0
+
+[node name="HealthBar" parent="." instance=ExtResource("3_6ujev")]
+offset_left = -70.0
+offset_top = -75.0
+offset_right = 60.0
+offset_bottom = -55.0
