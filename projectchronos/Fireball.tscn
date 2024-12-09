@@ -1,9 +1,14 @@
-[gd_scene load_steps=6 format=3 uid="uid://b673r8pjlxxpv"]
+[gd_scene load_steps=8 format=3 uid="uid://b673r8pjlxxpv"]
 
 [ext_resource type="Script" path="res://Fireball.cs" id="1_a76c0"]
+[ext_resource type="Texture2D" uid="uid://krtljjd3dye6" path="res://assets/tartarus_tileset_1_11.15.png" id="2_denjh"]
 [ext_resource type="Texture2D" uid="uid://bxbdpn858yt8v" path="res://assets/daemon_spritesheet.png" id="2_yc5bs"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lm87t"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d3h4l"]
+atlas = ExtResource("2_denjh")
+region = Rect2(768, 512, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dyno7"]
 atlas = ExtResource("2_yc5bs")
@@ -13,10 +18,18 @@ region = Rect2(768, 0, 128, 128)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_d3h4l")
+}],
+"loop": true,
+"name": &"burst",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_dyno7")
 }],
 "loop": true,
-"name": &"default",
+"name": &"moving",
 "speed": 5.0
 }]
 
@@ -26,8 +39,9 @@ script = ExtResource("1_a76c0")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_lm87t")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="FireballSprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_3shns")
+animation = &"burst"
 
 [node name="MoverTimer" type="Timer" parent="."]
 

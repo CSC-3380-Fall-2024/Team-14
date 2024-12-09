@@ -5,13 +5,15 @@ using System.Numerics;
 
 public partial class Fireball : Area2D
 {
-	public float Speed = 200f; //speed in pix/s
+	public float Speed = 350f; //speed in pix/s
 	public int Damage = 7; //damage amt
 
 	public static int DebuffDuration = 5; //how long it inflicts debuffs (on fire here)
 	public static int Lifetime = 4; // seconds to despawn
 
 	private Player _player;
+
+	private AnimatedSprite2D fireballSprite;
 
 	private Player player
 	{
@@ -31,9 +33,18 @@ public partial class Fireball : Area2D
 	//called on enter
 	public override void _Ready()
 	{
+		fireballSprite = GetNode<AnimatedSprite2D>("FireballSprite");
+		fireballSprite.Play("moving");
 
 		//connect signalfor when collides
 		Connect("body_entered", new Callable (this, nameof(OnBodyEntered)));
+	}
+
+	//update sprite so top is facing direction of travel
+	private void UpdateSpriteRotation() {
+		if (Velocity.LengthSquared() > 0) {
+			fireballSprite.Rotation = Velocity.Angle() + Mathf.Pi / 2;
+		}
 	}
 	
 	//sets target, spped, damage
@@ -46,20 +57,28 @@ public partial class Fireball : Area2D
 	}
 
 	private double alive;
-	public override void _Process(double delta)
+	public async override void _Process(double delta)
 	{
 		Position += Velocity * (float)delta;
 
+		UpdateSpriteRotation();
+
 		alive += delta;
-		if (alive > Lifetime) QueueFree();
+		if (alive > Lifetime) {
+			fireballSprite.Play("burst");
+			await ToSignal(GetTree().CreateTimer(0.05f), "timeout");
+			QueueFree();
+		} 
 	}
 
 	//detects collision and does damage
-	public void OnBodyEntered(Node body)
+	public async void OnBodyEntered(Node body)
 	{
 		if (body is Player player)
 		{
+			fireballSprite.Play("burst");
 			player.SetFireDuration(DebuffDuration);
+			await ToSignal(GetTree().CreateTimer(0.05f), "timeout");
 			QueueFree();
 		}
 	}
