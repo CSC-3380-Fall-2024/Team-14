@@ -93,10 +93,15 @@ public class Upgrade
 		GetTree().Paused = false;
 	}
 
-	public Player GetPlayer()
-	{
-		return GetNode("/root/Main/LevelContainer").GetChildren()[0].GetNode<Player>("Player");
+	public Player GetPlayer() {
+		Player p;
+		try {
+			p = GetNode("/root/Main/LevelContainer").GetChildren()[0].GetNode<Player>("Player");
+		} catch {
+			p = new Player(); // this is stupid but it prevents errors in edge cases where practical behavior is irrelevant.
+		}
 		
+		return p;
 	}
 
 		// Apply the upgrade to the player
