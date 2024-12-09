@@ -300,7 +300,7 @@ public partial class Player : CharacterBody2D {
 	 */
 	private void ProcessFire(double delta) {
 		if (_fireSecondsRemaining > 0) {
-			Main mainNode = (Main)GetParent().GetParent();
+			Main mainNode = GetNode<Main>("/root/Main");
 			CpuParticles2D fireAnimation = GetChild<CpuParticles2D>(3);
 			if (_sinceLastFireTick > 1) {
 				PlayerHp -= mainNode.getConfig().FireDamagePerSecond;
