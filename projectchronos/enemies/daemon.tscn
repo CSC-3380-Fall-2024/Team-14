@@ -53,7 +53,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"melee",
-"speed": 5.0
+"speed": 1.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -78,9 +78,7 @@ shape = SubResource("RectangleShape2D_bkucv")
 
 [node name="DaemonSprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_ah6cu")
-animation = &"ranged"
-frame = 1
-frame_progress = 1.0
+animation = &"melee"
 
 [node name="HealthBar" parent="." instance=ExtResource("3_6ujev")]
 offset_left = -70.0
