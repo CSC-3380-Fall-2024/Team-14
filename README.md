@@ -27,6 +27,10 @@ You can build and run the project by clicking the triangle 'play' button in the 
 
 Building and running the project will open the current version of the game in a new window.
 
+### Controls
+
+Use the arrow keys to move around and click in the direction you wish to attack. If the game becomes difficult, you may use "p" to regenerate health.
+
 ## Next Steps
 
 Once you have opened and built the project once, it should be available as a listed option when you next open Godot. If you then select it, you can click `run` to execute the program, or you can click `edit` to open the project in the main editor.
